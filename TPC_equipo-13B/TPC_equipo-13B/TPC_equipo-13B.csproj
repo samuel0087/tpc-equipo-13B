@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Usuario.aspx" />
     <Content Include="Global.asax" />
     <Content Include="marcas\FormMarca.aspx" />
     <Content Include="MenuAdministrador.aspx" />
@@ -89,6 +90,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.aspx.cs">
+      <DependentUpon>Usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuario.aspx.designer.cs">
+      <DependentUpon>Usuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
