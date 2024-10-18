@@ -67,8 +67,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="marcas\FormMarca.aspx" />
+    <Content Include="MenuAdministrador.aspx" />
+    <Content Include="marcas\MenuMarcas.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +92,27 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="marcas\FormMarca.aspx.cs">
+      <DependentUpon>FormMarca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="marcas\FormMarca.aspx.designer.cs">
+      <DependentUpon>FormMarca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MenuAdministrador.aspx.cs">
+      <DependentUpon>MenuAdministrador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MenuAdministrador.aspx.designer.cs">
+      <DependentUpon>MenuAdministrador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="marcas\MenuMarcas.aspx.cs">
+      <DependentUpon>MenuMarcas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="marcas\MenuMarcas.aspx.designer.cs">
+      <DependentUpon>MenuMarcas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -27,7 +27,7 @@ namespace Negocio
             accesoDatos.setearParametro("@Codigo", producto.Codigo);
             accesoDatos.setearParametro("@Nombre", producto.Nombre);
             accesoDatos.setearParametro("@Marca", producto.Marca);
-            accesoDatos.setearParametro("@IdProveedor", producto.IdProveedor);
+            accesoDatos.setearParametro("@IdProveedor", producto.Proveedor.IdProveedor);
             accesoDatos.setearParametro("@Stock", producto.Stock);
             accesoDatos.setearParametro("@Tipo", producto.Tipo);
 
@@ -46,7 +46,7 @@ namespace Negocio
             accesoDatos.setearParametro("@Codigo", producto.Codigo);
             accesoDatos.setearParametro("@Nombre", producto.Nombre);
             accesoDatos.setearParametro("@Marca", producto.Marca);
-            accesoDatos.setearParametro("@IdProveedor", producto.IdProveedor);
+            accesoDatos.setearParametro("@IdProveedor", producto.Proveedor.IdProveedor);
             accesoDatos.setearParametro("@Stock", producto.Stock);
             accesoDatos.setearParametro("@Tipo", producto.Tipo);
 

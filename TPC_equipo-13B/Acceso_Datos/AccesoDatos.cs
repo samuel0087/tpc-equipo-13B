@@ -21,7 +21,7 @@ namespace Acceso_Datos
         //se crea la conexxion a la base de datos en el constructor
         public AccesoDatos()
         {
-            const string DB = "Base de datos TP_Cuatrimestral"; //Nombre de la base de datos
+            const string DB = "TP_Cuatrimestral"; //Nombre de la base de datos
             conexion = new SqlConnection("server=.\\SQLEXPRESS; database="+ DB +"; integrated security=true");
             comando = new SqlCommand();
         }

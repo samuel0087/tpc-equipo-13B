@@ -49,7 +49,7 @@ go
 create table Usuarios(
 IdUsuario int primary key identity(1,1),
 Nombre varchar(50) not null,
-Contraseña varchar(50) not null,
+Contraseï¿½a varchar(50) not null,
 Rol varchar(50) not null
 );
 
@@ -175,4 +175,15 @@ create table PrecioProducto (
     constraint fk_PrecioProducto_Producto foreign key (IdProducto) references Productos(IdProducto),
     primary key(IdProducto, FechaVigencia)
 );
+
+/*Datos de pueba de la tabla Marcas*/
+INSERT INTO Marcas (Nombre)
+VALUES
+('Coca-Cola Argentina'),
+('Patagonia'),
+('Arcor'),
+('Felfort'),
+('La SerenÃ­sima'),
+('Quilmes');
+
 
