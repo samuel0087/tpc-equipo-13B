@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,31 +13,18 @@ namespace TPC_equipo_13B
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("IdUsuario");
-            dt.Columns.Add("Nombre de usuario");
-            dt.Columns.Add("cargo");
-            dt.Columns.Add("FechaRegistro");
+            if (!IsPostBack)
+            {
+                NegocioUsuario negocioUsuario = new NegocioUsuario();
+                DataTable dt = new DataTable();
+                dt = negocioUsuario.cargartablausuario();
 
-            dt.Rows.Add(1, "Juan Pérez", "juan@example.com", DateTime.Now);
-            dt.Rows.Add(2, "María López", "maria@example.com", DateTime.Now);
-
-            GridViewUsuarios.DataSource = dt;
-            GridViewUsuarios.DataBind();
+                GridViewUsuarios.DataSource = dt;
+                GridViewUsuarios.DataBind();
+            }
         }
   
-            protected void GridViewUsuarios_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                // Obtener el ID del usuario seleccionado
-                int userId = Convert.ToInt32(GridViewUsuarios.SelectedDataKey.Value);
-
-                // Almacenar el ID en ViewState si necesitas usarlo más adelante
-                ViewState["SelectedUserId"] = userId;
-
-                // Habilitar los botones para modificar y eliminar
-                btnModificar.Enabled = true;
-                btnEliminar.Enabled = true;
-            }
+    
         protected void btnnuevo_Click(object sender, EventArgs e)
         {
             // Aquí puedes redirigir a la página para crear un nuevo usuario
@@ -56,7 +44,32 @@ namespace TPC_equipo_13B
                 // Mostrar un mensaje de error o alertar al usuario de que debe seleccionar un usuario primero
             }
         }
-        protected void btnEliminar_Click(object sender, EventArgs e) { }
+        protected void btnEliminar_Click(object sender, EventArgs e) {
+        
+         
+        }
+  
+        protected void GridViewUsuarios_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Modificar")
+            {
+                int idUsuario = Convert.ToInt32(e.CommandArgument);
+                NegocioUsuario negocioUsuario = new NegocioUsuario();
+               
+            }
+            else if (e.CommandName == "Eliminar")
+            {
+                int idUsuario = Convert.ToInt32(e.CommandArgument);
+                NegocioUsuario negocioUsuario = new NegocioUsuario();
+                negocioUsuario.EliminarUsuario(idUsuario);
+
+                DataTable dt = new DataTable();
+                dt = negocioUsuario.cargartablausuario();
+
+                GridViewUsuarios.DataSource = dt;
+                GridViewUsuarios.DataBind();
+            }
+        }
 
 
     }

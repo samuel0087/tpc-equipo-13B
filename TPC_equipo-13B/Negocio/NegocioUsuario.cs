@@ -1,6 +1,8 @@
-﻿using Dominio;
+﻿using Acceso_Datos;
+using Dominio;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -87,6 +89,28 @@ namespace Negocio
 
             return usuarios;
         }
+        //Esta es para cargar tablas
+        public DataTable cargartablausuario()
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
 
+            DataTable tablausuarios = new DataTable();
+
+            string consulta = "select IdUsuario,Nombre,Rol from Usuarios ";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+                tablausuarios.Load(accesoDatos.Lector);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener usuarios: " + ex.Message);
+            }
+
+            return tablausuarios;
+
+        }
     }
 }

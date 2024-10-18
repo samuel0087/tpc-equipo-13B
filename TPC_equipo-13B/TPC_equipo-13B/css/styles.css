@@ -46,4 +46,10 @@ body {
         background: rgb(13 110 253);
         color: white;
     }
+.row-style {
+    background-color: #f9f9f9;
+}
 
+.selected-row {
+    background-color: #c6e2ff; /* Azul claro para indicar selección */
+}

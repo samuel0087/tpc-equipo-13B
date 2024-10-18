@@ -15,15 +15,6 @@ namespace TPC_equipo_13B
     {
 
         /// <summary>
-        /// Control GridViewUsuarios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewUsuarios;
-
-        /// <summary>
         /// Control btnnuevo.
         /// </summary>
         /// <remarks>
@@ -33,21 +24,12 @@ namespace TPC_equipo_13B
         protected global::System.Web.UI.WebControls.Button btnnuevo;
 
         /// <summary>
-        /// Control btnModificar.
+        /// Control GridViewUsuarios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificar;
-
-        /// <summary>
-        /// Control btnEliminar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminar;
+        protected global::System.Web.UI.WebControls.GridView GridViewUsuarios;
     }
 }
