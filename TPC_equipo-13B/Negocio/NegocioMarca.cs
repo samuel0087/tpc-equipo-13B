@@ -17,6 +17,68 @@ namespace Negocio
             accesoDatos = new Acceso_Datos.AccesoDatos();
         }
 
+        public List<Marca> listar()
+        {
+            List<Marca> lista = new List<Marca>();
+            string consulta = @"SELECT IdMarca, Nombre FROM Marcas";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+
+                while (accesoDatos.Lector.Read())
+                {
+                    Marca aux = new Marca();
+                    aux.IdMarca = accesoDatos.Lector["IdMarca"] is DBNull ? 0 : (int)accesoDatos.Lector["IdMarca"];
+                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public List<Marca> listar(bool orden)
+        {
+            List<Marca> lista = new List<Marca>();
+            string consulta = @"SELECT IdMarca, Nombre FROM Marcas ORDER BY Nombre ASC";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+
+                while (accesoDatos.Lector.Read())
+                {
+                    Marca aux = new Marca();
+                    aux.IdMarca = accesoDatos.Lector["IdMarca"] is DBNull ? 0 : (int)accesoDatos.Lector["IdMarca"];
+                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
         // Agregar marca
         public void AgregarMarca(Marca aux)
         {
@@ -75,10 +137,11 @@ namespace Negocio
         }
 
         // Buscar marcas
-        public Marca BuscarMarca(string nombre = null, int? idMarca = null)
+        public List<Marca> BuscarMarca(string nombre = null, int? idMarca = null)
         {
             string consulta = "SELECT * FROM Marcas WHERE 1=1";
             Marca aux = null;
+            List<Marca> lista = new List<Marca>();
 
             try
             {
@@ -97,15 +160,16 @@ namespace Negocio
                 accesoDatos.setearConsulta(consulta);
                 accesoDatos.ejecutarLectura();
 
-                if (accesoDatos.Lector.Read())
+                while (accesoDatos.Lector.Read())
                 {
                     aux = new Marca();
                     aux.IdMarca = accesoDatos.Lector["IdMarca"] is DBNull ? 0 : (int)accesoDatos.Lector["IdMarca"];
                     aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
 
+                    lista.Add(aux);
                 }
 
-                return aux;
+                return lista;
 
             }
             catch (Exception)
@@ -148,7 +212,37 @@ namespace Negocio
             }
             finally
             {
+                accesoDatos.cerrarConexion();
+            }
+        }
 
+        public Marca getOneByNombre(string nombre)
+        {
+            Marca aux = new Marca();
+            string consulta = "SELECT IdMarca, Nombre FROM Marcas WHERE Nombre = @nombre";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.setearParametro("@nombre", nombre);
+                accesoDatos.ejecutarLectura();
+
+                if (accesoDatos.Lector.Read())
+                {
+                    aux.IdMarca = accesoDatos.Lector["IdMarca"] is DBNull ? 0 : (int)accesoDatos.Lector["IdMarca"];
+                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+                }
+
+                return aux;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
             }
         }
     }

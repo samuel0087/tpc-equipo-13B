@@ -11,13 +11,16 @@
 
                 <asp:UpdatePanel runat="server">
                     <ContentTemplate>
+
                         <div class="mb-3">
-                            <label for="NombreMarca" class="form-label">Nombre</label>
+                            <asp:Label Text="Nombre"  ID="lblNombreMarca" CssClass="form-label" runat="server" />
                             <asp:TextBox runat="server" cssClass="form-control" ID="txtNombreMarca" AutoPostBack="true" OnTextChanged="txtNombreMarca_TextChanged" />
                             <asp:Label Text="" CssClass="error" runat="server" ID="lblError"/>
                         </div>
 
                         <asp:Button Text="Añadir" ID="btnAñadir" cssClass="btn btn-primary" runat="server" onclick="btnAñadir_Click"/>
+                        <asp:Button Text="Modificar" ID="btnModificar" cssClass="btn btn-primary" runat="server" onClick="btnModificar_Click1"/>
+                        <asp:Button Text="Eliminar" ID="btnEliminar" cssClass="btn btn-danger" runat="server" onClick="btnEliminar_Click"/>
                     </ContentTemplate>
                 </asp:UpdatePanel>
 

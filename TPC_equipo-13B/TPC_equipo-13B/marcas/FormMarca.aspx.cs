@@ -16,6 +16,33 @@ namespace TPC_equipo_13B.marcas
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            try
+            {
+                btnModificar.Visible = false;
+                btnEliminar.Visible = false;
+                if (Request.QueryString["id"] != null)
+                {
+                    btnModificar.Visible = true;
+                    btnEliminar.Visible = true;
+                    btnAñadir.Visible = false;
+
+                    NegocioMarca negocio = new NegocioMarca();
+                    int id = int.Parse(Request.QueryString["id"]);
+                    Marca = new Marca();
+                    Marca = negocio.getOne(id);
+                    if (!IsPostBack)
+                    {
+                        txtNombreMarca.Text = Marca.Nombre;
+                       
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
         protected void txtNombreMarca_TextChanged(object sender, EventArgs e)
@@ -63,7 +90,7 @@ namespace TPC_equipo_13B.marcas
                 if (!string.IsNullOrEmpty(text))
                 {
                     NegocioMarca negocio = new NegocioMarca();
-                    var aux = negocio.BuscarMarca(text);
+                    var aux = negocio.getOneByNombre(text);
 
                     if (aux != null)
                     {
@@ -99,6 +126,40 @@ namespace TPC_equipo_13B.marcas
                 throw;
             }
             
+        }
+
+
+        protected void btnModificar_Click1(object sender, EventArgs e)
+        {
+
+            validarCampo(txtNombreMarca.Text);
+            if (lblError.Text != "")
+            {
+                return;
+            }
+            NegocioMarca negocio = new NegocioMarca();
+
+            try
+            {
+                if (Marca != null)
+                {
+                    Marca.Nombre = txtNombreMarca.Text;
+                    negocio.ModificarMarca(Marca);
+                }
+
+                Response.Redirect("VerMarcas.aspx");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

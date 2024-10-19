@@ -7,6 +7,7 @@
             <h2>Marcas</h2>
 
             <div class="menu">
+                <a href="VerMarcas.aspx">Mostrar Todo</a>
                 <a href="FormMarca.aspx">Agregar</a>
                 <a href="#">Modificar</a>
                 <a href="#">Eliminar</a>
