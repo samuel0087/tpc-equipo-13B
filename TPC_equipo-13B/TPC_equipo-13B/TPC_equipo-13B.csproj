@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
+    <Content Include="comfirmareliminacion.aspx" />
     <Content Include="marcas\VerMarcas.aspx" />
     <Content Include="Usuario.aspx" />
     <Content Include="Global.asax" />
@@ -91,6 +92,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="comfirmareliminacion.aspx.cs">
+      <DependentUpon>comfirmareliminacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="comfirmareliminacion.aspx.designer.cs">
+      <DependentUpon>comfirmareliminacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="marcas\VerMarcas.aspx.cs">
       <DependentUpon>VerMarcas.aspx</DependentUpon>

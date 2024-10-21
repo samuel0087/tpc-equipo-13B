@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,7 +46,29 @@ namespace Negocio
 
             accesoDatos.ejecutarAccion();
         }
+        public Usuario buscarUsuarioPorId(int id)
+        {
+            Usuario usuario = null;
+            string consulta = "SELECT idusuario, nombre, rol FROM usuarios WHERE idusuario = @id";
 
+            accesoDatos.setearConsulta(consulta);
+            accesoDatos.setearParametro("@id", id);
+
+            accesoDatos.ejecutarLectura();
+
+            if (accesoDatos.Lector.Read())
+            {
+                usuario = new Usuario
+                {
+                    IdUsuario = accesoDatos.Lector.GetInt32(0),
+                    Nombre = accesoDatos.Lector.GetString(1), 
+                    Rol = accesoDatos.Lector.GetString(2) 
+                };
+            }
+
+            accesoDatos.cerrarConexion(); 
+            return usuario; 
+        }
         // Eliminar usuario
         public void EliminarUsuario(int idUsuario)
         {

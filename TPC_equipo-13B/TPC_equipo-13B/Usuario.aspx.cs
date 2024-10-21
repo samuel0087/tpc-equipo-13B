@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -58,16 +59,16 @@ namespace TPC_equipo_13B
                
             }
             else if (e.CommandName == "Eliminar")
-            {
+            {   NegocioUsuario negocioUsuario= new NegocioUsuario();
                 int idUsuario = Convert.ToInt32(e.CommandArgument);
-                NegocioUsuario negocioUsuario = new NegocioUsuario();
-                negocioUsuario.EliminarUsuario(idUsuario);
+                Usuario usuarioAEliminar = negocioUsuario.buscarUsuarioPorId(idUsuario);
+                if (usuarioAEliminar != null)
+                {
+                    Session["UsuarioAEliminar"] = usuarioAEliminar; 
+                }
 
-                DataTable dt = new DataTable();
-                dt = negocioUsuario.cargartablausuario();
+                Response.Redirect("comfirmareliminacion.aspx");
 
-                GridViewUsuarios.DataSource = dt;
-                GridViewUsuarios.DataBind();
             }
         }
 
