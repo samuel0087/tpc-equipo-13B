@@ -49,7 +49,7 @@ namespace Negocio
         public Usuario buscarUsuarioPorId(int id)
         {
             Usuario usuario = null;
-            string consulta = "SELECT idusuario, nombre, rol FROM usuarios WHERE idusuario = @id";
+            string consulta = "SELECT idusuario, nombre,Contraseña,rol FROM usuarios WHERE idusuario = @id";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@id", id);
@@ -61,8 +61,9 @@ namespace Negocio
                 usuario = new Usuario
                 {
                     IdUsuario = accesoDatos.Lector.GetInt32(0),
-                    Nombre = accesoDatos.Lector.GetString(1), 
-                    Rol = accesoDatos.Lector.GetString(2) 
+                    Nombre = accesoDatos.Lector.GetString(1),
+                    Contraseña = accesoDatos.Lector.GetString(2),
+                    Rol = accesoDatos.Lector.GetString(3),
                 };
             }
 
@@ -119,7 +120,7 @@ namespace Negocio
 
             DataTable tablausuarios = new DataTable();
 
-            string consulta = "select IdUsuario,Nombre,Rol from Usuarios ";
+            string consulta = "select IdUsuario,Nombre,Contraseña,Rol from Usuarios ";
             try
             {
                 accesoDatos.setearConsulta(consulta);

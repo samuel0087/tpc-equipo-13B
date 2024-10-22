@@ -56,7 +56,13 @@ namespace TPC_equipo_13B
             {
                 int idUsuario = Convert.ToInt32(e.CommandArgument);
                 NegocioUsuario negocioUsuario = new NegocioUsuario();
-               
+                Usuario UsuarioaModificar = negocioUsuario.buscarUsuarioPorId(idUsuario);
+                if(UsuarioaModificar != null)
+                {
+                    Session["UsuarioaModificar"] = UsuarioaModificar;
+                }
+
+                Response.Redirect("Modificar.aspx");
             }
             else if (e.CommandName == "Eliminar")
             {   NegocioUsuario negocioUsuario= new NegocioUsuario();

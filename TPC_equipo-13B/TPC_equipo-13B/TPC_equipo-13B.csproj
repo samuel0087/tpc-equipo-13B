@@ -70,6 +70,7 @@
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
     <Content Include="comfirmareliminacion.aspx" />
+    <Content Include="Modificar.aspx" />
     <Content Include="marcas\VerMarcas.aspx" />
     <Content Include="Usuario.aspx" />
     <Content Include="Global.asax" />
@@ -99,6 +100,13 @@
     </Compile>
     <Compile Include="comfirmareliminacion.aspx.designer.cs">
       <DependentUpon>comfirmareliminacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modificar.aspx.cs">
+      <DependentUpon>Modificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modificar.aspx.designer.cs">
+      <DependentUpon>Modificar.aspx</DependentUpon>
     </Compile>
     <Compile Include="marcas\VerMarcas.aspx.cs">
       <DependentUpon>VerMarcas.aspx</DependentUpon>
