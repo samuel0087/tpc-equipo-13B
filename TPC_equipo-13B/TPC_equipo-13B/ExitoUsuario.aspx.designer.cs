@@ -11,25 +11,16 @@ namespace TPC_equipo_13B
 {
 
 
-    public partial class Formulario_web1
+    public partial class Formulario_web14
     {
 
         /// <summary>
-        /// Control btnAgregar.
+        /// Control Volver.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregar;
-
-        /// <summary>
-        /// Control GridViewUsuarios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewUsuarios;
+        protected global::System.Web.UI.WebControls.Button Volver;
     }
 }

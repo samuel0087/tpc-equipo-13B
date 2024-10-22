@@ -70,6 +70,9 @@
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
     <Content Include="comfirmareliminacion.aspx" />
+    <Content Include="AgregarUsuario.aspx" />
+    <Content Include="ExitoUsuario.aspx" />
+    <Content Include="UsuarioModificadoconExito.aspx" />
     <Content Include="Modificar.aspx" />
     <Content Include="marcas\VerMarcas.aspx" />
     <Content Include="Usuario.aspx" />
@@ -100,6 +103,27 @@
     </Compile>
     <Compile Include="comfirmareliminacion.aspx.designer.cs">
       <DependentUpon>comfirmareliminacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarUsuario.aspx.cs">
+      <DependentUpon>AgregarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarUsuario.aspx.designer.cs">
+      <DependentUpon>AgregarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExitoUsuario.aspx.cs">
+      <DependentUpon>ExitoUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExitoUsuario.aspx.designer.cs">
+      <DependentUpon>ExitoUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioModificadoconExito.aspx.cs">
+      <DependentUpon>UsuarioModificadoconExito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UsuarioModificadoconExito.aspx.designer.cs">
+      <DependentUpon>UsuarioModificadoconExito.aspx</DependentUpon>
     </Compile>
     <Compile Include="Modificar.aspx.cs">
       <DependentUpon>Modificar.aspx</DependentUpon>

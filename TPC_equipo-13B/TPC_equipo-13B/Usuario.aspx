@@ -6,7 +6,7 @@
        <div class="col-6 main">
            <h2>Usuario</h2>
            <div>
-    <asp:Button ID="btnnuevo" runat="server" Text="Nuevo" OnClick="btnnuevo_Click" Enabled="False" CssClass="btn btn-primary" style="margin-bottom: 10px;" />
+    <asp:Button ID="btnAgregar" runat="server" Text="Agregar"  CssClass="btn btn-primary" style="margin-bottom: 10px;" OnClick="btnAgregar_Click"/>
 </div>
 <asp:GridView ID="GridViewUsuarios" runat="server" AutoGenerateColumns="False" CssClass="table" Visible="true" AllowPaging="True" OnRowCommand="GridViewUsuarios_RowCommand">
     <Columns>

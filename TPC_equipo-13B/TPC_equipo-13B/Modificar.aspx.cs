@@ -20,7 +20,7 @@ namespace TPC_equipo_13B
                     Usuario usuario = (Usuario)Session["UsuarioaModificar"];
                   
 
-                    txtIdUsuario.Text = usuario.IdUsuario.ToString();
+                    /*txtIdUsuario.Text = usuario.IdUsuario.ToString();*/
                     txtNombre.Text = usuario.Nombre;
                     TextContraseña.Text = usuario.Contraseña;
                     TextRol.Text = usuario.Rol;
@@ -37,15 +37,15 @@ namespace TPC_equipo_13B
         {   NegocioUsuario negocioUsuario=new NegocioUsuario();
             Usuario usuarioModificado = (Usuario)Session["UsuarioaModificar"];
 
-            usuarioModificado.IdUsuario = Convert.ToInt32(txtIdUsuario.Text);
+            /*usuarioModificado.IdUsuario = Convert.ToInt32(txtIdUsuario.Text);*/
             usuarioModificado.Nombre = txtNombre.Text;
             usuarioModificado.Contraseña = TextContraseña.Text;
             usuarioModificado.Rol = TextRol.Text;
 
             negocioUsuario.ModificarUsuario(usuarioModificado);
 
-            Response.Redirect("Usuario.aspx");
-
+            Response.Redirect("UsuarioModificadoconExito.aspx");
+                              
 
         }
         protected void btnCancelar_Click(object sender, EventArgs e)

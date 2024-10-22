@@ -26,29 +26,12 @@ namespace TPC_equipo_13B
         }
   
     
-        protected void btnnuevo_Click(object sender, EventArgs e)
+        protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            // Aquí puedes redirigir a la página para crear un nuevo usuario
-            Response.Redirect("NuevoUsuario.aspx");
+          
+            Response.Redirect("AgregarUsuario.aspx");
         }
-        protected void btnModificar_Click(object sender, EventArgs e)
-        {
-            // Verifica que haya un usuario seleccionado
-            if (ViewState["SelectedUserId"] != null)
-            {
-                int userId = (int)ViewState["SelectedUserId"];
-                // Redirige a la página de modificación pasando el userId
-                Response.Redirect($"ModificarUsuario.aspx?userId={userId}");
-            }
-            else
-            {
-                // Mostrar un mensaje de error o alertar al usuario de que debe seleccionar un usuario primero
-            }
-        }
-        protected void btnEliminar_Click(object sender, EventArgs e) {
-        
-         
-        }
+      
   
         protected void GridViewUsuarios_RowCommand(object sender, GridViewCommandEventArgs e)
         {

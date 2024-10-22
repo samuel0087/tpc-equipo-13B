@@ -1,16 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ComercioApp.Master" AutoEventWireup="true" CodeBehind="Modificar.aspx.cs" Inherits="TPC_equipo_13B.Formulario_web12" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ComercioApp.Master" AutoEventWireup="true" CodeBehind="AgregarUsuario.aspx.cs" Inherits="TPC_equipo_13B.Formulario_web13" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-          <div class="row" >
-  <div class="col-6 main">
-      <h2>Modificar</h2>
+          <h2>Agregar Usuario:</h2>
       <div><!--<div>
           <label>ID:</label>
           </div>
           <div>
          <asp:TextBox ID="txtIdUsuario" runat="server" style="margin-bottom: 10px;"></asp:TextBox><br />
-          </div>  -->   
+          </div>   -->  
       </div>
       <div>
           <div>
