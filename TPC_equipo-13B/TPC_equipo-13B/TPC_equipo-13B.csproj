@@ -67,6 +67,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Compras\FormCompras.aspx" />
+    <Content Include="Compras\ListadoCompras.aspx" />
+    <Content Include="Compras\MenuCompras.aspx" />
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
     <Content Include="comfirmareliminacion.aspx" />
@@ -92,6 +95,27 @@
     </Compile>
     <Compile Include="ComercioApp.Master.designer.cs">
       <DependentUpon>ComercioApp.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Compras\FormCompras.aspx.cs">
+      <DependentUpon>FormCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Compras\FormCompras.aspx.designer.cs">
+      <DependentUpon>FormCompras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Compras\ListadoCompras.aspx.cs">
+      <DependentUpon>ListadoCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Compras\ListadoCompras.aspx.designer.cs">
+      <DependentUpon>ListadoCompras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Compras\MenuCompras.aspx.cs">
+      <DependentUpon>MenuCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Compras\MenuCompras.aspx.designer.cs">
+      <DependentUpon>MenuCompras.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

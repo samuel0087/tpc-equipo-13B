@@ -8,7 +8,7 @@
 
             <div class="menu">
                 <a href="<%: ResolveUrl("~/Ventas/MenuVentas.aspx") %>">Ventas</a>
-                <a href="#">Compras</a>
+                <a href="<%: ResolveUrl("~/Compras/MenuCompras.aspx") %>">Compras</a>
                 <a href="<%: ResolveUrl("~/MenuAdministrador.aspx") %>">Administrar</a>
                 <a href="#">Cerrar Sesion</a>
 
