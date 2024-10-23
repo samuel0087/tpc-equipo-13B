@@ -71,6 +71,9 @@ namespace TPC_equipo_13B.marcas
                     Marca = new Marca();
                     Marca.Nombre = txtNombreMarca.Text;
                     negocio.AgregarMarca(Marca);
+                    lblError.Text = "Guardado exitosamente";
+                    lblError.CssClass = "exito";
+                    txtNombreMarca.Text = "";
                 }
             }
             catch (Exception)
@@ -84,6 +87,7 @@ namespace TPC_equipo_13B.marcas
         public void validarCampo(string text)
         {
             string error = "";
+            lblError.CssClass = "error";
             try
             {
                 //dar una validacion al campo

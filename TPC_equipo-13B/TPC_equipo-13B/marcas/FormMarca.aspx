@@ -15,7 +15,7 @@
                         <div class="mb-3">
                             <asp:Label Text="Nombre"  ID="lblNombreMarca" CssClass="form-label" runat="server" />
                             <asp:TextBox runat="server" cssClass="form-control" ID="txtNombreMarca" AutoPostBack="true" OnTextChanged="txtNombreMarca_TextChanged" />
-                            <asp:Label Text="" CssClass="error" runat="server" ID="lblError"/>
+                            <asp:Label Text=""  runat="server" ID="lblError"/>
                         </div>
 
                         <asp:Button Text="Añadir" ID="btnAñadir" cssClass="btn btn-primary" runat="server" onclick="btnAñadir_Click"/>

@@ -12,6 +12,10 @@ body {
     color: red;
 }
 
+.exito {
+    color: green;
+}
+
 .main{
     padding: 20px;
     border: 1px solid #ccc;
