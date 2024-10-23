@@ -80,6 +80,9 @@
     <Content Include="marcas\FormMarca.aspx" />
     <Content Include="MenuAdministrador.aspx" />
     <Content Include="marcas\MenuMarcas.aspx" />
+    <Content Include="Ventas\FormVentas.aspx" />
+    <Content Include="Ventas\ListadoVentas.aspx" />
+    <Content Include="Ventas\MenuVentas.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +174,27 @@
       <DependentUpon>MenuMarcas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ventas\FormVentas.aspx.cs">
+      <DependentUpon>FormVentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ventas\FormVentas.aspx.designer.cs">
+      <DependentUpon>FormVentas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas\ListadoVentas.aspx.cs">
+      <DependentUpon>ListadoVentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ventas\ListadoVentas.aspx.designer.cs">
+      <DependentUpon>ListadoVentas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas\MenuVentas.aspx.cs">
+      <DependentUpon>MenuVentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ventas\MenuVentas.aspx.designer.cs">
+      <DependentUpon>MenuVentas.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ComercioApp.Master" />

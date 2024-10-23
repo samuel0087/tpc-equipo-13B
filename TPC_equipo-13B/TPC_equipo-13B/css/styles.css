@@ -57,7 +57,7 @@ body {
 .selected-row {
     background-color: #c6e2ff; /* Azul claro para indicar selección */
 }
-<style >
+
 .button-container {
     display: flex;
     justify-content: center; /* Centra horizontalmente */

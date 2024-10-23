@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TPC_equipo_13B
+namespace TPC_equipo_13B.Ventas
 {
 
 
-    public partial class Default
+    public partial class MenuVentas
     {
     }
 }

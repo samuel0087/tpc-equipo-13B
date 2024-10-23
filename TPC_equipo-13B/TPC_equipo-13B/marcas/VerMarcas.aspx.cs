@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
-using Negocio;
 
 namespace TPC_equipo_13B.marcas
 {
