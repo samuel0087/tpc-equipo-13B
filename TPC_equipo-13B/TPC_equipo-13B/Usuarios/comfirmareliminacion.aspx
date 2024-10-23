@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <div class="row" >
-  <div class="col-6 main">
+  <div >
       <h2>¿Desea eliminar el siguiente usuario?</h2>
       <div>
           <label>ID:</label>

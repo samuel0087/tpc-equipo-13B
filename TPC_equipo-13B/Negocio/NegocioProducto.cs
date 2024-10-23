@@ -1,4 +1,5 @@
-﻿using Dominio;
+﻿using Acceso_Datos;
+using Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,16 +21,16 @@ namespace Negocio
         // Agregar producto
         public void AgregarProducto(Producto producto)
         {
-            string consulta = "INSERT INTO Productos (Codigo, Nombre, Marca, IdProveedor, Stock, Tipo) " +
-                              "VALUES (@Codigo, @Nombre, @Marca, @IdProveedor, @Stock, @Tipo)";
+            string consulta = "INSERT INTO Productos (Codigo, Nombre, IdMarca, IdProveedor, Stock, IdTipo) " +
+                              "VALUES (@Codigo, @Nombre, @IdMarca, @IdProveedor, @Stock, @IdTipo)";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@Codigo", producto.Codigo);
             accesoDatos.setearParametro("@Nombre", producto.Nombre);
-            accesoDatos.setearParametro("@Marca", producto.Marca);
+            accesoDatos.setearParametro("@IdMarca", producto.Marca.IdMarca);
             accesoDatos.setearParametro("@IdProveedor", producto.Proveedor.IdProveedor);
             accesoDatos.setearParametro("@Stock", producto.Stock);
-            accesoDatos.setearParametro("@Tipo", producto.Tipo);
+            accesoDatos.setearParametro("@IdTipo", producto.Tipo.IdTipo);
 
             accesoDatos.ejecutarAccion();
         }
@@ -113,6 +114,29 @@ namespace Negocio
             accesoDatos.cerrarConexion();
 
             return productos;
+        }
+
+        public DataTable cargartaProducto()
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            DataTable tablaProducto = new DataTable();
+
+            string consulta = "select idproducto,Codigo, Nombre, IdMarca, Stock, IdTipo, IdProveedor from productos";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+                tablaProducto.Load(accesoDatos.Lector);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener usuarios: " + ex.Message);
+            }
+
+            return tablaProducto;
+
         }
     }
 }

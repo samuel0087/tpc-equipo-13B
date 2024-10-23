@@ -26,7 +26,7 @@ namespace TPC_equipo_13B
 
             negocioUsuario.AgregarUsuario(usuario);
 
-            Response.Redirect("UsuarioModificadoconExito.aspx");
+            Response.Redirect("ExitoUsuario.aspx");
         }
         protected void btnCancelar_Click(Object sender, EventArgs e) 
         {

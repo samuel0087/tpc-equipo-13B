@@ -75,6 +75,9 @@
     <Content Include="Compras\MenuCompras.aspx" />
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Productos\ExitoProducto.aspx" />
+    <Content Include="Productos\AgregarProductos.aspx" />
+    <Content Include="Productos\productos.aspx" />
     <Content Include="Usuarios\comfirmareliminacion.aspx" />
     <Content Include="Usuarios\AgregarUsuario.aspx" />
     <Content Include="Usuarios\ExitoUsuario.aspx" />
@@ -147,6 +150,27 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Productos\ExitoProducto.aspx.cs">
+      <DependentUpon>ExitoProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Productos\ExitoProducto.aspx.designer.cs">
+      <DependentUpon>ExitoProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Productos\AgregarProductos.aspx.cs">
+      <DependentUpon>AgregarProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Productos\AgregarProductos.aspx.designer.cs">
+      <DependentUpon>AgregarProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Productos\productos.aspx.cs">
+      <DependentUpon>productos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Productos\productos.aspx.designer.cs">
+      <DependentUpon>productos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Usuarios\comfirmareliminacion.aspx.cs">
       <DependentUpon>comfirmareliminacion.aspx</DependentUpon>
