@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dominio;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,16 +8,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
+using System.Security.Cryptography.X509Certificates;
 
-namespace TPC_equipo_13B.marcas
+namespace TPC_equipo_13B.Categorias
 {
-    public partial class FormMarca : System.Web.UI.Page
+    public partial class FormCategorias : System.Web.UI.Page
     {
-        public Marca Marca { get; set; }
-
+        public Categoria Categoria{ get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-
             try
             {
                 btnModificar.Visible = false;
@@ -26,14 +27,14 @@ namespace TPC_equipo_13B.marcas
                     btnEliminar.Visible = true;
                     btnAñadir.Visible = false;
 
-                    NegocioMarca negocio = new NegocioMarca();
+                    NegocioCategoria negocio = new NegocioCategoria();
                     int id = int.Parse(Request.QueryString["id"]);
-                    Marca = new Marca();
-                    Marca = negocio.getOne(id);
+                    Categoria = new Categoria();
+                    Categoria = negocio.getOne(id);
                     if (!IsPostBack)
                     {
-                        txtNombreMarca.Text = Marca.Nombre;
-                       
+                        txtNombreCategoria.Text = Categoria.Nombre;
+
                     }
                 }
             }
@@ -42,46 +43,72 @@ namespace TPC_equipo_13B.marcas
 
                 throw;
             }
-           
+
         }
-
-
-        //Metodo para validar campo cuando cambia el texto
-        //protected void txtNombreMarca_TextChanged(object sender, EventArgs e)
-        //{
-        //    validarCampo(txtNombreMarca.Text);
-        //    if(lblError.Text != "")
-        //    {
-        //        return;
-        //    }
-
-        //}
 
         protected void btnAñadir_Click(object sender, EventArgs e)
         {
-            validarCampo(txtNombreMarca.Text);
+            validarCampo(txtNombreCategoria.Text);
             if (lblError.Text != "")
             {
                 return;
             }
-            NegocioMarca negocio = new NegocioMarca();
+            NegocioCategoria negocio = new NegocioCategoria();
 
             try
             {
-                if (Marca == null)
+                if (Categoria == null)
                 {
-                    Marca = new Marca();
-                    Marca.Nombre = txtNombreMarca.Text;
-                    negocio.AgregarMarca(Marca);
+                    Categoria = new Categoria();
+                    Categoria.Nombre = txtNombreCategoria.Text;
+                    negocio.AgregarCategoria(Categoria);
                     lblError.Text = "Guardado exitosamente";
                     lblError.CssClass = "exito";
-                    txtNombreMarca.Text = "";
+                    txtNombreCategoria.Text = "";
                 }
             }
             catch (Exception)
             {
 
                 throw;
+            }
+
+        }
+
+        protected void btnModificar_Click1(object sender, EventArgs e)
+        {
+
+            validarCampo(txtNombreCategoria.Text);
+            if (lblError.Text != "")
+            {
+                return;
+            }
+            NegocioCategoria negocio = new NegocioCategoria();
+
+            try
+            {
+                if (Categoria != null)
+                {
+                    Categoria.Nombre = txtNombreCategoria.Text;
+                    negocio.ModificarCategoria(Categoria);
+                }
+
+                Response.Redirect("VerCategorias.aspx");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        protected void txtNombreCategoria_TextChanged(object sender, EventArgs e)
+        {
+            validarCampo(txtNombreCategoria.Text);
+            if(lblError.Text != "")
+            {
+                return;
             }
 
         }
@@ -95,17 +122,17 @@ namespace TPC_equipo_13B.marcas
                 //dar una validacion al campo
                 if (!string.IsNullOrEmpty(text))
                 {
-                    NegocioMarca negocio = new NegocioMarca();
+                    NegocioCategoria negocio = new NegocioCategoria();
                     var aux = negocio.getOneByNombre(text);
 
                     if (aux != null)
                     {
-                        if ((aux.Nombre != null) || (aux.IdMarca != 0))
+                        if ((aux.Nombre != null) || (aux.IdCategoria != 0))
                         {
                             error = "existente";
                         }
                     }
-                        
+
                 }
                 else
                 {
@@ -116,7 +143,7 @@ namespace TPC_equipo_13B.marcas
                 {
                     lblError.Text = "Campo vacio, ingrese un nombre valido";
                 }
-                else if(error == "existente")
+                else if (error == "existente")
                 {
                     lblError.Text = "El nombre ya existe";
                 }
@@ -131,44 +158,10 @@ namespace TPC_equipo_13B.marcas
 
                 throw;
             }
-            
-        }
-
-
-        protected void btnModificar_Click1(object sender, EventArgs e)
-        {
-
-            validarCampo(txtNombreMarca.Text);
-            if (lblError.Text != "")
-            {
-                return;
-            }
-            NegocioMarca negocio = new NegocioMarca();
-
-            try
-            {
-                if (Marca != null)
-                {
-                    Marca.Nombre = txtNombreMarca.Text;
-                    negocio.ModificarMarca(Marca);
-                }
-
-                Response.Redirect("VerMarcas.aspx");
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
 
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void txtNombreMarca_TextChanged1(object sender, EventArgs e)
         {
 
         }

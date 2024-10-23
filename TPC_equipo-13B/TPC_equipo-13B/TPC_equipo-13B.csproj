@@ -67,18 +67,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Categorias\FormCategorias.aspx" />
+    <Content Include="Categorias\MenuCategorias.aspx" />
+    <Content Include="Categorias\VerCategorias.aspx" />
     <Content Include="Compras\FormCompras.aspx" />
     <Content Include="Compras\ListadoCompras.aspx" />
     <Content Include="Compras\MenuCompras.aspx" />
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
-    <Content Include="comfirmareliminacion.aspx" />
-    <Content Include="AgregarUsuario.aspx" />
-    <Content Include="ExitoUsuario.aspx" />
-    <Content Include="UsuarioModificadoconExito.aspx" />
-    <Content Include="Modificar.aspx" />
+    <Content Include="Usuarios\comfirmareliminacion.aspx" />
+    <Content Include="Usuarios\AgregarUsuario.aspx" />
+    <Content Include="Usuarios\ExitoUsuario.aspx" />
+    <Content Include="Usuarios\UsuarioModificadoconExito.aspx" />
+    <Content Include="Usuarios\Modificar.aspx" />
     <Content Include="marcas\VerMarcas.aspx" />
-    <Content Include="Usuario.aspx" />
+    <Content Include="Usuarios\Usuario.aspx" />
     <Content Include="Global.asax" />
     <Content Include="marcas\FormMarca.aspx" />
     <Content Include="MenuAdministrador.aspx" />
@@ -89,6 +92,27 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categorias\FormCategorias.aspx.cs">
+      <DependentUpon>FormCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Categorias\FormCategorias.aspx.designer.cs">
+      <DependentUpon>FormCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Categorias\MenuCategorias.aspx.cs">
+      <DependentUpon>MenuCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Categorias\MenuCategorias.aspx.designer.cs">
+      <DependentUpon>MenuCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Categorias\VerCategorias.aspx.cs">
+      <DependentUpon>VerCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Categorias\VerCategorias.aspx.designer.cs">
+      <DependentUpon>VerCategorias.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ComercioApp.Master.cs">
       <DependentUpon>ComercioApp.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -124,39 +148,39 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="comfirmareliminacion.aspx.cs">
+    <Compile Include="Usuarios\comfirmareliminacion.aspx.cs">
       <DependentUpon>comfirmareliminacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="comfirmareliminacion.aspx.designer.cs">
+    <Compile Include="Usuarios\comfirmareliminacion.aspx.designer.cs">
       <DependentUpon>comfirmareliminacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AgregarUsuario.aspx.cs">
+    <Compile Include="Usuarios\AgregarUsuario.aspx.cs">
       <DependentUpon>AgregarUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AgregarUsuario.aspx.designer.cs">
+    <Compile Include="Usuarios\AgregarUsuario.aspx.designer.cs">
       <DependentUpon>AgregarUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ExitoUsuario.aspx.cs">
+    <Compile Include="Usuarios\ExitoUsuario.aspx.cs">
       <DependentUpon>ExitoUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ExitoUsuario.aspx.designer.cs">
+    <Compile Include="Usuarios\ExitoUsuario.aspx.designer.cs">
       <DependentUpon>ExitoUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UsuarioModificadoconExito.aspx.cs">
+    <Compile Include="Usuarios\UsuarioModificadoconExito.aspx.cs">
       <DependentUpon>UsuarioModificadoconExito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UsuarioModificadoconExito.aspx.designer.cs">
+    <Compile Include="Usuarios\UsuarioModificadoconExito.aspx.designer.cs">
       <DependentUpon>UsuarioModificadoconExito.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Modificar.aspx.cs">
+    <Compile Include="Usuarios\Modificar.aspx.cs">
       <DependentUpon>Modificar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Modificar.aspx.designer.cs">
+    <Compile Include="Usuarios\Modificar.aspx.designer.cs">
       <DependentUpon>Modificar.aspx</DependentUpon>
     </Compile>
     <Compile Include="marcas\VerMarcas.aspx.cs">
@@ -166,11 +190,11 @@
     <Compile Include="marcas\VerMarcas.aspx.designer.cs">
       <DependentUpon>VerMarcas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuario.aspx.cs">
+    <Compile Include="Usuarios\Usuario.aspx.cs">
       <DependentUpon>Usuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuario.aspx.designer.cs">
+    <Compile Include="Usuarios\Usuario.aspx.designer.cs">
       <DependentUpon>Usuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">

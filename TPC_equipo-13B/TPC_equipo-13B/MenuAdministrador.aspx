@@ -8,11 +8,11 @@
 
             <div class="menu">
                 <a href="marcas/MenuMarcas.aspx">Marcas</a>
-                <a href="#">Categorias</a>
+                <a href="<%=ResolveUrl("~/Categorias/MenuCategorias.aspx") %>">Categorias</a>
                 <a href="#">Tipos de productos</a>
                 <a href="#">Productos</a>
                 <a href="#">Proveedores</a>
-                <a href="#">Usuarios</a>
+                <a href="<%=ResolveUrl("~/Usuarios/Usuario.aspx") %>">Usuarios</a>
             </div>
         </div>
     </div>

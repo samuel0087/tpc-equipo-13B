@@ -49,7 +49,7 @@ go
 create table Usuarios(
 IdUsuario int primary key identity(1,1),
 Nombre varchar(50) not null,
-Contrase�a varchar(50) not null,
+Contraseña varchar(50) not null,
 Rol varchar(50) not null
 );
 
@@ -185,5 +185,17 @@ VALUES
 ('Felfort'),
 ('La Serenísima'),
 ('Quilmes');
+
+
+/*Datos para la tabla Categorias*/
+INSERT INTO Categorias (Nombre) VALUES
+('Frutas y Verduras'),
+('Lácteos'),
+('Carnes y Aves'),
+('Panadería'),
+('Bebidas'),
+('Congelados'),
+('Productos de Limpieza'),
+('Snacks y Dulces');
 
 
