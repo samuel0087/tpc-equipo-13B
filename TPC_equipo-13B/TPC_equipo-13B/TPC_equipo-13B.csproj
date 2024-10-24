@@ -75,6 +75,8 @@
     <Content Include="Compras\MenuCompras.aspx" />
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Productos\exitoproductoeliminado.aspx" />
+    <Content Include="Productos\EliminarProducto.aspx" />
     <Content Include="Productos\ExitoProducto.aspx" />
     <Content Include="Productos\AgregarProductos.aspx" />
     <Content Include="Productos\productos.aspx" />
@@ -150,6 +152,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Productos\exitoproductoeliminado.aspx.cs">
+      <DependentUpon>exitoproductoeliminado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Productos\exitoproductoeliminado.aspx.designer.cs">
+      <DependentUpon>exitoproductoeliminado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Productos\EliminarProducto.aspx.cs">
+      <DependentUpon>EliminarProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Productos\EliminarProducto.aspx.designer.cs">
+      <DependentUpon>EliminarProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Productos\ExitoProducto.aspx.cs">
       <DependentUpon>ExitoProducto.aspx</DependentUpon>

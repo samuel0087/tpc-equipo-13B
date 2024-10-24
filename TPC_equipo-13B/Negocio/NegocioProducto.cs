@@ -34,6 +34,49 @@ namespace Negocio
 
             accesoDatos.ejecutarAccion();
         }
+        public Producto buscarProductoPorId(int id)
+        {
+            Producto producto = null;
+            string consulta = "SELECT IdProducto,Codigo,Nombre,IdMarca,IdProveedor,Stock,IdTipo FROM Productos WHERE IdProducto = @IdProducto; ";
+
+            accesoDatos.setearConsulta(consulta);
+            accesoDatos.setearParametro("@IdProducto", id);
+
+            accesoDatos.ejecutarLectura();
+
+            if (accesoDatos.Lector.Read())
+            {
+                producto = new Producto()
+                {
+                    IdProducto = accesoDatos.Lector.GetInt32(0),
+                    Codigo=accesoDatos.Lector.GetInt32(1),
+                    Nombre = accesoDatos.Lector.GetString(2),
+                    Stock=accesoDatos.Lector.GetInt64(5)
+                };
+                producto.Marca = new Marca()
+                {
+                    IdMarca= accesoDatos.Lector.GetInt32(3)
+                };
+                if (!accesoDatos.Lector.IsDBNull(4))
+                {
+                    producto.Proveedor = new Proveedor()
+                    {
+                        IdProveedor = accesoDatos.Lector.GetInt32(4)
+                    };
+                }
+                if (!accesoDatos.Lector.IsDBNull(5))
+                {
+                    producto.Tipo = new Tipo()
+                    {
+                        IdTipo = accesoDatos.Lector.GetInt32(6)
+                    };
+
+                }
+            }
+
+            accesoDatos.cerrarConexion();
+            return producto;
+        }
 
         // Modificar producto
         public void ModificarProducto(Producto producto)
