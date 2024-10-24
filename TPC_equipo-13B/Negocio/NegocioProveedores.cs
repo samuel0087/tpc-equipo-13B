@@ -1,4 +1,5 @@
-﻿using Dominio;
+﻿using Acceso_Datos;
+using Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -129,6 +130,28 @@ namespace Negocio
             accesoDatos.cerrarConexion();
 
             return proveedores;
+        }
+        public DataTable cargartablaProveedor()
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            DataTable tablaProveedor = new DataTable();
+
+            string consulta = "SELECT  IdProveedor,Nombre,Apellido,Email,Telefono,Celular,Direccion,Provincia,Pais FROM  Provedores;";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+                tablaProveedor.Load(accesoDatos.Lector);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener usuarios: " + ex.Message);
+            }
+
+            return tablaProveedor;
+
         }
     }
 }

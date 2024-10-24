@@ -11,7 +11,7 @@
                 <a href="<%=ResolveUrl("~/Categorias/MenuCategorias.aspx") %>">Categorias</a>
                 <a href="#">Tipos de productos</a>
                 <a href="<%=ResolveUrl("~/Productos/Productos.aspx") %>">Productos</a>
-                <a href="<%=ResolveUrl("~/Usuarios/Usuario.aspx") %>">Proveedores</a>
+                <a href="<%=ResolveUrl("~/Proveedores/Proveedores.aspx") %>">Proveedores</a>
                 <a href="<%=ResolveUrl("~/Usuarios/Usuario.aspx") %>">Usuarios</a>
             </div>
         </div>
