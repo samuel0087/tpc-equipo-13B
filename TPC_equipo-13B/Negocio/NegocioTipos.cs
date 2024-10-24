@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Acceso_Datos;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -75,6 +76,28 @@ namespace Negocio
             accesoDatos.cerrarConexion();
 
             return tipos;
+        }
+        public DataTable cargartablaTipos()
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            DataTable tablaTipos = new DataTable();
+
+            string consulta = "SELECT  IdTipo,Nombre FROM  Tipos;";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+                tablaTipos.Load(accesoDatos.Lector);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener usuarios: " + ex.Message);
+            }
+
+            return tablaTipos;
+
         }
     }
 }
