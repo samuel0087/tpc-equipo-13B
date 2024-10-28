@@ -9,7 +9,7 @@
             <div class="menu">
                 <a href="VerMarcas.aspx">Mostrar Todo</a>
                 <a href="FormMarca.aspx">Agregar</a>
-                <a href="#">Buscar</a>
+                <a href="VerMarcas.aspx?Buscar=true">Buscar</a>
 
             </div>
         </div>
