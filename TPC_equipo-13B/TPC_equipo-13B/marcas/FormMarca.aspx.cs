@@ -168,7 +168,7 @@ namespace TPC_equipo_13B.marcas
 
         }
 
-        protected void txtNombreMarca_TextChanged1(object sender, EventArgs e)
+        protected void txtNombreMarca_TextChanged(object sender, EventArgs e)
         {
 
         }
