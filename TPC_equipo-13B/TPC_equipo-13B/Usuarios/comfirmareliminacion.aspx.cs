@@ -23,7 +23,7 @@ namespace TPC_equipo_13B
                     
                     lblIdUsuario.Text = usuarioAEliminar.IdUsuario.ToString(); // Asigna el ID
                     lblNombre.Text = usuarioAEliminar.Nombre; // Asigna el nombre
-                    lblRol.Text = usuarioAEliminar.Rol; // Asigna el rol
+                    lblRol.Text = usuarioAEliminar.Rol.NombreRol; // Asigna el rol
                 }
                 else
                 {

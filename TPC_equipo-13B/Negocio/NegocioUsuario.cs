@@ -23,12 +23,12 @@ namespace Negocio
         // Agregar usuario
         public void AgregarUsuario(Usuario usuario)
         {
-            string consulta = "INSERT INTO Usuarios (Nombre, Contraseña, Rol) VALUES (@Nombre, @Contraseña, @Rol)";
+            string consulta = "INSERT INTO Usuarios (Nombre, Contraseña, IdRol) VALUES (@Nombre, @Contraseña, @IdRol)";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@Nombre", usuario.Nombre);
             accesoDatos.setearParametro("@Contraseña", usuario.Contraseña);
-            accesoDatos.setearParametro("@Rol", usuario.Rol);
+            accesoDatos.setearParametro("@Rol", usuario.Rol.IdRol);
 
             accesoDatos.ejecutarAccion();
         }
@@ -48,8 +48,8 @@ namespace Negocio
         }
         public Usuario buscarUsuarioPorId(int id)
         {
-            Usuario usuario = null;
-            string consulta = "SELECT idusuario, nombre,Contraseña,rol FROM usuarios WHERE idusuario = @id";
+            Usuario aux = null;
+            string consulta = "SELECT idusuario, nombre,Contraseña, IdRol,NombreRol FROM usuarios WHERE idusuario = @id";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@id", id);
@@ -58,17 +58,18 @@ namespace Negocio
 
             if (accesoDatos.Lector.Read())
             {
-                usuario = new Usuario
-                {
-                    IdUsuario = accesoDatos.Lector.GetInt32(0),
-                    Nombre = accesoDatos.Lector.GetString(1),
-                    Contraseña = accesoDatos.Lector.GetString(2),
-                    Rol = accesoDatos.Lector.GetString(3),
-                };
+
+                aux.IdUsuario = accesoDatos.Lector.GetInt32(0);
+                aux.Nombre = accesoDatos.Lector.GetString(1);
+                aux.Contraseña = accesoDatos.Lector.GetString(2);
+                aux.Rol = new Rol();
+                aux.Rol.IdRol = accesoDatos.Lector.GetInt32(3);
+                aux.Rol.NombreRol = accesoDatos.Lector.GetString(4);
+
             }
 
             accesoDatos.cerrarConexion(); 
-            return usuario; 
+            return aux; 
         }
         // Eliminar usuario
         public void EliminarUsuario(int idUsuario)
@@ -98,11 +99,12 @@ namespace Negocio
                 accesoDatos.setearParametro("@Nombre", "%" + nombre + "%");
             }
 
-            if (!string.IsNullOrEmpty(rol))
-            {
-                consulta += " AND Rol LIKE @Rol";
-                accesoDatos.setearParametro("@Rol", "%" + rol + "%");
-            }
+            //se comenta, ya que tiene un IdRol(int)
+            //if (!string.IsNullOrEmpty(rol))
+            //{
+            //    consulta += " AND Rol LIKE @Rol";
+            //    accesoDatos.setearParametro("@Rol", "%" + rol + "%");
+            //}
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.ejecutarLectura();
@@ -120,7 +122,8 @@ namespace Negocio
 
             DataTable tablausuarios = new DataTable();
 
-            string consulta = "select IdUsuario,Nombre,Contraseña,Rol from Usuarios ";
+            string consulta = @"select U.IdUsuario, U.Nombre, U.Contraseña, R.IdRol, R.Rol from Usuarios U
+                                Inner Join Roles R On R.IdRol = U.IdRol";
             try
             {
                 accesoDatos.setearConsulta(consulta);

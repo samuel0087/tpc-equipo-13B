@@ -13,6 +13,15 @@ namespace TPC_equipo_13B
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                NegocioRol negocio = new NegocioRol();
+                ddlRoles.DataSource = negocio.listar();
+                ddlRoles.DataBind();
+
+
+
+            }
 
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -22,7 +31,7 @@ namespace TPC_equipo_13B
 
             usuario.Nombre = txtNombre.Text;
             usuario.Contraseña = TextContraseña.Text;
-            usuario.Rol=TextRol.Text;
+            usuario.Rol.NombreRol =TextRol.Text;
 
             negocioUsuario.AgregarUsuario(usuario);
 

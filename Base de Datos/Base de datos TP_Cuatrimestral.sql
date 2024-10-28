@@ -128,17 +128,17 @@ INSERT INTO Categorias (Nombre) VALUES
 
 go
 
-INSERT INTO Productos (Codigo, Nombre, IdMarca, IdTipo) VALUES
-(1001, 'Producto A', 1, 1),
-(1002, 'Producto B', 2, 1),
-(1003, 'Producto C', 1, 2),
-(1004, 'Producto D', 3, 2),
-(1005, 'Producto E', 1, 1),
-(1006, 'Producto F', 2, 3),
-(1007, 'Producto G', 3, 3),
-(1008, 'Producto H', 1, 1),
-(1009, 'Producto I', 2, 2),
-(1010, 'Producto J', 3, 3);
+INSERT INTO Productos (Codigo, Nombre, IdMarca, IdTipo, Ganancia) VALUES
+(1001, 'Producto A', 1, 1, 1.2),
+(1002, 'Producto B', 2, 1, 1.2),
+(1003, 'Producto C', 1, 2, 1.2),
+(1004, 'Producto D', 3, 2, 1.2),
+(1005, 'Producto E', 1, 1, 1.2),
+(1006, 'Producto F', 2, 3, 1.2),
+(1007, 'Producto G', 3, 3, 1.2),
+(1008, 'Producto H', 1, 1, 1.2),
+(1009, 'Producto I', 2, 2, 1.2),
+(1010, 'Producto J', 3, 3, 1.2);
 
 
 

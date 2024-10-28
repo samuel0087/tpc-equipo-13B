@@ -54,6 +54,7 @@
     <Compile Include="Proveedor.cs" />
     <Compile Include="ProveedorXProducto.cs" />
     <Compile Include="PruductoXCategoria.cs" />
+    <Compile Include="Rol.cs" />
     <Compile Include="Tipo.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Venta.cs" />

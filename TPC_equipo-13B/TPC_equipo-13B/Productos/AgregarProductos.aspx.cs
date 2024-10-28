@@ -19,15 +19,12 @@ namespace TPC_equipo_13B
         {
             Producto producto = new Producto();
             producto.Marca=new Marca();
-            producto.Proveedor = new Proveedor();
             producto.Tipo = new Tipo();
             NegocioProducto negocioProducto = new NegocioProducto();
 
             producto.Codigo = int.Parse(txtCodigo.Text);
             producto.Nombre=TxtNombre.Text;
             producto.Marca.IdMarca=int.Parse(TxtMarca.Text);
-            producto.Proveedor.IdProveedor = int.Parse(TxtIdproveedor.Text);
-            producto.Stock = int.Parse(Txtstock.Text);
             producto.Tipo.IdTipo = int.Parse(TxtIdTipo.Text);
 
             negocioProducto.AgregarProducto(producto);

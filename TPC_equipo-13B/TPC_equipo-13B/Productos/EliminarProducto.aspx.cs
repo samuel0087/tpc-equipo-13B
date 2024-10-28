@@ -23,8 +23,6 @@ namespace TPC_equipo_13B
                     LblCodigo.Text = producto.Codigo.ToString();
                     lblNombre.Text = producto.Nombre.ToString();
                     lblMarca.Text = producto.Marca.ToString();
-                    Lblstock.Text = producto.Stock.ToString();
-                    LblProveedor.Text=producto.Proveedor.ToString();
                 }
                 else
                 {

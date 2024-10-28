@@ -23,7 +23,7 @@ namespace TPC_equipo_13B
                     /*txtIdUsuario.Text = usuario.IdUsuario.ToString();*/
                     txtNombre.Text = usuario.Nombre;
                     TextContraseña.Text = usuario.Contraseña;
-                    TextRol.Text = usuario.Rol;
+                    TextRol.Text = usuario.Rol.NombreRol;
                     
                     
                 }
@@ -40,7 +40,7 @@ namespace TPC_equipo_13B
             /*usuarioModificado.IdUsuario = Convert.ToInt32(txtIdUsuario.Text);*/
             usuarioModificado.Nombre = txtNombre.Text;
             usuarioModificado.Contraseña = TextContraseña.Text;
-            usuarioModificado.Rol = TextRol.Text;
+            usuarioModificado.Rol.NombreRol = TextRol.Text;
 
             negocioUsuario.ModificarUsuario(usuarioModificado);
 

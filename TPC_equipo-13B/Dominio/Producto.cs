@@ -12,8 +12,7 @@ namespace Dominio
         public int Codigo { get; set; }
         public string Nombre { get; set; }
         public Marca Marca { get; set; }
-        public Proveedor Proveedor { get; set; }
-        public long Stock { get; set; }
         public Tipo Tipo { get; set; }
+        public Decimal Ganancia { get; set; }
     }
 }

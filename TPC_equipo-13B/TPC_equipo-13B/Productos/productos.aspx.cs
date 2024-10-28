@@ -17,10 +17,8 @@ namespace TPC_equipo_13B
             if (!IsPostBack)
             {
                 NegocioProducto negocioProducto = new NegocioProducto();
-                DataTable dt = new DataTable();
-                dt = negocioProducto.cargartaProducto();
 
-                GridViewProductos.DataSource = dt;
+                GridViewProductos.DataSource = negocioProducto.listar();
                 GridViewProductos.DataBind();
             }
         }

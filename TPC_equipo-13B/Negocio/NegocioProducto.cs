@@ -18,6 +18,54 @@ namespace Negocio
             accesoDatos = new Acceso_Datos.AccesoDatos();
         }
 
+        public List<Producto> listar()
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            List<Producto> lista = new List<Producto>();
+
+            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
+                                Left join Marcas M On M.IdMarca = P.IdMarca
+                                Left Join Tipos T On T.IdTipo = P.IdTipo";
+            try
+            {
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Producto aux = new Producto();
+                    aux.IdProducto = datos.Lector["IdProducto"] is DBNull ? 0 : (int)datos.Lector["IdProducto"] ;
+                    aux.Codigo = datos.Lector["Codigo"] is DBNull ? 0 : (int)datos.Lector["Codigo"] ;
+                    aux.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"] ;
+                    aux.Ganancia = datos.Lector["Ganancia"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["Ganancia"]) ;
+
+                    aux.Marca = new Marca();
+                    aux.Marca.IdMarca = datos.Lector["IdMarca"] is DBNull ? 0 : (int)datos.Lector["IdMarca"];
+                    aux.Marca.Nombre = datos.Lector["MarcaNombre"] is DBNull ? "" : (string)datos.Lector["MarcaNombre"];
+
+                    aux.Tipo = new Tipo();
+                    aux.Tipo.IdTipo = datos.Lector["IdTipo"] is DBNull ? 0 : (int)datos.Lector["IdTipo"];
+                    aux.Tipo.Nombre = datos.Lector["TipoNombre"] is DBNull ? "" : (string)datos.Lector["TipoNombre"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener usuarios: " + ex.Message);
+            }
+            finally
+            {
+
+            }
+
+
+        }
+
         // Agregar producto
         public void AgregarProducto(Producto producto)
         {
@@ -28,8 +76,6 @@ namespace Negocio
             accesoDatos.setearParametro("@Codigo", producto.Codigo);
             accesoDatos.setearParametro("@Nombre", producto.Nombre);
             accesoDatos.setearParametro("@IdMarca", producto.Marca.IdMarca);
-            accesoDatos.setearParametro("@IdProveedor", producto.Proveedor.IdProveedor);
-            accesoDatos.setearParametro("@Stock", producto.Stock);
             accesoDatos.setearParametro("@IdTipo", producto.Tipo.IdTipo);
 
             accesoDatos.ejecutarAccion();
@@ -37,7 +83,7 @@ namespace Negocio
         public Producto buscarProductoPorId(int id)
         {
             Producto producto = null;
-            string consulta = "SELECT IdProducto,Codigo,Nombre,IdMarca,IdProveedor,Stock,IdTipo FROM Productos WHERE IdProducto = @IdProducto; ";
+            string consulta = "SELECT IdProducto,Codigo,Nombre,IdMarcaIdTipo FROM Productos WHERE IdProducto = @IdProducto; ";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@IdProducto", id);
@@ -51,24 +97,17 @@ namespace Negocio
                     IdProducto = accesoDatos.Lector.GetInt32(0),
                     Codigo=accesoDatos.Lector.GetInt32(1),
                     Nombre = accesoDatos.Lector.GetString(2),
-                    Stock=accesoDatos.Lector.GetInt64(5)
                 };
                 producto.Marca = new Marca()
                 {
                     IdMarca= accesoDatos.Lector.GetInt32(3)
                 };
+
                 if (!accesoDatos.Lector.IsDBNull(4))
-                {
-                    producto.Proveedor = new Proveedor()
-                    {
-                        IdProveedor = accesoDatos.Lector.GetInt32(4)
-                    };
-                }
-                if (!accesoDatos.Lector.IsDBNull(5))
                 {
                     producto.Tipo = new Tipo()
                     {
-                        IdTipo = accesoDatos.Lector.GetInt32(6)
+                        IdTipo = accesoDatos.Lector.GetInt32(4)
                     };
 
                 }
@@ -82,7 +121,7 @@ namespace Negocio
         public void ModificarProducto(Producto producto)
         {
             string consulta = "UPDATE Productos SET Codigo = @Codigo, Nombre = @Nombre, Marca = @Marca, " +
-                              "IdProveedor = @IdProveedor, Stock = @Stock, Tipo = @Tipo " +
+                              "Tipo = @Tipo " +
                               "WHERE IdProducto = @IdProducto";
 
             accesoDatos.setearConsulta(consulta);
@@ -90,8 +129,6 @@ namespace Negocio
             accesoDatos.setearParametro("@Codigo", producto.Codigo);
             accesoDatos.setearParametro("@Nombre", producto.Nombre);
             accesoDatos.setearParametro("@Marca", producto.Marca);
-            accesoDatos.setearParametro("@IdProveedor", producto.Proveedor.IdProveedor);
-            accesoDatos.setearParametro("@Stock", producto.Stock);
             accesoDatos.setearParametro("@Tipo", producto.Tipo);
 
             accesoDatos.ejecutarAccion();
@@ -131,17 +168,6 @@ namespace Negocio
                 accesoDatos.setearParametro("@Marca", "%" + marca + "%");
             }
 
-            if (idProveedor.HasValue)
-            {
-                consulta += " AND IdProveedor = @IdProveedor";
-                accesoDatos.setearParametro("@IdProveedor", idProveedor.Value);
-            }
-
-            if (stock.HasValue)
-            {
-                consulta += " AND Stock = @Stock";
-                accesoDatos.setearParametro("@Stock", stock.Value);
-            }
 
             if (!string.IsNullOrEmpty(tipo))
             {
@@ -165,7 +191,9 @@ namespace Negocio
 
             DataTable tablaProducto = new DataTable();
 
-            string consulta = "select idproducto,Codigo, Nombre, IdMarca, Stock, IdTipo, IdProveedor from productos";
+            string consulta = @"Select P.Idproducto, P.Codigo, P.Nombre, P.Ganancia, M.IdMarca, M.Nombre , T.IdTipo, T.Nombre from Productos P
+                                Left join Marcas M On M.IdMarca = P.IdMarca
+                                Left Join Tipos T On T.IdTipo = P.IdTipo";
             try
             {
                 accesoDatos.setearConsulta(consulta);
