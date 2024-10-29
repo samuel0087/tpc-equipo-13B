@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio;
 
 namespace Negocio
 {
@@ -17,25 +18,87 @@ namespace Negocio
             accesoDatos = new Acceso_Datos.AccesoDatos();
         }
 
+        public List<Tipo> listar()
+        {
+            List<Tipo> lista = new List<Tipo>();
+            string consulta = @"SELECT IdTipo, Nombre FROM Tipos";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+
+                while (accesoDatos.Lector.Read())
+                {
+                    Tipo aux = new Tipo();
+                    aux.IdTipo = accesoDatos.Lector["IdTipo"] is DBNull ? 0 : (int)accesoDatos.Lector["IdTipo"];
+                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public List<Tipo> listar(bool orden)
+        {
+            List<Tipo> lista = new List<Tipo>();
+            string consulta = @"SELECT IdTipo, Nombre FROM Tipos ORDER BY Nombre ASC";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+
+                while (accesoDatos.Lector.Read())
+                {
+                    Tipo aux = new Tipo();
+                    aux.IdTipo = accesoDatos.Lector["IdTipo"] is DBNull ? 0 : (int)accesoDatos.Lector["IdTipo"];
+                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
         // Agregar tipo
-        public void AgregarTipo(string nombre)
+        public void AgregarTipo(Tipo aux)
         {
             string consulta = "INSERT INTO Tipos (Nombre) VALUES (@Nombre)";
 
             accesoDatos.setearConsulta(consulta);
-            accesoDatos.setearParametro("@Nombre", nombre);
+            accesoDatos.setearParametro("@Nombre", aux.Nombre);
 
             accesoDatos.ejecutarAccion();
         }
 
         // Modificar tipo
-        public void ModificarTipo(int idTipo, string nombre)
+        public void ModificarTipo(Tipo aux)
         {
             string consulta = "UPDATE Tipos SET Nombre = @Nombre WHERE IdTipo = @IdTipo";
 
             accesoDatos.setearConsulta(consulta);
-            accesoDatos.setearParametro("@IdTipo", idTipo);
-            accesoDatos.setearParametro("@Nombre", nombre);
+            accesoDatos.setearParametro("@IdTipo", aux.IdTipo);
+            accesoDatos.setearParametro("@Nombre", aux.Nombre);
 
             accesoDatos.ejecutarAccion();
         }
@@ -98,6 +161,67 @@ namespace Negocio
 
             return tablaTipos;
 
+        }
+
+        //Buscar una sola marca
+        public Tipo getOne(int id)
+        {
+            Tipo aux = new Tipo();
+            string consulta = "SELECT IdTipo, Nombre FROM Tipos WHERE IdTipo = @Id";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.setearParametro("@Id", id);
+                accesoDatos.ejecutarLectura();
+
+                if (accesoDatos.Lector.Read())
+                {
+                    aux.IdTipo = accesoDatos.Lector["IdTipo"] is DBNull ? 0 : (int)accesoDatos.Lector["IdTipo"];
+                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+                }
+
+                return aux;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public Tipo getOneByNombre(string nombre)
+        {
+            Tipo aux = new Tipo();
+            string consulta = "SELECT IdTipo, Nombre FROM Tipos WHERE Nombre = @nombre";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.setearParametro("@nombre", nombre);
+                accesoDatos.ejecutarLectura();
+
+                if (accesoDatos.Lector.Read())
+                {
+                    aux.IdTipo = accesoDatos.Lector["IdTipo"] is DBNull ? 0 : (int)accesoDatos.Lector["IdTipo"];
+                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+                }
+
+                return aux;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
         }
     }
 }
