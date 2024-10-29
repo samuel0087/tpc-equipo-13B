@@ -126,12 +126,12 @@ namespace Negocio
         }
 
         // Eliminar categoría
-        public void EliminarCategoria(int idCategoria)
+        public void EliminarCategoria(Categoria aux)
         {
             string consulta = "DELETE FROM Categorias WHERE IdCategoria = @IdCategoria";
 
             accesoDatos.setearConsulta(consulta);
-            accesoDatos.setearParametro("@IdCategoria", idCategoria);
+            accesoDatos.setearParametro("@IdCategoria", aux.IdCategoria);
 
             accesoDatos.ejecutarAccion();
         }

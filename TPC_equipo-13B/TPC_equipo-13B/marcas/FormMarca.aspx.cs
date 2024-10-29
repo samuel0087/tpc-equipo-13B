@@ -19,6 +19,7 @@ namespace TPC_equipo_13B.marcas
 
             try
             {
+                btnAñadir.Visible = true;
                 btnModificar.Visible = false;
                 btnEliminar.Visible = false;
                 if (Request.QueryString["id"] != null)

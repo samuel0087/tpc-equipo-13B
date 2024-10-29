@@ -18,9 +18,24 @@
                         <asp:Label Text="" runat="server" ID="lblError" />
                     </div>
 
-                    <asp:Button Text="Añadir" ID="btnAñadir" CssClass="btn btn-primary" runat="server" OnClick="btnAñadir_Click" />
-                    <asp:Button Text="Modificar" ID="btnModificar" CssClass="btn btn-primary" runat="server" OnClick="btnModificar_Click1" />
-                    <asp:Button Text="Eliminar" ID="btnEliminar" CssClass="btn btn-danger" runat="server" OnClick="btnEliminar_Click" />
+                     <%if (!confirmarEliminacion){%>
+                        <div class="mb-3 button-container">
+                            <asp:Button Text="Añadir" ID="btnAñadir" CssClass="btn btn-primary" runat="server" OnClick="btnAñadir_Click" />
+                            <asp:Button Text="Modificar" ID="btnModificar" CssClass="btn btn-primary" runat="server" OnClick="btnModificar_Click1" />
+                            <asp:Button Text="Eliminar" ID="btnEliminar" CssClass="btn btn-danger" runat="server" OnClick="btnEliminar_Click" />
+                        </div>
+                    <%} %>
+
+                    <%if (confirmarEliminacion){%>
+                        <div class="mb-3">
+                            <span class="form-label button-container">¿Esta seguro que desea eliminar?</span>
+                            <div class="button-container">
+                                <asp:Button Text="Eliminar" ID="btnConfrimarEliminacion" CssClass="btn btn-outline-danger" runat="server" OnClick="btnConfrimarEliminacion_Click" />
+                                <asp:Button Text="Cancelar" ID="btnCancelar" CssClass="btn btn btn-outline-secondary" runat="server" OnClick="btnCancelar_Click" />
+                            </div>
+                        </div>
+                    <%} %>
+
                 </ContentTemplate>
             </asp:UpdatePanel>
 

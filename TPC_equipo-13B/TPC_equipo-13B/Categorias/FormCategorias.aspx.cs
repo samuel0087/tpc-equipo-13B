@@ -14,6 +14,7 @@ namespace TPC_equipo_13B.Categorias
 {
     public partial class FormCategorias : System.Web.UI.Page
     {
+        public bool confirmarEliminacion = false;
         public Categoria Categoria{ get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,14 +24,20 @@ namespace TPC_equipo_13B.Categorias
                 btnEliminar.Visible = false;
                 if (Request.QueryString["id"] != null)
                 {
+                    int id = int.Parse(Request.QueryString["id"]);
+                    NegocioCategoria negocio = new NegocioCategoria();
+                    Categoria = new Categoria();
+                    Categoria = negocio.getOne(id);
+
+                    if (Categoria == null || Categoria.IdCategoria == 0)
+                    {
+                        Response.Redirect("VerMarcas.aspx");
+                    }
+
                     btnModificar.Visible = true;
                     btnEliminar.Visible = true;
                     btnAñadir.Visible = false;
 
-                    NegocioCategoria negocio = new NegocioCategoria();
-                    int id = int.Parse(Request.QueryString["id"]);
-                    Categoria = new Categoria();
-                    Categoria = negocio.getOne(id);
                     if (!IsPostBack)
                     {
                         txtNombreCategoria.Text = Categoria.Nombre;
@@ -163,7 +170,27 @@ namespace TPC_equipo_13B.Categorias
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            confirmarEliminacion = true;
+        }
 
+        protected void btnConfrimarEliminacion_Click(object sender, EventArgs e)
+        {
+            NegocioCategoria negocio = new NegocioCategoria();
+            try
+            {
+                negocio.EliminarCategoria(Categoria);
+                Response.Redirect("VerCategorias.aspx");
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error",ex);
+            }
+
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            confirmarEliminacion = false;
         }
     }
 }
