@@ -104,12 +104,12 @@ namespace Negocio
         }
 
         // Eliminar tipo
-        public void EliminarTipo(int idTipo)
+        public void EliminarTipo(Tipo aux)
         {
             string consulta = "DELETE FROM Tipos WHERE IdTipo = @IdTipo";
 
             accesoDatos.setearConsulta(consulta);
-            accesoDatos.setearParametro("@IdTipo", idTipo);
+            accesoDatos.setearParametro("@IdTipo", aux.IdTipo);
 
             accesoDatos.ejecutarAccion();
         }

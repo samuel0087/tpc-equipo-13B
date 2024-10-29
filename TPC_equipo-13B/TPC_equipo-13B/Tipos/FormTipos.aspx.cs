@@ -11,6 +11,7 @@ namespace TPC_equipo_13B.Tipos
 {
     public partial class FormTipos : System.Web.UI.Page
     {
+        public bool confirmarEliminacion = false;
         public Tipo Tipo { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -22,14 +23,20 @@ namespace TPC_equipo_13B.Tipos
                 btnEliminar.Visible = false;
                 if (Request.QueryString["id"] != null)
                 {
+                    int id = int.Parse(Request.QueryString["id"]);
+                    NegocioTipo negocio = new NegocioTipo();
+                    Tipo = new Tipo();
+                    Tipo = negocio.getOne(id);
+
+                    if (Tipo == null || Tipo.IdTipo == 0)
+                    {
+                        Response.Redirect("VerTipos.aspx");
+                    }
+
                     btnModificar.Visible = true;
                     btnEliminar.Visible = true;
                     btnAñadir.Visible = false;
 
-                    NegocioTipo negocio = new NegocioTipo();
-                    int id = int.Parse(Request.QueryString["id"]);
-                    Tipo = new Tipo();
-                    Tipo = negocio.getOne(id);
                     if (!IsPostBack)
                     {
                         txtNombreTipo.Text = Tipo.Nombre;
@@ -165,12 +172,32 @@ namespace TPC_equipo_13B.Tipos
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-
+            confirmarEliminacion = true;
         }
 
         protected void txtNombreTipo_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnConfrimarEliminacion_Click(object sender, EventArgs e)
+        {
+            NegocioTipo negocio = new NegocioTipo();
+            try
+            {
+                negocio.EliminarTipo(Tipo);
+                Response.Redirect("VerTipos.aspx");
+            }
+            catch(Exception ex) 
+            {
+                Session.Add("error", ex);
+            }
+
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            confirmarEliminacion = false;
         }
     }
 }
