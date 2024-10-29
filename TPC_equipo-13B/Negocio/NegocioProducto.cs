@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -83,38 +84,47 @@ namespace Negocio
         public Producto buscarProductoPorId(int id)
         {
             Producto producto = null;
-            string consulta = "SELECT IdProducto,Codigo,Nombre,IdMarcaIdTipo FROM Productos WHERE IdProducto = @IdProducto; ";
+            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
+                                Left join Marcas M On M.IdMarca = P.IdMarca
+                                Left Join Tipos T On T.IdTipo = P.IdTipo
+                                Where P.IdProducto = @IdProducto";
 
-            accesoDatos.setearConsulta(consulta);
-            accesoDatos.setearParametro("@IdProducto", id);
-
-            accesoDatos.ejecutarLectura();
-
-            if (accesoDatos.Lector.Read())
+            try
             {
-                producto = new Producto()
-                {
-                    IdProducto = accesoDatos.Lector.GetInt32(0),
-                    Codigo=accesoDatos.Lector.GetInt32(1),
-                    Nombre = accesoDatos.Lector.GetString(2),
-                };
-                producto.Marca = new Marca()
-                {
-                    IdMarca= accesoDatos.Lector.GetInt32(3)
-                };
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.setearParametro("@IdProducto", id);
 
-                if (!accesoDatos.Lector.IsDBNull(4))
-                {
-                    producto.Tipo = new Tipo()
-                    {
-                        IdTipo = accesoDatos.Lector.GetInt32(4)
-                    };
+                accesoDatos.ejecutarLectura();
 
+                if (accesoDatos.Lector.Read())
+                {
+                    Producto aux = new Producto();
+                    aux.IdProducto = accesoDatos.Lector["IdProducto"] is DBNull ? 0 : (int)accesoDatos.Lector["IdProducto"];
+                    aux.Codigo = accesoDatos.Lector["Codigo"] is DBNull ? 0 : (int)accesoDatos.Lector["Codigo"];
+                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+                    aux.Ganancia = accesoDatos.Lector["Ganancia"] is DBNull ? 0 : Convert.ToDecimal(accesoDatos.Lector["Ganancia"]);
+
+                    aux.Marca = new Marca();
+                    aux.Marca.IdMarca = accesoDatos.Lector["IdMarca"] is DBNull ? 0 : (int)accesoDatos.Lector["IdMarca"];
+                    aux.Marca.Nombre = accesoDatos.Lector["MarcaNombre"] is DBNull ? "" : (string)accesoDatos.Lector["MarcaNombre"];
+
+                    aux.Tipo = new Tipo();
+                    aux.Tipo.IdTipo = accesoDatos.Lector["IdTipo"] is DBNull ? 0 : (int)accesoDatos.Lector["IdTipo"];
+                    aux.Tipo.Nombre = accesoDatos.Lector["TipoNombre"] is DBNull ? "" : (string)accesoDatos.Lector["TipoNombre"];
                 }
-            }
 
-            accesoDatos.cerrarConexion();
-            return producto;
+                accesoDatos.cerrarConexion();
+                return producto;
+            }
+            catch(Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
         }
 
         // Modificar producto

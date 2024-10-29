@@ -75,6 +75,7 @@
     <Content Include="Compras\MenuCompras.aspx" />
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Productos\MenuProductos.aspx" />
     <Content Include="Tipos\FormTipos.aspx" />
     <Content Include="Tipos\MenuTipos.aspx" />
     <Content Include="Tipos\Tipos.aspx" />
@@ -82,8 +83,8 @@
     <Content Include="Productos\exitoproductoeliminado.aspx" />
     <Content Include="Productos\EliminarProducto.aspx" />
     <Content Include="Productos\ExitoProducto.aspx" />
-    <Content Include="Productos\AgregarProductos.aspx" />
-    <Content Include="Productos\productos.aspx" />
+    <Content Include="Productos\FormProductos.aspx" />
+    <Content Include="Productos\VerProductos.aspx" />
     <Content Include="Tipos\VerTipos.aspx" />
     <Content Include="Usuarios\comfirmareliminacion.aspx" />
     <Content Include="Usuarios\AgregarUsuario.aspx" />
@@ -158,6 +159,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Productos\MenuProductos.aspx.cs">
+      <DependentUpon>MenuProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Productos\MenuProductos.aspx.designer.cs">
+      <DependentUpon>MenuProductos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Tipos\FormTipos.aspx.cs">
       <DependentUpon>FormTipos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -207,19 +215,19 @@
     <Compile Include="Productos\ExitoProducto.aspx.designer.cs">
       <DependentUpon>ExitoProducto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Productos\AgregarProductos.aspx.cs">
-      <DependentUpon>AgregarProductos.aspx</DependentUpon>
+    <Compile Include="Productos\FormProductos.aspx.cs">
+      <DependentUpon>FormProductos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Productos\AgregarProductos.aspx.designer.cs">
-      <DependentUpon>AgregarProductos.aspx</DependentUpon>
+    <Compile Include="Productos\FormProductos.aspx.designer.cs">
+      <DependentUpon>FormProductos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Productos\productos.aspx.cs">
-      <DependentUpon>productos.aspx</DependentUpon>
+    <Compile Include="Productos\VerProductos.aspx.cs">
+      <DependentUpon>VerProductos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Productos\productos.aspx.designer.cs">
-      <DependentUpon>productos.aspx</DependentUpon>
+    <Compile Include="Productos\VerProductos.aspx.designer.cs">
+      <DependentUpon>VerProductos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tipos\VerTipos.aspx.cs">
       <DependentUpon>VerTipos.aspx</DependentUpon>

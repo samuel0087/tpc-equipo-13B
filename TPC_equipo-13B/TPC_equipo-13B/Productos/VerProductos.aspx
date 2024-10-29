@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ComercioApp.Master" AutoEventWireup="true" CodeBehind="productos.aspx.cs" Inherits="TPC_equipo_13B.Formulario_web16" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ComercioApp.Master" AutoEventWireup="true" CodeBehind="VerProductos.aspx.cs" Inherits="TPC_equipo_13B.Formulario_web16" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -13,7 +13,7 @@
 
                    <asp:BoundField DataField="Codigo" HeaderText="Codigo" />
                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                   <asp:BoundField DataField="Marca.Nombre" HeaderText="IdMarca" />
+                   <asp:BoundField DataField="Marca.Nombre" HeaderText="Marca" />
                    <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
 
 

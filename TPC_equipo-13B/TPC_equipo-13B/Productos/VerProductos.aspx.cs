@@ -12,13 +12,21 @@ namespace TPC_equipo_13B
 {
     public partial class Formulario_web16 : System.Web.UI.Page
     {
+        public bool Buscar = false;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString["Buscar"] != null)
+            {
+                Buscar = true;
+            }
+
             if (!IsPostBack)
             {
                 NegocioProducto negocioProducto = new NegocioProducto();
+                Session.Add("ListaProductos", negocioProducto.listar());
 
-                GridViewProductos.DataSource = negocioProducto.listar();
+
+                GridViewProductos.DataSource = (List<Producto>)Session["ListaProductos"];
                 GridViewProductos.DataBind();
             }
         }
@@ -30,15 +38,9 @@ namespace TPC_equipo_13B
         {
             if (e.CommandName == "Modificar")
             {
-                /*int idUsuario = Convert.ToInt32(e.CommandArgument);
-                NegocioUsuario negocioUsuario = new NegocioUsuario();
-                Usuario UsuarioaModificar = negocioUsuario.buscarUsuarioPorId(idUsuario);
-                if (UsuarioaModificar != null)
-                {
-                    Session["UsuarioaModificar"] = UsuarioaModificar;
-                }
+                int idProducto = Convert.ToInt32(e.CommandArgument);
 
-                Response.Redirect("Modificar.aspx");*/
+                Response.Redirect("FormProductos.aspx?id=" + idProducto);
             }
             else if (e.CommandName == "Eliminar")
             {   
