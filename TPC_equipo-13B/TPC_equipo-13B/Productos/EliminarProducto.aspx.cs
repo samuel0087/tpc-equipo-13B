@@ -35,21 +35,21 @@ namespace TPC_equipo_13B
         }
         protected void btnsi_Click(object sender, EventArgs e)
         {
-            if (Session["producto"] != null) 
-            {
-                Producto productoaeliminar = (Producto)Session["producto"];
-                int idproductoaeliminar = productoaeliminar.IdProducto;
-                NegocioProducto negocioProducto = new NegocioProducto();
-                negocioProducto.EliminarProducto(idproductoaeliminar);
+            //if (Session["producto"] != null) 
+            //{
+            //    Producto productoaeliminar = (Producto)Session["producto"];
+            //    int idproductoaeliminar = productoaeliminar.IdProducto;
+            //    NegocioProducto negocioProducto = new NegocioProducto();
+            //    negocioProducto.EliminarProducto(idproductoaeliminar);
 
-                Response.Redirect("exitoproductoeliminado.aspx");
+            //    Response.Redirect("exitoproductoeliminado.aspx");
 
 
-            }
-            else
-            {
-                Response.Redirect("PaginaDeError.aspx"); //Falta crear la pagina de error aclaro
-            }
+            //}
+            //else
+            //{
+            //    Response.Redirect("PaginaDeError.aspx"); //Falta crear la pagina de error aclaro
+            //}
             
         }
         protected void btnno_Click(object sender, EventArgs e)

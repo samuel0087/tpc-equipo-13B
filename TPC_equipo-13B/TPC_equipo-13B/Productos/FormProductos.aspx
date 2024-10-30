@@ -2,66 +2,58 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-              <h2>Agregar Producto:</h2>
-      <div><!--<div>
-          <label>ID:</label>
-          </div>
-          <div>
-         <asp:TextBox ID="txtIdUsuario" runat="server" style="margin-bottom: 10px;"></asp:TextBox><br />
-          </div>   -->  
-      </div>
-      <div>
-          <div>
-          <label>Codigo:</label>
-          </div>
-          <div>
-          <asp:TextBox ID="txtCodigo" runat="server" style="margin-bottom: 10px;"></asp:TextBox><br />
-          </div>
-      </div>
-      <div>
-          <div>
-       <label>Nombre:</label>
-          </div>
-          <div>
-          <asp:TextBox ID="TxtNombre" runat="server" style="margin-bottom: 10px;"></asp:TextBox><br />
-          </div>
-      </div>
-      <div>
-             <div>
-<label>IdMarca:</label>
-   </div>
-   <div>
-   <asp:TextBox ID="TxtMarca" runat="server" style="margin-bottom: 10px;"></asp:TextBox><br />
-   </div>
-      </div>
-          <div>
-             <div>
-<label>IdProveedor:</label>
-   </div>
-   <div>
-   <asp:TextBox ID="TxtIdproveedor" runat="server" style="margin-bottom: 10px;"></asp:TextBox><br />
-   </div>
-      </div>
-          <div>
-             <div>
-<label>stock:</label>
-   </div>
-   <div>
-   <asp:TextBox ID="Txtstock" runat="server" style="margin-bottom: 10px;"></asp:TextBox><br />
-   </div>
-      </div>
-   <div>
-   <div>
-<label>IdTipo:</label>
-   </div>
-   <div>
-   <asp:TextBox ID="TxtIdTipo" runat="server" style="margin-bottom: 10px;"></asp:TextBox><br />
-   </div>
-      </div>
-      <div class="col-12 text-center">
- <asp:Button ID="btnGuardar" runat="server" Text="Guardar"  CssClass="btn btn-primary" style="margin-bottom: 10px;" OnClick="btnGuardar_Click"/>
- <asp:Button ID="btnCancelar" runat="server" Text="Cancelar"  CssClass="btn btn-danger" style="margin-bottom: 10px;" OnClick="btnCancelar_Click"/>
-  </div>
-  </div>
-      </div>
+    <div class="col-6 main">
+    <h2>Formulario Producto</h2>
+
+    <asp:ScriptManager runat="server" id="ScriptManager1"/>
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <div class="mb-3">
+                    <label>Codigo:</label>
+                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="mb-3">
+                    <label>Nombre:</label>
+                    <asp:TextBox ID="txtNombreProducto" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+
+                <div class="mb-3">
+                    <label>Marca:</label>
+                    <asp:DropDownList runat="server" ID="ddlMarca" CssClass="form-select">
+                    </asp:DropDownList>
+
+                </div>
+
+                <div class="mb-3">
+                    <label>Tipo</label>
+                    <asp:DropDownList runat="server" ID="ddlTipo" CssClass="form-select">
+                    </asp:DropDownList>
+                </div>
+
+                <%if (!confirmarEliminacion){%>
+                <div class="mb-3 button-container ">
+                    <asp:Button Text="Añadir" ID="btnAñadir" CssClass="btn btn-primary" runat="server" OnClick="btnAñadir_Click" />
+                    <asp:Button Text="Modificar" ID="btnModificar" CssClass="btn btn-primary" runat="server" OnClick="btnModificar_Click" />
+                    <asp:Button Text="Eliminar" ID="btnEliminar" CssClass="btn btn-danger" runat="server" OnClick="btnEliminar_Click" />
+                </div>
+                <%} %>
+
+                <%if (confirmarEliminacion){%>
+                <div class="mb-3">
+                    <span class="form-label button-container">¿Esta seguro que desea eliminar?</span>
+                    <div class="button-container">
+                        <asp:Button Text="Eliminar" ID="btnConfrimarEliminacion" CssClass="btn btn-outline-danger" runat="server" OnClick="btnConfrimarEliminacion_Click" />
+                        <asp:Button Text="Cancelar" ID="btnCancelar" CssClass="btn btn btn-outline-secondary" runat="server" OnClick="btnCancelar_Click" />
+                    </div>
+                </div>
+                <%} %>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
+
+
+    </div>
+
+
 </asp:Content>

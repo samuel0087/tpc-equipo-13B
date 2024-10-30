@@ -13,7 +13,7 @@
                     <ContentTemplate>
 
                         <div class="mb-3">
-                            <asp:Label Text="Nombre"  ID="lblNombreMarca" CssClass="form-label" runat="server" />
+                            <asp:Label Text="Nombre"  ID="lblNombreMarca" CssClass="form-label my-1 mr-2" runat="server" />
                             <asp:TextBox runat="server" cssClass="form-control" ID="txtNombreMarca" AutoPostBack="true" OnTextChanged="txtNombreMarca_TextChanged" />
                             <asp:Label Text=""  runat="server" ID="lblError"/>
                         </div>
