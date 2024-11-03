@@ -8,7 +8,7 @@
 
             <div class="menu">
                 <a href="VerProductos.aspx">Mostrar Todo</a>
-                <a href="FormProducto.aspx">Agregar</a>
+                <a href="FormProductos.aspx">Agregar</a>
                 <a href="VerProductos.aspx?Buscar=true">Buscar</a>
 
             </div>

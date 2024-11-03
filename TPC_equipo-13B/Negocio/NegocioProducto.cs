@@ -114,17 +114,19 @@ namespace Negocio
         // Agregar producto
         public void AgregarProducto(Producto producto)
         {
-            string consulta = "INSERT INTO Productos (Codigo, Nombre, IdMarca, IdProveedor, Stock, IdTipo) " +
-                              "VALUES (@Codigo, @Nombre, @IdMarca, @IdProveedor, @Stock, @IdTipo)";
+            string consulta = "INSERT INTO Productos (Codigo, Nombre, IdMarca, IdTipo, Ganancia) " +
+                                             "VALUES (@Codigo, @Nombre, @IdMarca, @IdTipo, @Ganancia)";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@Codigo", producto.Codigo);
             accesoDatos.setearParametro("@Nombre", producto.Nombre);
             accesoDatos.setearParametro("@IdMarca", producto.Marca.IdMarca);
             accesoDatos.setearParametro("@IdTipo", producto.Tipo.IdTipo);
+            accesoDatos.setearParametro("@IdGanancia", producto.Ganancia);
 
             accesoDatos.ejecutarAccion();
         }
+
         public Producto buscarProductoPorId(int id)
         {
             Producto producto = null;
@@ -174,16 +176,17 @@ namespace Negocio
         // Modificar producto
         public void ModificarProducto(Producto producto)
         {
-            string consulta = "UPDATE Productos SET Codigo = @Codigo, Nombre = @Nombre, Marca = @Marca, " +
-                              "Tipo = @Tipo " +
+            string consulta = "UPDATE Productos SET Codigo = @Codigo, Nombre = @Nombre, IdMarca = @Marca, " +
+                              "IdTipo = @Tipo, Ganancia = @Ganancia " +
                               "WHERE IdProducto = @IdProducto";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@IdProducto", producto.IdProducto);
             accesoDatos.setearParametro("@Codigo", producto.Codigo);
             accesoDatos.setearParametro("@Nombre", producto.Nombre);
-            accesoDatos.setearParametro("@Marca", producto.Marca);
-            accesoDatos.setearParametro("@Tipo", producto.Tipo);
+            accesoDatos.setearParametro("@Marca", producto.Marca.IdMarca);
+            accesoDatos.setearParametro("@Tipo", producto.Tipo.IdTipo);
+            accesoDatos.setearParametro("@Ganancia", producto.Ganancia);
 
             accesoDatos.ejecutarAccion();
         }

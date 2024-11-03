@@ -31,7 +31,13 @@
                     </asp:DropDownList>
                 </div>
 
-                <%if (!confirmarEliminacion){%>
+                <div class="mb-3">
+                    <label>Ganancia</label>
+                        <asp:TextBox ID="txtGanancia" runat="server" CssClass="form-control"></asp:TextBox>
+                    </asp:DropDownList>
+                </div>
+
+                <%if (!confirmarEliminacion && !confirmarModificacion){%>
                 <div class="mb-3 button-container ">
                     <asp:Button Text="Añadir" ID="btnAñadir" CssClass="btn btn-primary" runat="server" OnClick="btnAñadir_Click" />
                     <asp:Button Text="Modificar" ID="btnModificar" CssClass="btn btn-primary" runat="server" OnClick="btnModificar_Click" />
@@ -45,6 +51,16 @@
                     <div class="button-container">
                         <asp:Button Text="Eliminar" ID="btnConfrimarEliminacion" CssClass="btn btn-outline-danger" runat="server" OnClick="btnConfrimarEliminacion_Click" />
                         <asp:Button Text="Cancelar" ID="btnCancelar" CssClass="btn btn btn-outline-secondary" runat="server" OnClick="btnCancelar_Click" />
+                    </div>
+                </div>
+                <%} %>
+
+                 <%if (confirmarModificacion){%>
+                <div class="mb-3">
+                    <span class="form-label button-container">¿Esta seguro que desea eliminar?</span>
+                    <div class="button-container">
+                        <asp:Button Text="Modificar" ID="btnConfirmarModificacion" CssClass="btn btn-outline-primary" runat="server" OnClick="btnConfirmarModificacion_Click" />
+                        <asp:Button Text="Cancelar" ID="btnCancelarModificacion" CssClass="btn btn btn-outline-secondary" runat="server" OnClick="btnCancelar_Click" />
                     </div>
                 </div>
                 <%} %>
