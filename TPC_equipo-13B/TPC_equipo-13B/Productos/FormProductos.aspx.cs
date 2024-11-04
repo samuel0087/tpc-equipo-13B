@@ -26,18 +26,22 @@ namespace TPC_equipo_13B
                 btnModificar.Visible = false;
                 btnEliminar.Visible = false;
 
-                //ddl para Productos
-                ddlMarca.DataSource = marcaNegocio.listar();
-                ddlMarca.DataValueField = "IdMarca";
-                ddlMarca.DataTextField = "Nombre";
-                ddlMarca.DataBind();
+                if (!IsPostBack)
+                {
+                    //ddl para Productos
+                    ddlMarca.DataSource = marcaNegocio.listar();
+                    ddlMarca.DataValueField = "IdMarca";
+                    ddlMarca.DataTextField = "Nombre";
+                    ddlMarca.DataBind();
 
-                //ddl para tipos
-                ddlTipo.DataSource = tipoNegocio.listar(true);
-                ddlTipo.DataValueField = "IdTipo";
-                ddlTipo.DataTextField = "Nombre";
-                ddlTipo.DataBind();
+                    //ddl para tipos
+                    ddlTipo.DataSource = tipoNegocio.listar(true);
+                    ddlTipo.DataValueField = "IdTipo";
+                    ddlTipo.DataTextField = "Nombre";
+                    ddlTipo.DataBind();
+                }
 
+                
                 if (Request.QueryString["id"] != null)
                 {
                     int id = int.Parse(Request.QueryString["id"]);
@@ -77,25 +81,7 @@ namespace TPC_equipo_13B
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if(Producto == null || Producto.IdProducto== 0)
-            {
-                Producto = new Producto();
-            }
-
-            Producto.Tipo = new Tipo();
-            NegocioProducto negocioProducto = new NegocioProducto();
-
-            Producto.Codigo = int.Parse(txtCodigo.Text);
-            Producto.Nombre = txtNombreProducto.Text;
-            Producto.Tipo.IdTipo = int.Parse(ddlTipo.SelectedValue);
-            Producto.Marca.IdMarca = int.Parse(ddlTipo.SelectedValue);
-            Producto.Ganancia = Decimal.Parse(txtGanancia.Text);
-
-            negocioProducto.AgregarProducto(Producto);
-
-            Response.Redirect("ExitoProducto.aspx");
-
-
+            
         }
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -132,7 +118,36 @@ namespace TPC_equipo_13B
 
         protected void btnAñadir_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (Producto == null || Producto.IdProducto == 0)
+                {
+                    Producto = new Producto();
+                    Producto.Marca = new Marca();
+                    Producto.Tipo = new Tipo();
+                }
 
+                Producto.Tipo = new Tipo();
+                NegocioProducto negocioProducto = new NegocioProducto();
+
+                Producto.Codigo = int.Parse(txtCodigo.Text);
+                Producto.Nombre = txtNombreProducto.Text;
+                Producto.Tipo.IdTipo = int.Parse(ddlTipo.SelectedValue);
+                Producto.Marca.IdMarca = int.Parse(ddlMarca.SelectedValue);
+                Producto.Ganancia = Decimal.Parse(txtGanancia.Text);
+
+                negocioProducto.AgregarProducto(Producto);
+
+                Response.Redirect("VerProductos.aspx");
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex);
+            }
         }
 
         protected void btnConfirmarModificacion_Click(object sender, EventArgs e)

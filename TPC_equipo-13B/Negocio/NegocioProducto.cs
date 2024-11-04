@@ -122,7 +122,7 @@ namespace Negocio
             accesoDatos.setearParametro("@Nombre", producto.Nombre);
             accesoDatos.setearParametro("@IdMarca", producto.Marca.IdMarca);
             accesoDatos.setearParametro("@IdTipo", producto.Tipo.IdTipo);
-            accesoDatos.setearParametro("@IdGanancia", producto.Ganancia);
+            accesoDatos.setearParametro("@Ganancia", producto.Ganancia);
 
             accesoDatos.ejecutarAccion();
         }

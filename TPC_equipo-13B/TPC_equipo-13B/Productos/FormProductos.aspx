@@ -34,7 +34,6 @@
                 <div class="mb-3">
                     <label>Ganancia</label>
                         <asp:TextBox ID="txtGanancia" runat="server" CssClass="form-control"></asp:TextBox>
-                    </asp:DropDownList>
                 </div>
 
                 <%if (!confirmarEliminacion && !confirmarModificacion){%>
