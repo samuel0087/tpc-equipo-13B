@@ -11,6 +11,10 @@ namespace TPC_equipo_13B
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Usuario"] == null)
+            {
+                Response.Redirect(ResolveUrl("~/Login.aspx"), false);
+            }
 
         }
     }

@@ -20,6 +20,44 @@ namespace Negocio
             accesoDatos = new Acceso_Datos.AccesoDatos();
         }
 
+        //Buscar usuario para logear
+        public bool loguear(Usuario usuario)
+        {
+            try
+            {
+                accesoDatos.setearConsulta(@"Select U.IdUsuario, R.IdRol, R.Rol
+                                            From Usuarios U 
+                                            Inner Join Roles R On U.IdRol = R.IdRol
+                                            Where U.Nombre = @Nombre
+                                            And U.Contraseña = @Password");
+                accesoDatos.setearParametro("@Nombre", usuario.Nombre);
+                accesoDatos.setearParametro("@Password", usuario.Contraseña);
+                accesoDatos.ejecutarLectura();
+
+                if (accesoDatos.Lector.Read())
+                {
+                    usuario.IdUsuario = accesoDatos.Lector["IdUsuario"] is DBNull ? 0 : (int)accesoDatos.Lector["IdUsuario"];
+
+                    usuario.Rol = new Rol();
+                    usuario.Rol.IdRol = accesoDatos.Lector["IdRol"] is DBNull ? 0 : (int)accesoDatos.Lector["IdRol"];
+                    usuario.Rol.NombreRol = accesoDatos.Lector["Rol"] is DBNull ? "" : (string)accesoDatos.Lector["Rol"];
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+
+        }
+
         // Agregar usuario
         public void AgregarUsuario(Usuario usuario)
         {

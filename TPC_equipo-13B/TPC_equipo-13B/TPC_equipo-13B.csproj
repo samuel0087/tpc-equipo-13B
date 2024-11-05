@@ -75,6 +75,7 @@
     <Content Include="Compras\MenuCompras.aspx" />
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Productos\MenuProductos.aspx" />
     <Content Include="Tipos\FormTipos.aspx" />
     <Content Include="Tipos\MenuTipos.aspx" />
@@ -158,6 +159,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Productos\MenuProductos.aspx.cs">
       <DependentUpon>MenuProductos.aspx</DependentUpon>
