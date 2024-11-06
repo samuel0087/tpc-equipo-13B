@@ -12,5 +12,10 @@ namespace Dominio
         public string Nombre { get; set; }
         public string Contraseña { get; set; }
         public Rol Rol { get; set; }
+        public Usuario()
+        {
+           
+            Rol = new Rol();
+        }
     }
 }

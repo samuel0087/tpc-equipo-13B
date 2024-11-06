@@ -41,6 +41,7 @@ namespace Negocio
                     usuario.Rol = new Rol();
                     usuario.Rol.IdRol = accesoDatos.Lector["IdRol"] is DBNull ? 0 : (int)accesoDatos.Lector["IdRol"];
                     usuario.Rol.NombreRol = accesoDatos.Lector["Rol"] is DBNull ? "" : (string)accesoDatos.Lector["Rol"];
+                    
                     return true;
                 }
 
@@ -58,15 +59,17 @@ namespace Negocio
 
         }
 
+
         // Agregar usuario
+   
         public void AgregarUsuario(Usuario usuario)
         {
-            string consulta = "INSERT INTO Usuarios (Nombre, Contraseña, IdRol) VALUES (@Nombre, @Contraseña, @IdRol)";
+            string consulta = "INSERT INTO Usuarios (Nombre, Contraseña, IdRol) VALUES (@Nombre, @Contraseña, @IdRol)"; // Cambia @Rol por @IdRol
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@Nombre", usuario.Nombre);
             accesoDatos.setearParametro("@Contraseña", usuario.Contraseña);
-            accesoDatos.setearParametro("@Rol", usuario.Rol.IdRol);
+            accesoDatos.setearParametro("@IdRol", usuario.Rol.IdRol);  
 
             accesoDatos.ejecutarAccion();
         }
@@ -86,8 +89,9 @@ namespace Negocio
         }
         public Usuario buscarUsuarioPorId(int id)
         {
-            Usuario aux = null;
-            string consulta = "SELECT idusuario, nombre,Contraseña, IdRol,NombreRol FROM usuarios WHERE idusuario = @id";
+            Usuario aux = new Usuario(); 
+            string consulta = "SELECT U.idusuario, U.nombre, U.Contraseña, U.IdRol, R.Rol AS NombreRol " +
+                              "FROM usuarios U INNER JOIN Roles R ON U.IdRol = R.IdRol WHERE U.idusuario = @id";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@id", id);
@@ -96,18 +100,16 @@ namespace Negocio
 
             if (accesoDatos.Lector.Read())
             {
-
                 aux.IdUsuario = accesoDatos.Lector.GetInt32(0);
                 aux.Nombre = accesoDatos.Lector.GetString(1);
                 aux.Contraseña = accesoDatos.Lector.GetString(2);
-                aux.Rol = new Rol();
+                aux.Rol = new Rol(); 
                 aux.Rol.IdRol = accesoDatos.Lector.GetInt32(3);
                 aux.Rol.NombreRol = accesoDatos.Lector.GetString(4);
-
             }
 
-            accesoDatos.cerrarConexion(); 
-            return aux; 
+            accesoDatos.cerrarConexion();
+            return aux;
         }
         // Eliminar usuario
         public void EliminarUsuario(int idUsuario)

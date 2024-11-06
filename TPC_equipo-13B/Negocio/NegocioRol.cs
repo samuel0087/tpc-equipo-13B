@@ -15,7 +15,7 @@ namespace Negocio
 			List<Rol> lista = new List<Rol>();
 			AccesoDatos datos = new AccesoDatos();
 
-			string consulta = "Select IdRol, NombreRol From Roles";
+			string consulta = "Select IdRol,Rol From Roles";
 			try
 			{
 				datos.setearConsulta(consulta);
@@ -25,7 +25,7 @@ namespace Negocio
 				{
 					Rol aux = new Rol();
 					aux.IdRol = datos.Lector["IdRol"] is DBNull ? 0 : (int)datos.Lector["IdRol"];
-					aux.NombreRol = datos.Lector["NombreRol"] is DBNull ? "" : (string)datos.Lector["NombreRol"];
+					aux.NombreRol = datos.Lector["Rol"] is DBNull ? "" : (string)datos.Lector["Rol"];
 				}
 
 				return lista;

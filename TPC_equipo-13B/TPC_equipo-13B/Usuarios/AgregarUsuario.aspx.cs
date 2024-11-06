@@ -31,7 +31,7 @@ namespace TPC_equipo_13B
 
             usuario.Nombre = txtNombre.Text;
             usuario.Contraseña = TextContraseña.Text;
-            usuario.Rol.NombreRol =TextRol.Text;
+            usuario.Rol.IdRol =int.Parse(TextRol.Text);
 
             negocioUsuario.AgregarUsuario(usuario);
 
