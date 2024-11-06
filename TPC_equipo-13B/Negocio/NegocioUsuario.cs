@@ -77,13 +77,13 @@ namespace Negocio
         // Modificar usuario
         public void ModificarUsuario(Usuario usuario)
         {
-            string consulta = "UPDATE Usuarios SET Nombre = @Nombre, Contraseña = @Contraseña, Rol = @Rol WHERE IdUsuario = @IdUsuario";
+            string consulta = "UPDATE Usuarios SET Nombre = @Nombre, Contraseña = @Contraseña, idRol = @Rol WHERE IdUsuario = @IdUsuario";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@IdUsuario", usuario.IdUsuario);
             accesoDatos.setearParametro("@Nombre", usuario.Nombre);
             accesoDatos.setearParametro("@Contraseña", usuario.Contraseña);
-            accesoDatos.setearParametro("@Rol", usuario.Rol);
+            accesoDatos.setearParametro("@Rol", usuario.Rol.IdRol);
 
             accesoDatos.ejecutarAccion();
         }
