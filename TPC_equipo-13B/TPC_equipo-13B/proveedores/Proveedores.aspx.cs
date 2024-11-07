@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -25,12 +26,36 @@ namespace TPC_equipo_13B
         }
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Agregarproveedor.aspx");
         }
         
-        protected void GridViewProveedores_RowCommand(object sender, EventArgs e)
+        protected void GridViewProveedores_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (e.CommandName == "Modificar")
+            {
+                int idProveedor = Convert.ToInt32(e.CommandArgument);
+                NegocioProveedor negocioProveedor = new NegocioProveedor();
+                Proveedor ProveedoraModificar = negocioProveedor.buscarProveedorPorId(idProveedor);
+                if (ProveedoraModificar != null)
+                {
+                    Session["UsuarioaModificar"] = ProveedoraModificar;
+                }
 
+                Response.Redirect("Modificar.aspx");
+            }
+            else if (e.CommandName == "Eliminar")
+            {
+                NegocioProveedor negocioProveedor = new NegocioProveedor();
+                int idProveedor = Convert.ToInt32(e.CommandArgument);
+                Proveedor ProveedorAEliminar = negocioProveedor.buscarProveedorPorId(idProveedor);
+                if (ProveedorAEliminar != null)
+                {
+                    Session["UsuarioAEliminar"] = ProveedorAEliminar;
+                }
+
+                Response.Redirect("comfirmareliminacion.aspx");
+
+            }
         }
     }
 }

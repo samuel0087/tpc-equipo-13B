@@ -19,28 +19,28 @@ namespace Negocio
         }
 
         //nuevo proveedor
-        public void AgregarProveedor(string nombre, string apellido, string email, string telefono, string celular, string direccion, string provincia, string pais)
+
+        public void AgregarProveedor(Proveedor proveedor)
         {
-            string consulta = "INSERT INTO Proveedores (Nombre, Apellido, Email, Telefono, Celular, Direccion, Provincia, Pais) " +
+            string consulta = "INSERT INTO Provedores (Nombre, Apellido, Email, Telefono, Celular, Direccion, Provincia, Pais) " +
                               "VALUES (@Nombre, @Apellido, @Email, @Telefono, @Celular, @Direccion, @Provincia, @Pais)";
 
             accesoDatos.setearConsulta(consulta);
-            accesoDatos.setearParametro("@Nombre", nombre);
-            accesoDatos.setearParametro("@Apellido", apellido);
-            accesoDatos.setearParametro("@Email", email);
-            accesoDatos.setearParametro("@Telefono", telefono);
-            accesoDatos.setearParametro("@Celular", celular);
-            accesoDatos.setearParametro("@Direccion", direccion);
-            accesoDatos.setearParametro("@Provincia", provincia);
-            accesoDatos.setearParametro("@Pais", pais);
-
+            accesoDatos.setearParametro("@Nombre",proveedor.Nombre);
+            accesoDatos.setearParametro("@Apellido",proveedor.Apellido);
+            accesoDatos.setearParametro("@Email",proveedor.Email);
+            accesoDatos.setearParametro("@Telefono", int.Parse(proveedor.Telefono));
+            accesoDatos.setearParametro("@Celular", int.Parse(proveedor.Celular));
+            accesoDatos.setearParametro("@Direccion", proveedor.Direccion);
+            accesoDatos.setearParametro("@Provincia", proveedor.Provincia);
+            accesoDatos.setearParametro("@Pais",proveedor.Pais);
             accesoDatos.ejecutarAccion();
         }
 
         //modificar proveedor
         public void ModificarProveedor(int idProveedor, string nombre, string apellido, string email, string telefono, string celular, string direccion, string provincia, string pais)
         {
-            string consulta = "UPDATE Proveedores SET Nombre = @Nombre, Apellido = @Apellido, Email = @Email, Telefono = @Telefono, " +
+            string consulta = "UPDATE Provedores SET Nombre = @Nombre, Apellido = @Apellido, Email = @Email, Telefono = @Telefono, " +
                               "Celular = @Celular, Direccion = @Direccion, Provincia = @Provincia, Pais = @Pais " +
                               "WHERE IdProveedor = @IdProveedor";
 
@@ -61,7 +61,7 @@ namespace Negocio
         //eliminar proveedor
         public void EliminarProveedor(int idProveedor)
         {
-            string consulta = "DELETE FROM Proveedores WHERE IdProveedor = @IdProveedor";
+            string consulta = "DELETE FROM Provedores WHERE IdProveedor = @IdProveedor";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@IdProveedor", idProveedor);
@@ -72,7 +72,7 @@ namespace Negocio
         //buscar proveedores
         public DataTable BuscarProveedores(string nombre = null, string apellido = null, string email = null, string telefono = null, string celular = null, string direccion = null, string provincia = null, string pais = null)
         {
-            string consulta = "SELECT * FROM Proveedores WHERE 1=1";
+            string consulta = "SELECT * FROM Provedores WHERE 1=1";
 
             if (!string.IsNullOrEmpty(nombre))
             {
@@ -152,6 +152,33 @@ namespace Negocio
 
             return tablaProveedor;
 
+        }
+        //Busacar Proveedor por id:
+        public Proveedor buscarProveedorPorId(int id)
+        {
+            Proveedor aux = new Proveedor();
+            string consulta = "SELECT IdProvedor,Nombre,Apellido,Email,Telefono,Celular,Direccion,Provincia,Pais FROM Proveedores WHERE IdProveedor = @id;";
+
+            accesoDatos.setearConsulta(consulta);
+            accesoDatos.setearParametro("@id", id);
+
+            accesoDatos.ejecutarLectura();
+
+            if (accesoDatos.Lector.Read())
+            {
+                aux.IdProveedor = accesoDatos.Lector.GetInt32(0);
+                aux.Nombre = accesoDatos.Lector.GetString(1);
+                aux.Apellido= accesoDatos.Lector.GetString(2);
+                aux.Email = accesoDatos.Lector.GetString(3);
+                aux.Telefono = accesoDatos.Lector.IsDBNull(4)? null: accesoDatos.Lector.GetInt32(4).ToString();
+                aux.Celular = accesoDatos.Lector.IsDBNull(5)? null: accesoDatos.Lector.GetInt32(5).ToString();
+                aux.Direccion= accesoDatos.Lector.GetString(6);
+                aux.Provincia = accesoDatos.Lector.GetString(7);
+                aux.Pais = accesoDatos.Lector.GetString(8);
+            }
+
+            accesoDatos.cerrarConexion();
+            return aux;
         }
     }
 }
