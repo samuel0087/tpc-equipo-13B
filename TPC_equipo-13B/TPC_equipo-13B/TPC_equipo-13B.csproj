@@ -75,6 +75,7 @@
     <Content Include="Compras\MenuCompras.aspx" />
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
+    <Content Include="proveedores\comfirmareliminacionproveedor.aspx" />
     <Content Include="proveedores\ExitoProveedor.aspx" />
     <Content Include="proveedores\Agregarproveedor.aspx" />
     <Content Include="Login.aspx" />
@@ -161,6 +162,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="proveedores\comfirmareliminacionproveedor.aspx.cs">
+      <DependentUpon>comfirmareliminacionproveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="proveedores\comfirmareliminacionproveedor.aspx.designer.cs">
+      <DependentUpon>comfirmareliminacionproveedor.aspx</DependentUpon>
     </Compile>
     <Compile Include="proveedores\ExitoProveedor.aspx.cs">
       <DependentUpon>ExitoProveedor.aspx</DependentUpon>

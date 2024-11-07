@@ -157,7 +157,7 @@ namespace Negocio
         public Proveedor buscarProveedorPorId(int id)
         {
             Proveedor aux = new Proveedor();
-            string consulta = "SELECT IdProvedor,Nombre,Apellido,Email,Telefono,Celular,Direccion,Provincia,Pais FROM Proveedores WHERE IdProveedor = @id;";
+            string consulta = "SELECT IdProveedor,Nombre,Apellido,Email,Telefono,Celular,Direccion,Provincia,Pais FROM Provedores WHERE IdProveedor = @id;";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@id", id);

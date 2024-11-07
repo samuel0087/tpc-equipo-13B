@@ -38,7 +38,7 @@ namespace TPC_equipo_13B
                 Proveedor ProveedoraModificar = negocioProveedor.buscarProveedorPorId(idProveedor);
                 if (ProveedoraModificar != null)
                 {
-                    Session["UsuarioaModificar"] = ProveedoraModificar;
+                    Session["ProveedoraModificar"] = ProveedoraModificar;
                 }
 
                 Response.Redirect("Modificar.aspx");
@@ -50,10 +50,10 @@ namespace TPC_equipo_13B
                 Proveedor ProveedorAEliminar = negocioProveedor.buscarProveedorPorId(idProveedor);
                 if (ProveedorAEliminar != null)
                 {
-                    Session["UsuarioAEliminar"] = ProveedorAEliminar;
+                    Session["ProveedoraEliminar"] = ProveedorAEliminar;
                 }
 
-                Response.Redirect("comfirmareliminacion.aspx");
+                Response.Redirect("comfirmareliminacionproveedor.aspx");
 
             }
         }
