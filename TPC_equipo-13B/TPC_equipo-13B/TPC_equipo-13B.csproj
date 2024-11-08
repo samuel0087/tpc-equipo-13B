@@ -67,67 +67,68 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Categorias\FormCategorias.aspx" />
-    <Content Include="Categorias\MenuCategorias.aspx" />
-    <Content Include="Categorias\VerCategorias.aspx" />
-    <Content Include="Compras\FormCompras.aspx" />
-    <Content Include="Compras\ListadoCompras.aspx" />
-    <Content Include="Compras\MenuCompras.aspx" />
+    <Content Include="Administrador\Categorias\FormCategorias.aspx" />
+    <Content Include="Administrador\Categorias\MenuCategorias.aspx" />
+    <Content Include="Administrador\Categorias\VerCategorias.aspx" />
+    <Content Include="Administrador\Compras\FormCompras.aspx" />
+    <Content Include="Administrador\Compras\ListadoCompras.aspx" />
+    <Content Include="Administrador\Compras\MenuCompras.aspx" />
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
-    <Content Include="proveedores\Proveedormodificadoconexito.aspx" />
-    <Content Include="proveedores\modificarproveedores.aspx" />
-    <Content Include="proveedores\comfirmareliminacionproveedor.aspx" />
-    <Content Include="proveedores\ExitoProveedor.aspx" />
-    <Content Include="proveedores\Agregarproveedor.aspx" />
+    <Content Include="Logout.aspx" />
+    <Content Include="Administrador\proveedores\Proveedormodificadoconexito.aspx" />
+    <Content Include="Administrador\proveedores\modificarproveedores.aspx" />
+    <Content Include="Administrador\proveedores\comfirmareliminacionproveedor.aspx" />
+    <Content Include="Administrador\proveedores\ExitoProveedor.aspx" />
+    <Content Include="Administrador\proveedores\Agregarproveedor.aspx" />
     <Content Include="Login.aspx" />
-    <Content Include="Productos\MenuProductos.aspx" />
-    <Content Include="Tipos\FormTipos.aspx" />
-    <Content Include="Tipos\MenuTipos.aspx" />
-    <Content Include="Tipos\Tipos.aspx" />
-    <Content Include="proveedores\Proveedores.aspx" />
-    <Content Include="Productos\exitoproductoeliminado.aspx" />
-    <Content Include="Productos\EliminarProducto.aspx" />
-    <Content Include="Productos\ExitoProducto.aspx" />
-    <Content Include="Productos\FormProductos.aspx" />
-    <Content Include="Productos\VerProductos.aspx" />
-    <Content Include="Tipos\VerTipos.aspx" />
-    <Content Include="Usuarios\comfirmareliminacion.aspx" />
-    <Content Include="Usuarios\AgregarUsuario.aspx" />
-    <Content Include="Usuarios\ExitoUsuario.aspx" />
-    <Content Include="Usuarios\UsuarioModificadoconExito.aspx" />
-    <Content Include="Usuarios\Modificar.aspx" />
-    <Content Include="marcas\VerMarcas.aspx" />
-    <Content Include="Usuarios\Usuario.aspx" />
+    <Content Include="Administrador\Productos\MenuProductos.aspx" />
+    <Content Include="Administrador\Tipos\FormTipos.aspx" />
+    <Content Include="Administrador\Tipos\MenuTipos.aspx" />
+    <Content Include="Administrador\Tipos\Tipos.aspx" />
+    <Content Include="Administrador\proveedores\Proveedores.aspx" />
+    <Content Include="Administrador\Productos\exitoproductoeliminado.aspx" />
+    <Content Include="Administrador\Productos\EliminarProducto.aspx" />
+    <Content Include="Administrador\Productos\ExitoProducto.aspx" />
+    <Content Include="Administrador\Productos\FormProductos.aspx" />
+    <Content Include="Administrador\Productos\VerProductos.aspx" />
+    <Content Include="Administrador\Tipos\VerTipos.aspx" />
+    <Content Include="Administrador\Usuarios\comfirmareliminacion.aspx" />
+    <Content Include="Administrador\Usuarios\AgregarUsuario.aspx" />
+    <Content Include="Administrador\Usuarios\ExitoUsuario.aspx" />
+    <Content Include="Administrador\Usuarios\UsuarioModificadoconExito.aspx" />
+    <Content Include="Administrador\Usuarios\Modificar.aspx" />
+    <Content Include="Administrador\marcas\VerMarcas.aspx" />
+    <Content Include="Administrador\Usuarios\Usuario.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="marcas\FormMarca.aspx" />
+    <Content Include="Administrador\marcas\FormMarca.aspx" />
     <Content Include="MenuAdministrador.aspx" />
-    <Content Include="marcas\MenuMarcas.aspx" />
+    <Content Include="Administrador\marcas\MenuMarcas.aspx" />
     <Content Include="Ventas\FormVentas.aspx" />
     <Content Include="Ventas\ListadoVentas.aspx" />
     <Content Include="Ventas\MenuVentas.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Categorias\FormCategorias.aspx.cs">
+    <Compile Include="Administrador\Categorias\FormCategorias.aspx.cs">
       <DependentUpon>FormCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Categorias\FormCategorias.aspx.designer.cs">
+    <Compile Include="Administrador\Categorias\FormCategorias.aspx.designer.cs">
       <DependentUpon>FormCategorias.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Categorias\MenuCategorias.aspx.cs">
+    <Compile Include="Administrador\Categorias\MenuCategorias.aspx.cs">
       <DependentUpon>MenuCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Categorias\MenuCategorias.aspx.designer.cs">
+    <Compile Include="Administrador\Categorias\MenuCategorias.aspx.designer.cs">
       <DependentUpon>MenuCategorias.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Categorias\VerCategorias.aspx.cs">
+    <Compile Include="Administrador\Categorias\VerCategorias.aspx.cs">
       <DependentUpon>VerCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Categorias\VerCategorias.aspx.designer.cs">
+    <Compile Include="Administrador\Categorias\VerCategorias.aspx.designer.cs">
       <DependentUpon>VerCategorias.aspx</DependentUpon>
     </Compile>
     <Compile Include="ComercioApp.Master.cs">
@@ -137,25 +138,25 @@
     <Compile Include="ComercioApp.Master.designer.cs">
       <DependentUpon>ComercioApp.Master</DependentUpon>
     </Compile>
-    <Compile Include="Compras\FormCompras.aspx.cs">
+    <Compile Include="Administrador\Compras\FormCompras.aspx.cs">
       <DependentUpon>FormCompras.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Compras\FormCompras.aspx.designer.cs">
+    <Compile Include="Administrador\Compras\FormCompras.aspx.designer.cs">
       <DependentUpon>FormCompras.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Compras\ListadoCompras.aspx.cs">
+    <Compile Include="Administrador\Compras\ListadoCompras.aspx.cs">
       <DependentUpon>ListadoCompras.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Compras\ListadoCompras.aspx.designer.cs">
+    <Compile Include="Administrador\Compras\ListadoCompras.aspx.designer.cs">
       <DependentUpon>ListadoCompras.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Compras\MenuCompras.aspx.cs">
+    <Compile Include="Administrador\Compras\MenuCompras.aspx.cs">
       <DependentUpon>MenuCompras.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Compras\MenuCompras.aspx.designer.cs">
+    <Compile Include="Administrador\Compras\MenuCompras.aspx.designer.cs">
       <DependentUpon>MenuCompras.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
@@ -165,39 +166,46 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="proveedores\Proveedormodificadoconexito.aspx.cs">
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\proveedores\Proveedormodificadoconexito.aspx.cs">
       <DependentUpon>Proveedormodificadoconexito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="proveedores\Proveedormodificadoconexito.aspx.designer.cs">
+    <Compile Include="Administrador\proveedores\Proveedormodificadoconexito.aspx.designer.cs">
       <DependentUpon>Proveedormodificadoconexito.aspx</DependentUpon>
     </Compile>
-    <Compile Include="proveedores\modificarproveedores.aspx.cs">
+    <Compile Include="Administrador\proveedores\modificarproveedores.aspx.cs">
       <DependentUpon>modificarproveedores.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="proveedores\modificarproveedores.aspx.designer.cs">
+    <Compile Include="Administrador\proveedores\modificarproveedores.aspx.designer.cs">
       <DependentUpon>modificarproveedores.aspx</DependentUpon>
     </Compile>
-    <Compile Include="proveedores\comfirmareliminacionproveedor.aspx.cs">
+    <Compile Include="Administrador\proveedores\comfirmareliminacionproveedor.aspx.cs">
       <DependentUpon>comfirmareliminacionproveedor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="proveedores\comfirmareliminacionproveedor.aspx.designer.cs">
+    <Compile Include="Administrador\proveedores\comfirmareliminacionproveedor.aspx.designer.cs">
       <DependentUpon>comfirmareliminacionproveedor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="proveedores\ExitoProveedor.aspx.cs">
+    <Compile Include="Administrador\proveedores\ExitoProveedor.aspx.cs">
       <DependentUpon>ExitoProveedor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="proveedores\ExitoProveedor.aspx.designer.cs">
+    <Compile Include="Administrador\proveedores\ExitoProveedor.aspx.designer.cs">
       <DependentUpon>ExitoProveedor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="proveedores\Agregarproveedor.aspx.cs">
+    <Compile Include="Administrador\proveedores\Agregarproveedor.aspx.cs">
       <DependentUpon>Agregarproveedor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="proveedores\Agregarproveedor.aspx.designer.cs">
+    <Compile Include="Administrador\proveedores\Agregarproveedor.aspx.designer.cs">
       <DependentUpon>Agregarproveedor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
@@ -207,140 +215,140 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Productos\MenuProductos.aspx.cs">
+    <Compile Include="Administrador\Productos\MenuProductos.aspx.cs">
       <DependentUpon>MenuProductos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Productos\MenuProductos.aspx.designer.cs">
+    <Compile Include="Administrador\Productos\MenuProductos.aspx.designer.cs">
       <DependentUpon>MenuProductos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Tipos\FormTipos.aspx.cs">
+    <Compile Include="Administrador\Tipos\FormTipos.aspx.cs">
       <DependentUpon>FormTipos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Tipos\FormTipos.aspx.designer.cs">
+    <Compile Include="Administrador\Tipos\FormTipos.aspx.designer.cs">
       <DependentUpon>FormTipos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Tipos\MenuTipos.aspx.cs">
+    <Compile Include="Administrador\Tipos\MenuTipos.aspx.cs">
       <DependentUpon>MenuTipos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Tipos\MenuTipos.aspx.designer.cs">
+    <Compile Include="Administrador\Tipos\MenuTipos.aspx.designer.cs">
       <DependentUpon>MenuTipos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Tipos\Tipos.aspx.cs">
+    <Compile Include="Administrador\Tipos\Tipos.aspx.cs">
       <DependentUpon>Tipos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Tipos\Tipos.aspx.designer.cs">
+    <Compile Include="Administrador\Tipos\Tipos.aspx.designer.cs">
       <DependentUpon>Tipos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="proveedores\Proveedores.aspx.cs">
+    <Compile Include="Administrador\proveedores\Proveedores.aspx.cs">
       <DependentUpon>Proveedores.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="proveedores\Proveedores.aspx.designer.cs">
+    <Compile Include="Administrador\proveedores\Proveedores.aspx.designer.cs">
       <DependentUpon>Proveedores.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Productos\exitoproductoeliminado.aspx.cs">
+    <Compile Include="Administrador\Productos\exitoproductoeliminado.aspx.cs">
       <DependentUpon>exitoproductoeliminado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Productos\exitoproductoeliminado.aspx.designer.cs">
+    <Compile Include="Administrador\Productos\exitoproductoeliminado.aspx.designer.cs">
       <DependentUpon>exitoproductoeliminado.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Productos\EliminarProducto.aspx.cs">
+    <Compile Include="Administrador\Productos\EliminarProducto.aspx.cs">
       <DependentUpon>EliminarProducto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Productos\EliminarProducto.aspx.designer.cs">
+    <Compile Include="Administrador\Productos\EliminarProducto.aspx.designer.cs">
       <DependentUpon>EliminarProducto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Productos\ExitoProducto.aspx.cs">
+    <Compile Include="Administrador\Productos\ExitoProducto.aspx.cs">
       <DependentUpon>ExitoProducto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Productos\ExitoProducto.aspx.designer.cs">
+    <Compile Include="Administrador\Productos\ExitoProducto.aspx.designer.cs">
       <DependentUpon>ExitoProducto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Productos\FormProductos.aspx.cs">
+    <Compile Include="Administrador\Productos\FormProductos.aspx.cs">
       <DependentUpon>FormProductos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Productos\FormProductos.aspx.designer.cs">
+    <Compile Include="Administrador\Productos\FormProductos.aspx.designer.cs">
       <DependentUpon>FormProductos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Productos\VerProductos.aspx.cs">
+    <Compile Include="Administrador\Productos\VerProductos.aspx.cs">
       <DependentUpon>VerProductos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Productos\VerProductos.aspx.designer.cs">
+    <Compile Include="Administrador\Productos\VerProductos.aspx.designer.cs">
       <DependentUpon>VerProductos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Tipos\VerTipos.aspx.cs">
+    <Compile Include="Administrador\Tipos\VerTipos.aspx.cs">
       <DependentUpon>VerTipos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Tipos\VerTipos.aspx.designer.cs">
+    <Compile Include="Administrador\Tipos\VerTipos.aspx.designer.cs">
       <DependentUpon>VerTipos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuarios\comfirmareliminacion.aspx.cs">
+    <Compile Include="Administrador\Usuarios\comfirmareliminacion.aspx.cs">
       <DependentUpon>comfirmareliminacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuarios\comfirmareliminacion.aspx.designer.cs">
+    <Compile Include="Administrador\Usuarios\comfirmareliminacion.aspx.designer.cs">
       <DependentUpon>comfirmareliminacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuarios\AgregarUsuario.aspx.cs">
+    <Compile Include="Administrador\Usuarios\AgregarUsuario.aspx.cs">
       <DependentUpon>AgregarUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuarios\AgregarUsuario.aspx.designer.cs">
+    <Compile Include="Administrador\Usuarios\AgregarUsuario.aspx.designer.cs">
       <DependentUpon>AgregarUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuarios\ExitoUsuario.aspx.cs">
+    <Compile Include="Administrador\Usuarios\ExitoUsuario.aspx.cs">
       <DependentUpon>ExitoUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuarios\ExitoUsuario.aspx.designer.cs">
+    <Compile Include="Administrador\Usuarios\ExitoUsuario.aspx.designer.cs">
       <DependentUpon>ExitoUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuarios\UsuarioModificadoconExito.aspx.cs">
+    <Compile Include="Administrador\Usuarios\UsuarioModificadoconExito.aspx.cs">
       <DependentUpon>UsuarioModificadoconExito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuarios\UsuarioModificadoconExito.aspx.designer.cs">
+    <Compile Include="Administrador\Usuarios\UsuarioModificadoconExito.aspx.designer.cs">
       <DependentUpon>UsuarioModificadoconExito.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuarios\Modificar.aspx.cs">
+    <Compile Include="Administrador\Usuarios\Modificar.aspx.cs">
       <DependentUpon>Modificar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuarios\Modificar.aspx.designer.cs">
+    <Compile Include="Administrador\Usuarios\Modificar.aspx.designer.cs">
       <DependentUpon>Modificar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="marcas\VerMarcas.aspx.cs">
+    <Compile Include="Administrador\marcas\VerMarcas.aspx.cs">
       <DependentUpon>VerMarcas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="marcas\VerMarcas.aspx.designer.cs">
+    <Compile Include="Administrador\marcas\VerMarcas.aspx.designer.cs">
       <DependentUpon>VerMarcas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuarios\Usuario.aspx.cs">
+    <Compile Include="Administrador\Usuarios\Usuario.aspx.cs">
       <DependentUpon>Usuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuarios\Usuario.aspx.designer.cs">
+    <Compile Include="Administrador\Usuarios\Usuario.aspx.designer.cs">
       <DependentUpon>Usuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="marcas\FormMarca.aspx.cs">
+    <Compile Include="Administrador\marcas\FormMarca.aspx.cs">
       <DependentUpon>FormMarca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="marcas\FormMarca.aspx.designer.cs">
+    <Compile Include="Administrador\marcas\FormMarca.aspx.designer.cs">
       <DependentUpon>FormMarca.aspx</DependentUpon>
     </Compile>
     <Compile Include="MenuAdministrador.aspx.cs">
@@ -350,11 +358,11 @@
     <Compile Include="MenuAdministrador.aspx.designer.cs">
       <DependentUpon>MenuAdministrador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="marcas\MenuMarcas.aspx.cs">
+    <Compile Include="Administrador\marcas\MenuMarcas.aspx.cs">
       <DependentUpon>MenuMarcas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="marcas\MenuMarcas.aspx.designer.cs">
+    <Compile Include="Administrador\marcas\MenuMarcas.aspx.designer.cs">
       <DependentUpon>MenuMarcas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

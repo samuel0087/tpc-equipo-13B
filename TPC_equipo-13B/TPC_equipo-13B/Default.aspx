@@ -8,9 +8,17 @@
 
             <div class="menu">
                 <a href="<%: ResolveUrl("~/Ventas/MenuVentas.aspx") %>">Ventas</a>
-                <a href="<%: ResolveUrl("~/Compras/MenuCompras.aspx") %>">Compras</a>
-                <a href="<%: ResolveUrl("~/MenuAdministrador.aspx") %>">Administrar</a>
-                <a href="#">Cerrar Sesion</a>
+
+                <%if (Session["Admin"] != null) {%>
+
+                    <%if ((bool)Session["admin"]) { %>
+                            <a href="<%: ResolveUrl("~/Compras/MenuCompras.aspx") %>">Compras</a>
+                            <a href="<%: ResolveUrl("~/MenuAdministrador.aspx") %>">Administrar</a>
+                    <%}%>
+
+                <%} %>
+                
+                <a href="<%: ResolveUrl("~/Logout.aspx") %>">Cerrar Sesion</a>
 
             </div>
         </div>

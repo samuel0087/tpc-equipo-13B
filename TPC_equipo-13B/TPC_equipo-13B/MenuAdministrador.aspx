@@ -7,12 +7,12 @@
             <h2>Administrador</h2>
 
             <div class="menu">
-                <a href="marcas/MenuMarcas.aspx">Marcas</a>
-                <a href="<%=ResolveUrl("~/Categorias/MenuCategorias.aspx") %>">Categorias</a>
-                <a href="<%=ResolveUrl("~/Tipos/MenuTipos.aspx") %>">Tipos de productos</a>
-                <a href="<%=ResolveUrl("~/Productos/MenuProductos.aspx") %>">Productos</a>
-                <a href="<%=ResolveUrl("~/Proveedores/Proveedores.aspx") %>">Proveedores</a>
-                <a href="<%=ResolveUrl("~/Usuarios/Usuario.aspx") %>">Usuarios</a>
+                <a href="<%=ResolveUrl("~/Administrador/marcas/MenuMarcas.aspx") %>">Marcas</a>
+                <a href="<%=ResolveUrl("~/Administrador/Categorias/MenuCategorias.aspx") %>">Categorias</a>
+                <a href="<%=ResolveUrl("~/Administrador/Tipos/MenuTipos.aspx") %>">Tipos de productos</a>
+                <a href="<%=ResolveUrl("~/Administrador/Productos/MenuProductos.aspx") %>">Productos</a>
+                <a href="<%=ResolveUrl("~/Administrador/Proveedores/Proveedores.aspx") %>">Proveedores</a>
+                <a href="<%=ResolveUrl("~/Administrador/Usuarios/Usuario.aspx") %>">Usuarios</a>
             </div>
         </div>
     </div>
