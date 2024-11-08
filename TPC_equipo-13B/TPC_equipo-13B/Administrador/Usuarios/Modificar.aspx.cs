@@ -15,6 +15,14 @@ namespace TPC_equipo_13B
         {
             if(!IsPostBack)
             {
+
+                    NegocioRol negocio = new NegocioRol();
+                    ddlRoles.DataSource = negocio.listar();
+                    ddlRoles.DataValueField = "IdRol";
+                    ddlRoles.DataTextField = "NombreRol";
+                    ddlRoles.DataBind();
+
+
                 if (Session["UsuarioaModificar"] != null)
                 {
                     Usuario usuario = (Usuario)Session["UsuarioaModificar"];
@@ -23,13 +31,13 @@ namespace TPC_equipo_13B
                     /*txtIdUsuario.Text = usuario.IdUsuario.ToString();*/
                     txtNombre.Text = usuario.Nombre;
                     TextContraseña.Text = usuario.Contraseña;
-                    TextRol.Text = usuario.Rol.NombreRol;
+                    ddlRoles.SelectedValue = usuario.Rol.IdRol.ToString();
                     
                     
                 }
                 else
                 {
-                    Response.Redirect("AgregarPaginaDeError_Falacrear");
+                    Response.Redirect(ResolveUrl("~/Administrador/Usuarios/Usuario.aspx"));
                 }
             }
         }
@@ -40,7 +48,7 @@ namespace TPC_equipo_13B
             /*usuarioModificado.IdUsuario = Convert.ToInt32(txtIdUsuario.Text);*/
             usuarioModificado.Nombre = txtNombre.Text;
             usuarioModificado.Contraseña = TextContraseña.Text;
-            usuarioModificado.Rol.NombreRol = TextRol.Text;
+            usuarioModificado.Rol.IdRol = int.Parse(ddlRoles.SelectedValue);
 
             negocioUsuario.ModificarUsuario(usuarioModificado);
 

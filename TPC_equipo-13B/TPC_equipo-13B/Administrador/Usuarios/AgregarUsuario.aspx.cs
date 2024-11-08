@@ -17,10 +17,9 @@ namespace TPC_equipo_13B
             {
                 NegocioRol negocio = new NegocioRol();
                 ddlRoles.DataSource = negocio.listar();
+                ddlRoles.DataValueField = "IdRol";
+                ddlRoles.DataTextField = "NombreRol";
                 ddlRoles.DataBind();
-
-
-
             }
 
         }
@@ -31,7 +30,7 @@ namespace TPC_equipo_13B
 
             usuario.Nombre = txtNombre.Text;
             usuario.Contraseña = TextContraseña.Text;
-            usuario.Rol.IdRol =int.Parse(TextRol.Text);
+            usuario.Rol.IdRol =int.Parse(ddlRoles.SelectedValue);
 
             negocioUsuario.AgregarUsuario(usuario);
 

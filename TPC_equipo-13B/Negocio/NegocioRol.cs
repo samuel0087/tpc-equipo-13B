@@ -26,6 +26,8 @@ namespace Negocio
 					Rol aux = new Rol();
 					aux.IdRol = datos.Lector["IdRol"] is DBNull ? 0 : (int)datos.Lector["IdRol"];
 					aux.NombreRol = datos.Lector["Rol"] is DBNull ? "" : (string)datos.Lector["Rol"];
+
+					lista.Add(aux);
 				}
 
 				return lista;

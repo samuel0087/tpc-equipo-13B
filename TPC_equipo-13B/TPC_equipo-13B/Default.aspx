@@ -12,7 +12,7 @@
                 <%if (Session["Admin"] != null) {%>
 
                     <%if ((bool)Session["admin"]) { %>
-                            <a href="<%: ResolveUrl("~/Compras/MenuCompras.aspx") %>">Compras</a>
+                            <a href="<%: ResolveUrl("~/Administrador/Compras/MenuCompras.aspx") %>">Compras</a>
                             <a href="<%: ResolveUrl("~/MenuAdministrador.aspx") %>">Administrar</a>
                     <%}%>
 

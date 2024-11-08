@@ -33,7 +33,8 @@
 <label>Cargo:</label>
    </div>
    <div>
-   <asp:TextBox ID="TextRol" runat="server" style="margin-bottom: 10px;"></asp:TextBox><br />
+        <asp:DropDownList runat="server" ID="ddlRoles">
+        </asp:DropDownList>
    </div>
       </div>
       <div class="col-12 text-center">
