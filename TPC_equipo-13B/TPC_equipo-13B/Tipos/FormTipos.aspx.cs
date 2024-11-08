@@ -19,6 +19,14 @@ namespace TPC_equipo_13B.Tipos
 
             try
             {
+
+                if (!IsPostBack)
+                {
+                    if (Session["error"] != null ){
+                        Session.Remove("error");
+                    }
+                }
+
                 btnModificar.Visible = false;
                 btnEliminar.Visible = false;
                 if (Request.QueryString["id"] != null)

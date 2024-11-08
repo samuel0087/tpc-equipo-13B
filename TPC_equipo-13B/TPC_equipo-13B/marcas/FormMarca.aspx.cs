@@ -19,6 +19,15 @@ namespace TPC_equipo_13B.marcas
 
             try
             {
+
+                if (!IsPostBack)
+                {
+                    if (Session["error"] != null)
+                    {
+                        Session.Remove("error");
+                    }
+                }
+
                 btnAñadir.Visible = true;
                 btnModificar.Visible = false;
                 btnEliminar.Visible = false;

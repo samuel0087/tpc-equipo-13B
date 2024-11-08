@@ -18,6 +18,13 @@
                         <asp:Label Text="" runat="server" ID="lblError" />
                     </div>
 
+                    <%if (Session["error"] != null){%>
+                            <div class="mb-3">
+                                <span class="error">Error al eliminar, verifique si El tipo de producto este en uso.</span>
+                                
+                            </div>
+                    <%} %>
+
                     <%if (!confirmarEliminacion){%>
                         <div class="mb-3 button-container">
                             <asp:Button Text="Añadir" ID="btnAñadir" CssClass="btn btn-primary" runat="server" OnClick="btnAñadir_Click" />

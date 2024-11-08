@@ -129,11 +129,24 @@ namespace Negocio
         public void EliminarMarca(Marca aux)
         {
             string consulta = "DELETE FROM Marcas WHERE IdMarca = @IdMarca";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.setearParametro("@IdMarca", aux.IdMarca);
 
-            accesoDatos.setearConsulta(consulta);
-            accesoDatos.setearParametro("@IdMarca", aux.IdMarca);
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
 
-            accesoDatos.ejecutarAccion();
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+
+            
         }
 
         // Buscar marcas

@@ -9,6 +9,7 @@ namespace TPC_equipo_13B
 {
     public partial class ComercioApp : System.Web.UI.MasterPage
     {
+        public bool Admin { set; get; }
         protected void Page_Load(object sender, EventArgs e)
         {
 
