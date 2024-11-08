@@ -41,7 +41,7 @@ namespace TPC_equipo_13B
                     Session["ProveedoraModificar"] = ProveedoraModificar;
                 }
 
-                Response.Redirect("Modificar.aspx");
+                Response.Redirect("modificarproveedores.aspx");
             }
             else if (e.CommandName == "Eliminar")
             {

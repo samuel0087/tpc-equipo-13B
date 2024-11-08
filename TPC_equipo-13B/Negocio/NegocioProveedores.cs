@@ -38,22 +38,21 @@ namespace Negocio
         }
 
         //modificar proveedor
-        public void ModificarProveedor(int idProveedor, string nombre, string apellido, string email, string telefono, string celular, string direccion, string provincia, string pais)
+     
+        public void ModificarProveedor(Proveedor proveedor)
         {
-            string consulta = "UPDATE Provedores SET Nombre = @Nombre, Apellido = @Apellido, Email = @Email, Telefono = @Telefono, " +
-                              "Celular = @Celular, Direccion = @Direccion, Provincia = @Provincia, Pais = @Pais " +
-                              "WHERE IdProveedor = @IdProveedor";
+            string consulta = "UPDATE Provedores SET Nombre = @Nombre,Apellido = @Apellido,Email = @Email,Telefono = @Telefono,Celular = @Celular,Direccion = @Direccion,Provincia = @Provincia,Pais = @Pais WHERE IdProveedor = @IdProveedor;";
 
             accesoDatos.setearConsulta(consulta);
-            accesoDatos.setearParametro("@IdProveedor", idProveedor);
-            accesoDatos.setearParametro("@Nombre", nombre);
-            accesoDatos.setearParametro("@Apellido", apellido);
-            accesoDatos.setearParametro("@Email", email);
-            accesoDatos.setearParametro("@Telefono", telefono);
-            accesoDatos.setearParametro("@Celular", celular);
-            accesoDatos.setearParametro("@Direccion", direccion);
-            accesoDatos.setearParametro("@Provincia", provincia);
-            accesoDatos.setearParametro("@Pais", pais);
+            accesoDatos.setearParametro("@IdProveedor",proveedor.IdProveedor);
+            accesoDatos.setearParametro("@Nombre", proveedor.Nombre);
+            accesoDatos.setearParametro("@Apellido",proveedor.Apellido);
+            accesoDatos.setearParametro("@Email",proveedor.Email);
+            accesoDatos.setearParametro("@Telefono",proveedor.Telefono);
+            accesoDatos.setearParametro("@Celular",proveedor.Celular);
+            accesoDatos.setearParametro("@Direccion",proveedor.Direccion);
+            accesoDatos.setearParametro("@Provincia",proveedor.Provincia);
+            accesoDatos.setearParametro("@Pais",proveedor.Pais);
 
             accesoDatos.ejecutarAccion();
         }
