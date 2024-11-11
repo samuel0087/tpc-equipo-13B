@@ -18,5 +18,6 @@ namespace Dominio
         public Cliente Cliente { get; set; }
         public Usuario Vendedor { get; set; }
         public MetodoDePago MetodoDePago { get; set; }
+
     }
 }

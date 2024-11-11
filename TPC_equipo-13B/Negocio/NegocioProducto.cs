@@ -266,5 +266,24 @@ namespace Negocio
             return tablaProducto;
 
         }
+        public DataTable ObtenerProductos()
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+            DataTable tablaProductos = new DataTable();
+
+            string consulta = "SELECT IdProducto, Nombre FROM Productos";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+                tablaProductos.Load(accesoDatos.Lector);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener productos: " + ex.Message);
+            }
+
+            return tablaProductos;
+        }
     }
 }

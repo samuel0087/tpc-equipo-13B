@@ -1,4 +1,5 @@
-﻿using Dominio;
+﻿using Acceso_Datos;
+using Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -137,6 +138,25 @@ namespace Negocio
             accesoDatos.cerrarConexion();
 
             return clientes;
+        }
+        public DataTable ObtenerClientes()
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+            DataTable tablaClientes = new DataTable();
+
+            string consulta = "SELECT IdCliente, Nombre FROM Clientes"; 
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+                tablaClientes.Load(accesoDatos.Lector);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener clientes: " + ex.Message);
+            }
+
+            return tablaClientes;
         }
     }
 }
