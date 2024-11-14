@@ -32,6 +32,7 @@ Nombre varchar(50)not null,
 IdMarca int not null,
 IdTipo int not null,
 Ganancia float not null,
+Precio float not null
 constraint fk_producto_Marca foreign key(idmarca) references Marcas(idmarca),
 constraint fk_producto_Tipos foreign key(idtipo) references tipos(idtipo)
 );
@@ -88,6 +89,27 @@ IdMetodoDePago int primary key identity(1,1),
 Nombre varchar(50) unique
 );
 
+create table stock(
+iddestock int primary key identity(1,1),
+idproducto int not null,
+cantidad bigint not null
+constraint fk_stock_idproducto foreign key (idproducto) references productos(idproducto)
+);
+
+create table compra(
+idcompra int primary key identity(1,1),
+precio money not null
+);
+
+create table compraXproducto(
+idcompraporproducto int primary key identity(1,1),
+idcompra int not null,
+idproducto int not null,
+cantidad bigint not null,
+constraint fk_compraXproducto_idcompra foreign key (idcompra) references compra(idcompra),
+constraint fk_compraXproducto_idproducto foreign key (idproducto) references productos(idproducto)
+);
+
 INSERT INTO Marcas (Nombre) VALUES
 ('Marca A'),
 ('Marca B'),
@@ -128,32 +150,33 @@ INSERT INTO Categorias (Nombre) VALUES
 
 go
 
-INSERT INTO Productos (Codigo, Nombre, IdMarca, IdTipo, Ganancia) VALUES
-(1001, 'Producto A', 1, 1, 1.2),
-(1002, 'Producto B', 2, 1, 1.2),
-(1003, 'Producto C', 1, 2, 1.2),
-(1004, 'Producto D', 3, 2, 1.2),
-(1005, 'Producto E', 1, 1, 1.2),
-(1006, 'Producto F', 2, 3, 1.2),
-(1007, 'Producto G', 3, 3, 1.2),
-(1008, 'Producto H', 1, 1, 1.2),
-(1009, 'Producto I', 2, 2, 1.2),
-(1010, 'Producto J', 3, 3, 1.2);
+INSERT INTO Productos (Codigo, Nombre, IdMarca, IdTipo, Ganancia,Precio) VALUES
+(1001, 'Producto A', 1, 1, 1.2,10),
+(1002, 'Producto B', 2, 1, 1.2,20),
+(1003, 'Producto C', 1, 2, 1.2,50),
+(1004, 'Producto D', 3, 2, 1.2,80),
+(1005, 'Producto E', 1, 1, 1.2,10),
+(1006, 'Producto F', 2, 3, 1.2,40),
+(1007, 'Producto G', 3, 3, 1.2,80),
+(1008, 'Producto H', 1, 1, 1.2,100),
+(1009, 'Producto I', 2, 2, 1.2,500),
+(1010, 'Producto J', 3, 3, 1.2,70);
 
 
 
 go
-INSERT INTO Clientes (Nombre, Apellido, DNI, Celular, Email, Direccion, Provincia, Pais, Telefono) VALUES
-('Juan', 'P�rez', 12345678, '1234567890', 'juan.perez@example.com', 'Av. Siempre Viva 742', 'Buenos Aires', 'Argentina', '01112345678'),
-('Mar�a', 'Gonz�lez', 87654321, '0987654321', 'maria.gonzalez@example.com', 'Calle Falsa 123', 'CABA', 'Argentina', '01187654321'),
-('Carlos', 'Mart�nez', 11223344, '1231231234', 'carlos.martinez@example.com', 'Calle de la Paz 456', 'Tigre', 'Argentina', '01111223344'),
-('Laura', 'L�pez', 44332211, '9876543210', 'laura.lopez@example.com', 'Av. Libertador 789', 'Tigre', 'Argentina', '01144332211'),
-('Ana', 'Fern�ndez', 22334455, '3213214321', 'ana.fernandez@example.com', 'Calle Nueva 101', 'San Fernando', 'Argentina', '01122334455'),
-('Pedro', 'Ram�rez', 33445566, '6543219870', 'pedro.ramirez@example.com', 'Av. Belgrano 202', 'CABA', 'Argentina', '01133445566'),
-('Luc�a', 'S�nchez', 55667788, '7890123456', 'lucia.sanchez@example.com', 'Calle de la Independencia 303', 'San Isidro', 'Argentina', '01155667788'),
-('Diego', 'Hern�ndez', 99887766, '4321098765', 'diego.hernandez@example.com', 'Calle de los H�roes 404', 'Pilar', 'Argentina', '01199887766'),
-('Gabriela', 'Torres', 66554433, '2345678901', 'gabriela.torres@example.com', 'Av. San Mart�n 505', 'San Fernando', 'Argentina', '01166554433'),
-('Javier', 'Guti�rrez', 55443322, '5678901234', 'javier.gutierrez@example.com', 'Calle del Sol 606', 'Tigre', 'Argentina', '01155443322');
+INSERT INTO Provedores (Nombre, Apellido, Email, Telefono, Celular, Direccion, Provincia, Pais)
+VALUES 
+    ('Carlos', 'Pérez', 'carlos.perez@example.com', 1234567890, 1234567891, 'Av. Siempre Viva 123', 'Buenos Aires', 'Argentina'),
+    ('María', 'López', 'maria.lopez@example.com', 1234567892, 1234567893, 'Calle Falsa 456', 'Córdoba', 'Argentina'),
+    ('José', 'González', 'jose.gonzalez@example.com', 1234567894, 1234567895, 'San Martín 789', 'Mendoza', 'Argentina'),
+    ('Laura', 'Martínez', 'laura.martinez@example.com', 1234567896, 1234567897, 'Belgrano 101', 'Santa Fe', 'Argentina'),
+    ('Ana', 'García', 'ana.garcia@example.com', 1234567898, 1234567899, 'Alvear 202', 'Tucumán', 'Argentina'),
+    ('Luis', 'Fernández', 'luis.fernandez@example.com', 1234567801, 1234567802, 'Las Heras 303', 'Salta', 'Argentina'),
+    ('Jorge', 'Rodríguez', 'jorge.rodriguez@example.com', 1234567803, 1234567804, 'Independencia 404', 'San Juan', 'Argentina'),
+    ('Sofía', 'Gómez', 'sofia.gomez@example.com', 1234567805, 1234567806, 'Libertad 505', 'Neuquén', 'Argentina'),
+    ('Miguel', 'Díaz', 'miguel.diaz@example.com', 1234567807, 1234567808, 'Rivadavia 606', 'La Rioja', 'Argentina'),
+    ('Lucía', 'Hernández', 'lucia.hernandez@example.com', 1234567809, 1234567810, 'Mitre 707', 'Misiones', 'Argentina');
 go
 INSERT INTO Provedores (Nombre, Apellido, Email, Telefono, Celular, Direccion, Provincia, Pais) VALUES
 ('Provedor', 'Uno', 'provedor1@example.com', '01112345678', '1234567890', 'Calle 1', 'Buenos Aires', 'Argentina'),
@@ -187,6 +210,8 @@ INSERT INTO MetodoDePago (Nombre) VALUES
 ('Bitcoin'),
 ('Criptomoneda'),
 ('Gift Card');
+
+
 -- go
 
 -- create table Ventas(

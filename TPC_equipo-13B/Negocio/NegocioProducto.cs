@@ -285,5 +285,38 @@ namespace Negocio
 
             return tablaProductos;
         }
+
+        public decimal ObtenerPrecioProducto(int idProducto)
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+            decimal precio = 0;
+
+            try
+            {
+                string consulta = "SELECT Precio FROM Productos WHERE IdProducto = @idProducto";
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.setearParametro("@idProducto", idProducto);
+                accesoDatos.ejecutarLectura();
+
+                if (accesoDatos.Lector.Read())
+                {
+                    precio = accesoDatos.Lector.GetDecimal(0);
+                }
+                else
+                {
+                    throw new Exception("El producto no se encontró o no tiene precio asignado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el precio del producto: " + ex.Message);
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+
+            return precio;
+        }
     }
 }

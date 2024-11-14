@@ -179,5 +179,26 @@ namespace Negocio
             accesoDatos.cerrarConexion();
             return aux;
         }
+
+        public DataTable ObtenerProveedores()
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+            DataTable tablaProveedores = new DataTable();
+
+            string consulta = "SELECT IdProveedor, Nombre, Apellido FROM Provedores";
+            try
+            {
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+                tablaProveedores.Load(accesoDatos.Lector);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener proveedores: " + ex.Message);
+            }
+
+            return tablaProveedores;
+        }
+
     }
 }
