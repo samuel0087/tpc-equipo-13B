@@ -107,10 +107,11 @@ namespace TPC_equipo_13B.Compras
             // Obtener el Label donde se mostrará el precio
             Label lblPrecio = (Label)item.FindControl("lblPrecio");
 
-            if (lblPrecio != null)
-            {
-              
+            // Obtener el TextBox de cantidad
+            TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
 
+            if (lblPrecio != null && txtCantidad != null)
+            {
                 int productoId;
                 // Verificar que el ID del producto es válido
                 if (int.TryParse(ddlProducto.SelectedValue, out productoId) && productoId > 0)
@@ -119,12 +120,72 @@ namespace TPC_equipo_13B.Compras
                     {
                         // Obtener el precio del producto desde la base de datos
                         decimal precioProducto = negocioProducto.ObtenerPrecioProducto(productoId);
-                        // Mostrar el precio en el Label
-                        lblPrecio.Text = precioProducto.ToString(); // Formato de moneda
+
+                        // Verificar que la cantidad es válida
+                        int cantidad = 1;  // Valor por defecto
+                        if (!string.IsNullOrEmpty(txtCantidad.Text) && int.TryParse(txtCantidad.Text, out cantidad) && cantidad > 0)
+                        {
+                            // Multiplicar el precio por la cantidad
+                            decimal precioTotal = precioProducto * cantidad;
+                            lblPrecio.Text = precioTotal.ToString("C2"); // Formato moneda con 2 decimales
+                        }
+                        else
+                        {
+                            lblPrecio.Text = "Cantidad inválida";
+                        }
                     }
                     catch (Exception ex)
                     {
-                        lblPrecio.Text = "Error al obtener el precioooo";
+                        lblPrecio.Text = "Error al obtener el precio: " + ex.Message;
+                    }
+                }
+                else
+                {
+                    lblPrecio.Text = "Selecciona un producto válido";
+                }
+            }
+        }
+        protected void txtCantidad_TextChanged(object sender, EventArgs e)
+        {   NegocioProducto negocioProducto = new NegocioProducto();
+            // Obtener el control TextBox de la cantidad
+            TextBox txtCantidad = (TextBox)sender;
+
+            // Obtener el RepeaterItem contenedor del TextBox
+            RepeaterItem item = (RepeaterItem)txtCantidad.NamingContainer;
+
+            // Obtener el DropDownList del producto y el Label donde se mostrará el precio
+            DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
+            Label lblPrecio = (Label)item.FindControl("lblPrecio");
+
+            if (ddlProducto != null && lblPrecio != null)
+            {
+                int productoId;
+                // Verificar que el ID del producto es válido
+                if (int.TryParse(ddlProducto.SelectedValue, out productoId) && productoId > 0)
+                {
+                    try
+                    {
+                        // Obtener el precio del producto desde la base de datos
+                        decimal precioProducto = negocioProducto.ObtenerPrecioProducto(productoId);
+
+                        // Verificar si el usuario ingresó una cantidad válida
+                        int cantidad;
+                        if (int.TryParse(txtCantidad.Text, out cantidad) && cantidad > 0)
+                        {
+                            // Calcular el precio total: precio * cantidad
+                            decimal precioTotal = precioProducto * cantidad;
+
+                            // Mostrar el precio total en el Label
+                            lblPrecio.Text = precioTotal.ToString("C"); // Formato de moneda
+                        }
+                        else
+                        {
+                            lblPrecio.Text = "Cantidad no válida";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        lblPrecio.Text = "Error al obtener el precio";
                         // Puedes registrar el error o manejarlo según sea necesario
                     }
                 }
@@ -134,9 +195,6 @@ namespace TPC_equipo_13B.Compras
                 }
             }
         }
-
-
-
         protected void btnConfirmarVenta_Click(object sender, EventArgs e)
         {
 

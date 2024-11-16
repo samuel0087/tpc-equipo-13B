@@ -86,9 +86,62 @@ namespace TPC_equipo_13B.Ventas
            
            
         }
+        protected void ddlProducto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Crear una instancia de la capa de negocio
+            NegocioProducto negocioProducto = new NegocioProducto();
+
+            // Obtener el control DropDownList que generó el evento
+            DropDownList ddlProducto = (DropDownList)sender;
+
+            // Obtener el contenedor del DropDownList (el RepeaterItem)
+            RepeaterItem item = (RepeaterItem)ddlProducto.NamingContainer;
+
+            // Buscar el Label correspondiente para mostrar el precio
+            Label lblPrecio = (Label)item.FindControl("lblPrecio");
+
+            if (lblPrecio == null)
+            {
+                System.Diagnostics.Debug.WriteLine("Error: No se encontró el control lblPrecio.");
+                return;
+            }
+
+            int productoId;
+
+            // Validar y convertir el valor seleccionado en el DropDownList
+            if (int.TryParse(ddlProducto.SelectedValue, out productoId) && productoId > 0)
+            {
+                try
+                {
+                    // Depuración del ID seleccionado
+                    System.Diagnostics.Debug.WriteLine($"Producto seleccionado: {productoId}");
+
+                    // Obtener el precio del producto desde la base de datos
+                    decimal precioProducto = negocioProducto.ObtenerPrecioProducto(productoId);
+
+                    // Mostrar el precio en el Label
+                    lblPrecio.Text = precioProducto.ToString("C"); // "C" muestra el formato de moneda local
+                }
+                catch (Exception ex)
+                {
+                    lblPrecio.Text = "Error al obtener el precio";
+                    System.Diagnostics.Debug.WriteLine($"Error al obtener el precio: {ex.Message}, StackTrace: {ex.StackTrace}");
+                   
+                }
+            }
+            else
+            {
+                lblPrecio.Text = "Seleccione un producto válido";
+            }
+        }
         protected void btnConfirmarVenta_Click(object sender, EventArgs e)
         {
-      
+            // Recargar productos en el Repeater
+            int count = rptProductos.Items.Count + 1; // Incrementar el número de productos
+            List<int> productsCount = Enumerable.Range(1, count).ToList();
+
+            rptProductos.DataSource = productsCount;
+            rptProductos.DataBind();
         }
     }
 }
