@@ -32,11 +32,12 @@ Nombre varchar(50)not null,
 IdMarca int not null,
 IdTipo int not null,
 Ganancia float not null,
-Precio float not null
+Precio decimal not null
 constraint fk_producto_Marca foreign key(idmarca) references Marcas(idmarca),
 constraint fk_producto_Tipos foreign key(idtipo) references tipos(idtipo)
 );
-
+ALTER TABLE Productos
+ALTER COLUMN Precio DECIMAL(18, 2);
 go
 create table Clientes(
 IdCliente int primary key identity(1,1),
@@ -162,7 +163,7 @@ INSERT INTO Productos (Codigo, Nombre, IdMarca, IdTipo, Ganancia,Precio) VALUES
 (1009, 'Producto I', 2, 2, 1.2,500),
 (1010, 'Producto J', 3, 3, 1.2,70);
 
-
+select * from Productos
 
 go
 INSERT INTO Provedores (Nombre, Apellido, Email, Telefono, Celular, Direccion, Provincia, Pais)
@@ -211,7 +212,9 @@ INSERT INTO MetodoDePago (Nombre) VALUES
 ('Criptomoneda'),
 ('Gift Card');
 
-
+SELECT IdProducto, Codigo, Nombre, Precio
+FROM Productos
+WHERE IdProducto = 5;
 -- go
 
 -- create table Ventas(
