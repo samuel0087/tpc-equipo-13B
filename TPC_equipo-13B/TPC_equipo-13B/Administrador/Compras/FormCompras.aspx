@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ComercioApp.Master" AutoEventWireup="true" CodeBehind="FormCompras.aspx.cs" Inherits="TPC_equipo_13B.Compras.FormCompras" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-   
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -9,7 +8,7 @@
         <div class="col-6 main">
             <h2>Nueva Compra</h2>
             <asp:ScriptManager ID="ScriptManager1" runat="server" />
-            
+
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                     <asp:Label ID="lblProveedor" runat="server" Text="Proveedor:" AssociatedControlID="ddlProveedor"></asp:Label>
@@ -48,12 +47,29 @@
                         </ItemTemplate>
                         <FooterTemplate>
                             </tbody>
-                        </table>
-                        <asp:Button ID="btnAddProduct" runat="server" CssClass="btn btn-primary" Text="Agregar Producto" OnClick="btnAddProduct_Click" />
-                    </FooterTemplate>
+                            </table>
+                            
+                        </FooterTemplate>
                     </asp:Repeater>
 
-                    <asp:Button ID="btnConfirmarVenta" runat="server" CssClass="btn btn-success" Text="Confirmar Venta" OnClick="btnConfirmarVenta_Click" />
+                    <h3>Total</h3>
+                    <asp:TextBox ID="txtTotal" runat="server" CssClass="form-control" ReadOnly="true" Text="0"></asp:TextBox>
+
+                  <div class="d-flex justify-content-between mt-3">
+    <!-- Botón Confirmar Compra -->
+    <asp:Button ID="btnConfirmarCompra" 
+                runat="server" 
+                CssClass="btn btn-success me-2" 
+                Text="Confirmar Compra" 
+                OnClick="btnConfirmarCompra_Click" />
+                
+    <!-- Botón Cancelar Compra -->
+    <asp:Button ID="btnCancelarCompra" 
+                runat="server" 
+                CssClass="btn btn-danger" 
+                Text="Cancelar Compra" 
+                OnClick="btnCancelarCompra_Click" />
+</div>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

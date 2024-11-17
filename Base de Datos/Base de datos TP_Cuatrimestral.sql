@@ -99,7 +99,9 @@ constraint fk_stock_idproducto foreign key (idproducto) references productos(idp
 
 create table compra(
 idcompra int primary key identity(1,1),
+idproveedor int not null,
 precio money not null
+constraint fk_compra foreign key (idproveedor) references Provedores(idproveedor)
 );
 
 create table compraXproducto(
@@ -107,6 +109,8 @@ idcompraporproducto int primary key identity(1,1),
 idcompra int not null,
 idproducto int not null,
 cantidad bigint not null,
+precioXcantidad money not null,
+precioXunidad money not null
 constraint fk_compraXproducto_idcompra foreign key (idcompra) references compra(idcompra),
 constraint fk_compraXproducto_idproducto foreign key (idproducto) references productos(idproducto)
 );

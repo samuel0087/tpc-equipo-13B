@@ -75,6 +75,7 @@
     <Content Include="Administrador\Compras\MenuCompras.aspx" />
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Administrador\Compras\compraexito.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Administrador\proveedores\Proveedormodificadoconexito.aspx" />
     <Content Include="Administrador\proveedores\modificarproveedores.aspx" />
@@ -165,6 +166,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Compras\compraexito.aspx.cs">
+      <DependentUpon>compraexito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Compras\compraexito.aspx.designer.cs">
+      <DependentUpon>compraexito.aspx</DependentUpon>
     </Compile>
     <Compile Include="Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
