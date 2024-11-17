@@ -14,5 +14,6 @@ namespace Dominio
         public Marca Marca { get; set; }
         public Tipo Tipo { get; set; }
         public Decimal Ganancia { get; set; }
+        public decimal Precio { get; set; }
     }
 }

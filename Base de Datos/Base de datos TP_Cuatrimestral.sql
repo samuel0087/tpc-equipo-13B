@@ -37,7 +37,8 @@ constraint fk_producto_Marca foreign key(idmarca) references Marcas(idmarca),
 constraint fk_producto_Tipos foreign key(idtipo) references tipos(idtipo)
 );
 ALTER TABLE Productos
-ALTER COLUMN Precio DECIMAL(18, 2);
+ALTER COLUMN Precio money;
+
 go
 create table Clientes(
 IdCliente int primary key identity(1,1),

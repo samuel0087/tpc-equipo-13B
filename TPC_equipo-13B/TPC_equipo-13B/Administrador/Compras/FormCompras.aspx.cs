@@ -215,7 +215,37 @@ namespace TPC_equipo_13B.Compras
 
         protected void btnConfirmarCompra_Click(object sender, EventArgs e)
         {
+            // Preparar datos para pasar al resumen
+            string proveedor = ddlProveedor.SelectedItem.Text;
+            string usuario = "NombreUsuarioEjemplo"; // Cambia por lógica para obtener el usuario logueado
 
+            // Crear una lista de productos
+            var productos = new List<object>();
+            foreach (RepeaterItem item in rptProductos.Items)
+            {
+                DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
+                TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
+                Label lblPrecio = (Label)item.FindControl("lblPrecio");
+
+                if (ddlProducto != null && txtCantidad != null && lblPrecio != null)
+                {
+                    productos.Add(new
+                    {
+                        NombreProducto = ddlProducto.SelectedItem.Text,
+                        Cantidad = txtCantidad.Text,
+                        PrecioTotal = lblPrecio.Text
+                    });
+                }
+            }
+
+            // Guardar datos en Session
+            Session["Proveedor"] = proveedor;
+            Session["Usuario"] = usuario;
+            Session["Productos"] = productos;
+            Session["Total"] =txtTotal.Text;
+
+            // Redirigir al resumen
+            Response.Redirect("compraexito.aspx");
         }
         protected void btnCancelarCompra_Click(object sender, EventArgs e)
         {
