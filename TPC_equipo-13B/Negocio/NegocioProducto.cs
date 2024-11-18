@@ -144,19 +144,19 @@ namespace Negocio
 
                 if (accesoDatos.Lector.Read())
                 {
-                    Producto aux = new Producto();
-                    aux.IdProducto = accesoDatos.Lector["IdProducto"] is DBNull ? 0 : (int)accesoDatos.Lector["IdProducto"];
-                    aux.Codigo = accesoDatos.Lector["Codigo"] is DBNull ? 0 : (int)accesoDatos.Lector["Codigo"];
-                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
-                    aux.Ganancia = accesoDatos.Lector["Ganancia"] is DBNull ? 0 : Convert.ToDecimal(accesoDatos.Lector["Ganancia"]);
+                    producto = new Producto();
+                    producto.IdProducto = accesoDatos.Lector["IdProducto"] is DBNull ? 0 : (int)accesoDatos.Lector["IdProducto"];
+                    producto.Codigo = accesoDatos.Lector["Codigo"] is DBNull ? 0 : (int)accesoDatos.Lector["Codigo"];
+                    producto.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+                    producto.Ganancia = accesoDatos.Lector["Ganancia"] is DBNull ? 0 : Convert.ToDecimal(accesoDatos.Lector["Ganancia"]);
 
-                    aux.Marca = new Marca();
-                    aux.Marca.IdMarca = accesoDatos.Lector["IdMarca"] is DBNull ? 0 : (int)accesoDatos.Lector["IdMarca"];
-                    aux.Marca.Nombre = accesoDatos.Lector["MarcaNombre"] is DBNull ? "" : (string)accesoDatos.Lector["MarcaNombre"];
+                    producto.Marca = new Marca();
+                    producto.Marca.IdMarca = accesoDatos.Lector["IdMarca"] is DBNull ? 0 : (int)accesoDatos.Lector["IdMarca"];
+                    producto.Marca.Nombre = accesoDatos.Lector["MarcaNombre"] is DBNull ? "" : (string)accesoDatos.Lector["MarcaNombre"];
 
-                    aux.Tipo = new Tipo();
-                    aux.Tipo.IdTipo = accesoDatos.Lector["IdTipo"] is DBNull ? 0 : (int)accesoDatos.Lector["IdTipo"];
-                    aux.Tipo.Nombre = accesoDatos.Lector["TipoNombre"] is DBNull ? "" : (string)accesoDatos.Lector["TipoNombre"];
+                    producto.Tipo = new Tipo();
+                    producto.Tipo.IdTipo = accesoDatos.Lector["IdTipo"] is DBNull ? 0 : (int)accesoDatos.Lector["IdTipo"];
+                    producto.Tipo.Nombre = accesoDatos.Lector["TipoNombre"] is DBNull ? "" : (string)accesoDatos.Lector["TipoNombre"];
                 }
 
                 accesoDatos.cerrarConexion();

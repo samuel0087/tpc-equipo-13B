@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,38 +12,40 @@ namespace TPC_equipo_13B.Ventas
 {
     public partial class FormVentas : System.Web.UI.Page
     {
+        public Cliente Cliente { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["ErrorCliente"] != null)
+            {
+                Session.Remove("ErrorCliente");
+            }
+
+            if (Session["Cliente"] != null)
+            {
+                Cliente = (Cliente)Session["Cliente"];
+            }
+
             if (!IsPostBack)
             {
-                CargarClientes();
                 CargarProductos();
+                CargarMarcas();
+                List<Producto> ListaVenta = new List<Producto>();
+                Session.Add("ListaVenta", ListaVenta);
+                CargarLista();
             }
         }
 
-        private void CargarClientes()
-        {   NegocioCliente negocioCliente = new NegocioCliente();   
-            try
-            {   
-                DataTable clientes = negocioCliente.ObtenerClientes();
-                ddlCliente.DataSource = clientes;
-                ddlCliente.DataTextField = "Nombre"; // Columna que deseas mostrar
-                ddlCliente.DataValueField = "IdCliente"; // Columna con el valor de cada opción
-                ddlCliente.DataBind();
-            }
-            catch (Exception ex)
-            {
-               // lblMensaje.Text = "Error al cargar clientes: " + ex.Message;
-                //lblMensaje.CssClass = "alert alert-danger";
-            }
-        }
         private void CargarProductos()
-        {   NegocioProducto negocioProducto = new NegocioProducto();
+        {   
+            NegocioProducto negocioProducto = new NegocioProducto();
             try
             {
-                DataTable productos = negocioProducto.ObtenerProductos();
-                rptProductos.DataSource = productos;
-                rptProductos.DataBind();
+                List<Producto> productos = negocioProducto.listar();
+                Session.Add("ListadoProductos", productos);
+                ddlProductos.DataSource = productos;
+                ddlProductos.DataValueField = "IdProducto";
+                ddlProductos.DataTextField = "Nombre";
+                ddlProductos.DataBind();
             }
             catch (Exception ex)
             {
@@ -51,41 +54,31 @@ namespace TPC_equipo_13B.Ventas
             }
         }
 
-        // Evento para cargar productos en el DropDownList del Repeater
-        protected void rptProductos_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {   NegocioProducto negocioProducto1 = new NegocioProducto();   
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        private void CargarMarcas()
+        {
+            NegocioMarca negocio = new NegocioMarca();
+            try
             {
-                // Obtener la lista de productos
-                DataTable productos = negocioProducto1.ObtenerProductos();
+                Session.Add("ListadoMarcas",negocio.listar());
+                ddlMarcas.DataSource = (List<Marca>)Session["ListadoMarcas"];
+                ddlMarcas.DataTextField = "Nombre";
+                ddlMarcas.DataValueField = "IdMarca";
+                ddlMarcas.DataBind();
+            }
+            catch (Exception)
+            {
 
-                // Encontrar el DropDownList en el Repeater
-                DropDownList ddlProducto = (DropDownList)e.Item.FindControl("ddlProducto");
-
-                if (ddlProducto != null)
-                {
-                    // Enlazar la lista de productos al DropDownList
-                    ddlProducto.DataSource = productos;
-                    ddlProducto.DataTextField = "Nombre";      // Mostrar el nombre del producto
-                    ddlProducto.DataValueField = "IdProducto"; // Valor es el ID del producto
-                    ddlProducto.DataBind();
-
-                    // Agregar opción por defecto
-                    ddlProducto.Items.Insert(0, new ListItem("Seleccione un producto", ""));
-                }
+                throw;
             }
         }
-        protected void btnAddProduct_Click(object sender, EventArgs e)
-        {
-            // Código para agregar una nueva fila al Repeater
-            List<int> productsCount = new List<int>(rptProductos.Items.Count + 1);
-            rptProductos.DataSource = productsCount;
-            rptProductos.DataBind();
 
-            // Recargar productos en cada nuevo DropDownList
-           
-           
+        private void CargarLista()
+        {
+            dgvProductos.DataSource = (List<Producto>)Session["ListaVenta"];
+            dgvProductos.DataBind();
         }
+
+
         protected void ddlProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Crear una instancia de la capa de negocio
@@ -134,14 +127,200 @@ namespace TPC_equipo_13B.Ventas
                 lblPrecio.Text = "Seleccione un producto válido";
             }
         }
+
+        protected void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                validarCampo(int.Parse(txtDni.Text));
+                if (lblError.Text != "")
+                {
+                    return;
+                }
+                Cliente = (Cliente)Session["Cliente"];
+
+                lblCliente.Text = Cliente.Nombre + "" + Cliente.Apellido;
+                lblDni.Text = Cliente.DNI.ToString();
+                lblEmail.Text = Cliente.Email;
+            }
+            catch(Exception ex)
+            {
+                Session.Add("ErrorCliente", "Por favor ingrese un numero de documento valido" );
+                return;
+            }
+            
+
+
+        }
+
+        protected void btnNuevoCliente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void validarCampo(int dni)
+        {
+            string error = "";
+            lblError.CssClass = "error";
+            try
+            {
+                //dar una validacion al campo
+                if (dni.ToString() != "" && dni > 0)
+                {
+                    NegocioCliente negocio = new NegocioCliente();
+                    var aux = negocio.getOneByDNI(dni);
+
+                    if (aux.ID == 0)
+                    {
+                        error = "inexistente";
+                    }
+                    else
+                    {
+                        Session.Add("Cliente", aux);
+                    }
+
+
+                   
+
+                }
+                else
+                {
+                    error = "vacio";
+                }
+
+                if (error == "vacio")
+                {
+                    lblError.Text = "Campo vacio, ingrese un dni valido";
+                }
+                else if (error == "inexistente")
+                {
+                    lblError.Text = "El Cliente no esta registrado";
+                }
+                else
+                {
+                    lblError.Text = "";
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        protected void btnCambiarCliente_Click(object sender, EventArgs e)
+        {
+            if (Session["Cliente"] != null)
+            {
+                Session.Remove("Cliente");
+            }
+            Cliente = null;
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            NegocioProducto negocio = new NegocioProducto();
+
+            try
+            {
+                int id = int.Parse(ddlProductos.SelectedItem.Value);
+                Producto aux = negocio.buscarProductoPorId(id);
+                aux.Cantidad = int.Parse(txtCantidad.Text);
+                List<Producto> ListaVenta = (List<Producto>)Session["ListaVenta"];
+
+                if (aux != null)
+                {
+
+                    Producto productoExistente = ListaVenta.Find(x => x.IdProducto == aux.IdProducto);
+                    if (productoExistente != null)
+                    {
+                        productoExistente.Cantidad += aux.Cantidad;
+                    }
+                    else
+                    {
+                        ((List<Producto>)Session["ListaVenta"]).Add(aux);
+                    }
+
+                    dgvProductos.DataSource = ((List<Producto>)Session["ListaVenta"]);
+                    DataBind();
+                }
+
+                Session["ListaVenta"] = ListaVenta;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        protected void ddlMarcas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = int.Parse(ddlMarcas.SelectedItem.Value);
+            ddlProductos.DataSource = ((List<Producto>)Session["ListadoProductos"]).FindAll(x => x.Marca.IdMarca == id);
+            ddlProductos.DataBind();
+        }
+
+        protected void btnBuscarProducto_Click(object sender, EventArgs e)
+        {
+            int aux;
+            if(txtCodigo.Text != "")
+            {
+               aux = int.Parse(txtCodigo.Text);
+            }
+            else
+            {
+                CargarProductos();
+                CargarMarcas();
+                return;
+            }
+
+            try
+            {
+                var resultado = ((List<Producto>)Session["ListadoProductos"]).FindAll(x => x.Codigo == aux);
+
+                ddlProductos.DataSource= (List<Producto>)Session["ListadoProductos"];
+                ddlProductos.DataBind();
+
+                ddlProductos.SelectedValue = resultado[0].IdProducto.ToString();
+                ddlMarcas.SelectedValue = resultado[0].Marca.IdMarca.ToString();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        protected void ddlProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            NegocioProducto negocio = new NegocioProducto();
+            int id =int.Parse(ddlProductos.SelectedItem.Value);
+
+            try
+            {
+                Producto aux = negocio.buscarProductoPorId(id);
+                if (aux != null)
+                {
+                    ddlMarcas.SelectedValue = aux.Marca.IdMarca.ToString();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         protected void btnConfirmarVenta_Click(object sender, EventArgs e)
         {
-            // Recargar productos en el Repeater
-            int count = rptProductos.Items.Count + 1; // Incrementar el número de productos
-            List<int> productsCount = Enumerable.Range(1, count).ToList();
 
-            rptProductos.DataSource = productsCount;
-            rptProductos.DataBind();
         }
     }
 }

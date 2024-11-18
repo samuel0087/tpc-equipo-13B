@@ -158,5 +158,40 @@ namespace Negocio
 
             return tablaClientes;
         }
+
+        public Cliente getOneByDNI(int dni) {
+            Cliente aux = new Cliente();
+            try
+            {
+                accesoDatos.setearConsulta(@"Select IdCliente, Nombre, Apellido, DNI, Celular, Telefono, Email, Direccion, Provincia, Pais From Clientes Where DNI = @DniCliente ");
+                accesoDatos.setearParametro("@DniCliente", dni);
+                accesoDatos.ejecutarLectura();
+
+                if (accesoDatos.Lector.Read())
+                {
+                    aux.ID = accesoDatos.Lector["IdCliente"] is DBNull ? 0 : (int)accesoDatos.Lector["IdCliente"];
+                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+                    aux.Apellido = accesoDatos.Lector["Apellido"] is DBNull ? "" : (string)accesoDatos.Lector["Apellido"];
+                    aux.DNI = accesoDatos.Lector["DNI"] is DBNull ? 0 : (int)accesoDatos.Lector["DNI"];
+                    aux.Celular = accesoDatos.Lector["Celular"] is DBNull ? "" : (string)accesoDatos.Lector["Celular"];
+                    aux.Telefono = accesoDatos.Lector["Telefono"] is DBNull ? "" : (string)accesoDatos.Lector["Telefono"];
+                    aux.Email = accesoDatos.Lector["Email"] is DBNull ? "" : (string)accesoDatos.Lector["Email"];
+                    aux.Direccion = accesoDatos.Lector["Direccion"] is DBNull ? "" : (string)accesoDatos.Lector["Direccion"];
+                    aux.Provincia = accesoDatos.Lector["Provincia"] is DBNull ? "" : (string)accesoDatos.Lector["Provincia"];
+                    aux.Pais = accesoDatos.Lector["Pais"] is DBNull ? "" : (string)accesoDatos.Lector["Pais"];
+                }
+
+                return aux;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally 
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
     }
 }
