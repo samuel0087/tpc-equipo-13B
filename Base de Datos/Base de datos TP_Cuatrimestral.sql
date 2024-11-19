@@ -120,8 +120,8 @@ precioXunidad money not null
 constraint fk_compraXproducto_idcompra foreign key (idcompra) references compra(idcompra),
 constraint fk_compraXproducto_idproducto foreign key (idproducto) references productos(idproducto)
 );
-select * from compra
-
+select * from compraXproducto
+SELECT TOP 1 idcompra FROM compra ORDER BY idcompra DESC
 
 
 INSERT INTO Marcas (Nombre) VALUES

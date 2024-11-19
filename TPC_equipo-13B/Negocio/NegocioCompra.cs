@@ -65,6 +65,42 @@ namespace Negocio
 
             return compras;
         }
+        public int ObtenerUltimaCompraId()
+        {
+            try
+            {   AccesoDatos accesoDatos = new AccesoDatos();
+              
+                string consulta = "SELECT TOP 1 idcompra FROM compra ORDER BY idcompra DESC";
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.ejecutarLectura();
+                int resultado=0;
+
+                if (accesoDatos.Lector.Read())
+                {
+                    resultado = accesoDatos.Lector.GetInt32(0);
+                }
+
+             
+
+                // Verificamos si el resultado es nulo
+                if (resultado > 0)
+                {
+                    // Devolvemos el Id de la última compra convertido a entero
+                    return Convert.ToInt32(resultado);
+                }
+                else
+                {
+                    // Si no hay compras, retornamos 0 o el valor que consideres adecuado
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                Console.WriteLine("Error al obtener la última compra: " + ex.Message);
+                return 0; // O puedes manejar el error de otra manera
+            }
+        }
 
         /*// Método para obtener una compra por su ID
         public Compra ObtenerCompraPorId(int idCompra)

@@ -11,36 +11,55 @@ namespace Negocio
 {
     public class NegocioProductoXcompra
     {
-        // Método para guardar un registro en la tabla compraXproducto
-        
-            public void InsertarCompraConProductos(CompraXproducto compraProducto)
+        public void InsertarComprasConProductos(List<CompraXproducto> listaCompraProductos)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
             {
-                AccesoDatos datos = new AccesoDatos();
-                try
-                {
-                    // Configurar la consulta SQL
-                    string query = "INSERT INTO CompraProductos (IdCompra, IdProducto, Cantidad, PrecioXcantidad) " +
-                                   "VALUES (@IdCompra, @IdProducto, @Cantidad, @PrecioXcantidad)";
-                    datos.setearConsulta(query);
+              
+                string query = "INSERT INTO compraXproducto (IdCompra, IdProducto, Cantidad, PrecioXcantidad, PrecioXunidad) " +
+                               "VALUES (@IdCompra, @IdProducto, @Cantidad, @PrecioXcantidad, @PrecioXunidad)";
 
-                    // Configurar los parámetros
-                    datos.setearParametro("@IdCompra", compraProducto.IdCompra);
-                    datos.setearParametro("@IdProducto", compraProducto.IdProducto);
-                    datos.setearParametro("@Cantidad", compraProducto.Cantidad);
-                    datos.setearParametro("@PrecioXcantidad", compraProducto.precioXcantidad);
+                
+                datos.setearConsulta(query);
 
-                    // Ejecutar la acción
-                    datos.ejecutarAccion();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error al insertar CompraXproducto: " + ex.Message);
-                }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
+               
+               
+                    try
+                    {
+                       
+                        foreach (var compraProducto in listaCompraProductos)
+                        {
+                           
+                            datos.setearParametro("@IdCompra", compraProducto.IdCompra);
+                            datos.setearParametro("@IdProducto", compraProducto.IdProducto);
+                            datos.setearParametro("@Cantidad", compraProducto.Cantidad);
+                            datos.setearParametro("@PrecioXcantidad", compraProducto.precioXcantidad);
+                            datos.setearParametro("@PrecioXunidad", compraProducto.PrecioXunidad);
+
+                            
+                            datos.ejecutarAccion();
+                        }
+
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                      
+                        throw new Exception("Error al insertar las compras con productos: " + ex.Message);
+                    }
+                
             }
-    }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar CompraXproducto: " + ex.Message);
+            }
+            finally
+            {
+                
+                datos.cerrarConexion();
+            }
+        }
+    }      
 }
 

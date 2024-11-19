@@ -238,6 +238,7 @@ namespace TPC_equipo_13B.Compras
                     });
                 }
             }
+            //proceso para guardar compra en la base de datos
 
             Compra compra = new Compra();
 
@@ -260,6 +261,42 @@ namespace TPC_equipo_13B.Compras
 
             NegocioCompra negocioCompra = new NegocioCompra();
             negocioCompra.InsertarCompra(compra);
+
+            //lo que sigue es el proceso para guardar los registros en la base de datos de compraXproducto
+
+            CompraXproducto compraXproducto = new CompraXproducto();
+            NegocioProductoXcompra negocioproductoxcompra = new NegocioProductoXcompra();
+            List<CompraXproducto> listaCompraXProducto = new List<CompraXproducto>();
+
+            foreach (RepeaterItem item in rptProductos.Items)
+            {
+                DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
+                TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
+                Label lblPrecio = (Label)item.FindControl("lblPrecio");
+
+                if (ddlProducto.SelectedValue != "" && !string.IsNullOrEmpty(txtCantidad.Text))
+                {
+                    compraXproducto.IdCompra = negocioCompra.ObtenerUltimaCompraId();
+                    compraXproducto.IdProducto = Convert.ToInt32(ddlProducto.SelectedValue);
+                    compraXproducto.Cantidad = Convert.ToInt32(txtCantidad.Text);
+
+                    string textoprecioXunidad = lblPrecio.Text.Replace("$", "").Trim();
+                    decimal precioXunidad;
+
+                    if (decimal.TryParse(textoprecioXunidad, out precioXunidad))
+                    {
+                        compraXproducto.PrecioXunidad = precioXunidad;
+                    }
+                    
+                    compraXproducto.precioXcantidad = compraXproducto.PrecioXunidad * compraXproducto.Cantidad;
+
+                    listaCompraXProducto.Add(compraXproducto);
+                }
+            }
+
+            negocioproductoxcompra.InsertarComprasConProductos(listaCompraXProducto);
+
+
 
             // Guardar datos en Session
             Session["Proveedor"] = proveedor;
