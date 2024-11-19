@@ -8,7 +8,7 @@
 
             <div class="menu">
                 <a href="<%: ResolveUrl("~/Administrador/Compras/FormCompras.aspx") %>">Nueva compra</a>
-                <a href="<%: ResolveUrl("~/Administrador/Compras/ListadoCompras.aspx") %>">Historico de Compras</a>
+                <a href="<%: ResolveUrl("~/Administrador/Compras/HistorialCompras.aspx") %>">Historico de Compras</a>
 
             </div>
         </div>

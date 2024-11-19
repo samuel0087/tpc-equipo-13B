@@ -97,6 +97,7 @@ idproducto int not null,
 cantidad bigint not null
 constraint fk_stock_idproducto foreign key (idproducto) references productos(idproducto)
 );
+select*from stock
 
 create table compra(
 idcompra int primary key identity(1,1),
@@ -106,10 +107,6 @@ precio money not null
 constraint fk_compra foreign key (idproveedor) references Provedores(idproveedor)
 );
 select*from compra
-INSERT INTO Compra (IdProveedor,Precio)
-VALUES (14,88)
-ALTER TABLE Compra
-ADD fecha DATE ;
 create table compraXproducto(
 idcompraporproducto int primary key identity(1,1),
 idcompra int not null,
@@ -224,6 +221,19 @@ INSERT INTO MetodoDePago (Nombre) VALUES
 ('Bitcoin'),
 ('Criptomoneda'),
 ('Gift Card');
+
+INSERT INTO stock (idproducto, cantidad)
+VALUES
+(3, 50), 
+(4, 30), 
+(5, 25),  
+(6, 40),  
+(7, 15),  
+(8, 60),  
+(9, 20),  
+(10, 10), 
+(11, 35), 
+(12, 45); 
 
 SELECT IdProducto, Codigo, Nombre, Precio
 FROM Productos

@@ -2,6 +2,7 @@
 using Dominio;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -67,8 +68,9 @@ namespace Negocio
         }
         public int ObtenerUltimaCompraId()
         {
+            AccesoDatos accesoDatos = new AccesoDatos();
             try
-            {   AccesoDatos accesoDatos = new AccesoDatos();
+            {   
               
                 string consulta = "SELECT TOP 1 idcompra FROM compra ORDER BY idcompra DESC";
                 accesoDatos.setearConsulta(consulta);
@@ -100,7 +102,28 @@ namespace Negocio
                 Console.WriteLine("Error al obtener la última compra: " + ex.Message);
                 return 0; // O puedes manejar el error de otra manera
             }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
         }
+        public DataTable CargarCompras()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            
+                string query = "SELECT idcompra, idproveedor, fecha, precio AS PrecioTotal FROM compra";
+                datos.setearConsulta(query);
+                datos.ejecutarLectura();
+
+                DataTable dt = new DataTable();
+                dt.Load(datos.Lector);
+
+              datos.cerrarConexion();
+
+              return dt;
+            
+        }
+
 
         /*// Método para obtener una compra por su ID
         public Compra ObtenerCompraPorId(int idCompra)

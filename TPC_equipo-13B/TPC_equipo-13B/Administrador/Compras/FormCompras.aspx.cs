@@ -212,101 +212,108 @@ namespace TPC_equipo_13B.Compras
             // Actualizar el TextBox de total
             txtTotal.Text = total.ToString("C");
         }
-
+        //REVISAR
         protected void btnConfirmarCompra_Click(object sender, EventArgs e)
         {
-            // Preparar datos para pasar al resumen
-            string proveedor = ddlProveedor.SelectedItem.Text;
-            string usuario = Session["NombreUsuario"] as string ?? "Usuario no autenticado";
-            DateTime fechaCompra = DateTime.Now;
-
-            // Crear una lista de productos
-            var productos = new List<object>();
-            foreach (RepeaterItem item in rptProductos.Items)
+            try
             {
-                DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
-                TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
-                Label lblPrecio = (Label)item.FindControl("lblPrecio");
+                // Preparar datos para pasar al resumen
+                string proveedor = ddlProveedor.SelectedItem.Text;
+                string usuario = Session["NombreUsuario"] as string ?? "Usuario no autenticado";
+                DateTime fechaCompra = DateTime.Now;
 
-                if (ddlProducto != null && txtCantidad != null && lblPrecio != null)
+                // Crear una lista de productos
+                var productos = new List<object>();
+                foreach (RepeaterItem item in rptProductos.Items)
                 {
-                    productos.Add(new
+                    DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
+                    TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
+                    Label lblPrecio = (Label)item.FindControl("lblPrecio");
+
+                    if (ddlProducto != null && txtCantidad != null && lblPrecio != null)
                     {
-                        NombreProducto = ddlProducto.SelectedItem.Text,
-                        Cantidad = txtCantidad.Text,
-                        PrecioTotal = lblPrecio.Text
-                    });
-                }
-            }
-            //proceso para guardar compra en la base de datos
-
-            Compra compra = new Compra();
-
-            compra.IdProveedor = Convert.ToInt32(ddlProveedor.SelectedValue);
-            compra.fecha=DateTime.Now;
-            string textoTotal = txtTotal.Text.Replace("$", "").Trim();
-            decimal precioTotal;
-
-            if (decimal.TryParse(textoTotal, out precioTotal))
-            {
-                compra.Precio = precioTotal;
-            }
-            else
-            {
-                lblError.Text = "El total ingresado no es válido.";
-                lblError.Visible = true;
-                return;
-            }
-
-
-            NegocioCompra negocioCompra = new NegocioCompra();
-            negocioCompra.InsertarCompra(compra);
-
-            //lo que sigue es el proceso para guardar los registros en la base de datos de compraXproducto
-
-            CompraXproducto compraXproducto = new CompraXproducto();
-            NegocioProductoXcompra negocioproductoxcompra = new NegocioProductoXcompra();
-            List<CompraXproducto> listaCompraXProducto = new List<CompraXproducto>();
-
-            foreach (RepeaterItem item in rptProductos.Items)
-            {
-                DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
-                TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
-                Label lblPrecio = (Label)item.FindControl("lblPrecio");
-
-                if (ddlProducto.SelectedValue != "" && !string.IsNullOrEmpty(txtCantidad.Text))
-                {
-                    compraXproducto.IdCompra = negocioCompra.ObtenerUltimaCompraId();
-                    compraXproducto.IdProducto = Convert.ToInt32(ddlProducto.SelectedValue);
-                    compraXproducto.Cantidad = Convert.ToInt32(txtCantidad.Text);
-
-                    string textoprecioXunidad = lblPrecio.Text.Replace("$", "").Trim();
-                    decimal precioXunidad;
-
-                    if (decimal.TryParse(textoprecioXunidad, out precioXunidad))
-                    {
-                        compraXproducto.PrecioXunidad = precioXunidad;
+                        productos.Add(new
+                        {
+                            NombreProducto = ddlProducto.SelectedItem.Text,
+                            Cantidad = txtCantidad.Text,
+                            PrecioTotal = lblPrecio.Text
+                        });
                     }
-                    
-                    compraXproducto.precioXcantidad = compraXproducto.PrecioXunidad * compraXproducto.Cantidad;
-
-                    listaCompraXProducto.Add(compraXproducto);
                 }
+
+                // Proceso para guardar compra en la base de datos
+                Compra compra = new Compra
+                {
+                    IdProveedor = Convert.ToInt32(ddlProveedor.SelectedValue),
+                    fecha = DateTime.Now
+                };
+
+                string textoTotal = txtTotal.Text.Replace("$", "").Trim();
+                if (decimal.TryParse(textoTotal, out decimal precioTotal))
+                {
+                    compra.Precio = precioTotal;
+                }
+                else
+                {
+                    lblError.Text = "El total ingresado no es válido.";
+                    lblError.Visible = true;
+                    return;
+                }
+
+                NegocioCompra negocioCompra = new NegocioCompra();
+                negocioCompra.InsertarCompra(compra);
+
+                // Proceso para guardar los registros en la base de datos de compraXproducto
+                NegocioProductoXcompra negocioproductoxcompra = new NegocioProductoXcompra();
+                List<CompraXproducto> listaCompraXProducto = new List<CompraXproducto>();
+
+                foreach (RepeaterItem item in rptProductos.Items)
+                {
+                    DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
+                    TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
+                    Label lblPrecio = (Label)item.FindControl("lblPrecio");
+
+                    if (!string.IsNullOrEmpty(ddlProducto.SelectedValue) && !string.IsNullOrEmpty(txtCantidad.Text))
+                    {
+                        // Crear una nueva instancia de CompraXproducto para cada producto
+                        CompraXproducto compraXproducto = new CompraXproducto
+                        {
+                            IdCompra = negocioCompra.ObtenerUltimaCompraId(),
+                            IdProducto = Convert.ToInt32(ddlProducto.SelectedValue),
+                            Cantidad = Convert.ToInt32(txtCantidad.Text)
+                        };
+
+                        string textoprecioXunidad = lblPrecio.Text.Replace("$", "").Trim();
+                        if (decimal.TryParse(textoprecioXunidad, out decimal precioXunidad))
+                        {
+                            compraXproducto.PrecioXunidad = precioXunidad;
+                        }
+
+                        compraXproducto.precioXcantidad = compraXproducto.PrecioXunidad * compraXproducto.Cantidad;
+
+                        listaCompraXProducto.Add(compraXproducto);
+                    }
+                }
+
+                negocioproductoxcompra.InsertarComprasConProductos(listaCompraXProducto);
+
+                // Guardar datos en Session
+                Session["Proveedor"] = proveedor;
+                Session["Usuario"] = usuario;
+                Session["Productos"] = productos;
+                Session["Total"] = txtTotal.Text;
+
+                // Redirigir al resumen
+                Response.Redirect("compraexito.aspx", false);
+                Context.ApplicationInstance.CompleteRequest(); // Finaliza la solicitud de manera segura
             }
-
-            negocioproductoxcompra.InsertarComprasConProductos(listaCompraXProducto);
-
-
-
-            // Guardar datos en Session
-            Session["Proveedor"] = proveedor;
-            Session["Usuario"] = usuario;
-            Session["Productos"] = productos;
-            Session["Total"] =txtTotal.Text;
-
-            // Redirigir al resumen
-            Response.Redirect("compraexito.aspx");
+            catch (Exception ex)
+            {
+                lblError.Text = "Ocurrió un error: " + ex.Message;
+                lblError.Visible = true;
+            }
         }
+
         /*protected void btnConfirmarCompra_Click(object sender, EventArgs e)
         {
             try

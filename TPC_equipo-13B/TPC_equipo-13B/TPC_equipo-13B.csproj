@@ -76,6 +76,7 @@
     <Content Include="css\styles.css" />
     <Content Include="Default.aspx" />
     <Content Include="Administrador\Compras\compraexito.aspx" />
+    <Content Include="Administrador\Compras\HistorialCompras.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Administrador\proveedores\Proveedormodificadoconexito.aspx" />
     <Content Include="Administrador\proveedores\modificarproveedores.aspx" />
@@ -173,6 +174,13 @@
     </Compile>
     <Compile Include="Administrador\Compras\compraexito.aspx.designer.cs">
       <DependentUpon>compraexito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Compras\HistorialCompras.aspx.cs">
+      <DependentUpon>HistorialCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Compras\HistorialCompras.aspx.designer.cs">
+      <DependentUpon>HistorialCompras.aspx</DependentUpon>
     </Compile>
     <Compile Include="Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
