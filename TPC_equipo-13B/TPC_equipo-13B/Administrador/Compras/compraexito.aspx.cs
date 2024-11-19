@@ -18,6 +18,8 @@ namespace TPC_equipo_13B
                 lblProveedor.Text = Session["Proveedor"] as string ?? "Proveedor no especificado";
                 lblUsuario.Text = Session["Usuario"] as string ?? "Usuario no especificado";
 
+                lblFechaCompra.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
                 // Cargar los productos
                 var productos = Session["Productos"] as List<dynamic>;
                 if (productos != null && productos.Count > 0)

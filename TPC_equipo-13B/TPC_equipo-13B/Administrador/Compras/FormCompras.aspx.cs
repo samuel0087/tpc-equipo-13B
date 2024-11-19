@@ -217,7 +217,8 @@ namespace TPC_equipo_13B.Compras
         {
             // Preparar datos para pasar al resumen
             string proveedor = ddlProveedor.SelectedItem.Text;
-            string usuario = "NombreUsuarioEjemplo"; // Cambia por lógica para obtener el usuario logueado
+            string usuario = Session["NombreUsuario"] as string ?? "Usuario no autenticado";
+            DateTime fechaCompra = DateTime.Now;
 
             // Crear una lista de productos
             var productos = new List<object>();
@@ -238,6 +239,28 @@ namespace TPC_equipo_13B.Compras
                 }
             }
 
+            Compra compra = new Compra();
+
+            compra.IdProveedor = Convert.ToInt32(ddlProveedor.SelectedValue);
+            compra.fecha=DateTime.Now;
+            string textoTotal = txtTotal.Text.Replace("$", "").Trim();
+            decimal precioTotal;
+
+            if (decimal.TryParse(textoTotal, out precioTotal))
+            {
+                compra.Precio = precioTotal;
+            }
+            else
+            {
+                lblError.Text = "El total ingresado no es válido.";
+                lblError.Visible = true;
+                return;
+            }
+
+
+            NegocioCompra negocioCompra = new NegocioCompra();
+            negocioCompra.InsertarCompra(compra);
+
             // Guardar datos en Session
             Session["Proveedor"] = proveedor;
             Session["Usuario"] = usuario;
@@ -247,6 +270,74 @@ namespace TPC_equipo_13B.Compras
             // Redirigir al resumen
             Response.Redirect("compraexito.aspx");
         }
+        /*protected void btnConfirmarCompra_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Preparar datos para pasar al resumen
+                string proveedor = ddlProveedor.SelectedItem.Text;
+                string usuario = Session["NombreUsuario"] as string ?? "Usuario no autenticado";
+                DateTime fechaCompra = DateTime.Now;
+
+                // Crear la compra
+                Compra compra = new Compra();
+                
+                    compra.IdProveedor = Convert.ToInt32(ddlProveedor.SelectedValue);
+                    compra.FechaCompra = fechaCompra;
+                    compra.CostoTotal = Convert.ToDecimal(txtTotal.Text);
+                    compra.Proveedor = new Proveedor { IdProveedor = Convert.ToInt32(ddlProveedor.SelectedValue) };
+
+                NegocioCompra negocioCompra = new NegocioCompra();
+                int idCompraGenerada = negocioCompra.InsertarCompra(compra);
+
+                // Crear una lista de productos de la compra
+               var productos = new List<CompraXproducto>();
+                foreach (RepeaterItem item in rptProductos.Items)
+                {
+                    DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
+                    TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
+                    Label lblPrecio = (Label)item.FindControl("lblPrecio");
+
+                    if (ddlProducto != null && txtCantidad != null && lblPrecio != null)
+                    {
+                        var producto = new CompraXproducto
+                        {
+                            IdProducto = Convert.ToInt32(ddlProducto.SelectedValue),
+                            Cantidad = Convert.ToInt32(txtCantidad.Text),
+                            precioXcantidad = Convert.ToDecimal(lblPrecio.Text),
+                            Producto = new Producto { IdProducto = Convert.ToInt32(ddlProducto.SelectedValue) }
+                        };
+                        productos.Add(producto);
+                    }
+                }
+
+                // Guardar datos en Session
+                Session["Proveedor"] = proveedor;
+                Session["Usuario"] = usuario;
+                Session["Productos"] = productos;
+                Session["Total"] = txtTotal.Text;
+
+              
+
+                NegocioProductoXcompra negocioCompraProducto = new NegocioProductoXcompra();
+                foreach (var producto in productos)
+                {
+                    producto.IdCompra = idCompraGenerada; // Asociar la compra a cada producto
+                    negocioCompraProducto.InsertarCompraConProductos(producto); // Insertar el producto
+                }
+
+                // Redirigir al resumen
+                
+                Response.Redirect("compraexito.aspx");
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores, puedes agregar un mensaje de error o redirigir a una página de error
+                Console.WriteLine("Error: " + ex.Message);
+                // Mostrar un mensaje en la UI si es necesario
+                lblError.Text = "Hubo un error al procesar la compra.";
+            }
+        }*/
         protected void btnCancelarCompra_Click(object sender, EventArgs e)
         {
            

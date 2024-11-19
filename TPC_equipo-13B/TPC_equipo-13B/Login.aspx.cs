@@ -25,7 +25,7 @@ namespace TPC_equipo_13B
             {
                 usuario.Nombre = txtNombreUsuario.Text;
                 usuario.Contraseña = txtContraseña.Text;
-
+                Session["NombreUsuario"]= usuario.Nombre;
                 if (negocio.loguear(usuario))
                 {
                     Session.Add("Usuario", usuario);

@@ -33,6 +33,15 @@ namespace TPC_equipo_13B
         protected global::System.Web.UI.WebControls.Label lblUsuario;
 
         /// <summary>
+        /// Control lblFechaCompra.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFechaCompra;
+
+        /// <summary>
         /// Control rptProductos.
         /// </summary>
         /// <remarks>

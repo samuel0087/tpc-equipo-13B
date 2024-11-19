@@ -18,7 +18,10 @@
             <strong>Usuario:</strong> 
             <asp:Label ID="lblUsuario" runat="server" CssClass="form-control-plaintext"></asp:Label>
         </div>
-
+            <div class="mb-3">
+            <strong>Fecha de Compra:</strong>
+            <asp:Label ID="lblFechaCompra" runat="server" CssClass="form-control-plaintext"></asp:Label>
+        </div>
         <!-- Tabla de productos -->
         <h4>Productos</h4>
         <table class="table">

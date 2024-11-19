@@ -54,7 +54,7 @@
 
                     <h3>Total</h3>
                     <asp:TextBox ID="txtTotal" runat="server" CssClass="form-control" ReadOnly="true" Text="0"></asp:TextBox>
-
+                    <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="false"></asp:Label>
                   <div class="d-flex justify-content-between mt-3">
     <!-- Botón Confirmar Compra -->
     <asp:Button ID="btnConfirmarCompra" 

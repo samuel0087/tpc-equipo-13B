@@ -101,10 +101,15 @@ constraint fk_stock_idproducto foreign key (idproducto) references productos(idp
 create table compra(
 idcompra int primary key identity(1,1),
 idproveedor int not null,
+fecha date not null,
 precio money not null
 constraint fk_compra foreign key (idproveedor) references Provedores(idproveedor)
 );
-
+select*from compra
+INSERT INTO Compra (IdProveedor,Precio)
+VALUES (14,88)
+ALTER TABLE Compra
+ADD fecha DATE ;
 create table compraXproducto(
 idcompraporproducto int primary key identity(1,1),
 idcompra int not null,
@@ -115,6 +120,9 @@ precioXunidad money not null
 constraint fk_compraXproducto_idcompra foreign key (idcompra) references compra(idcompra),
 constraint fk_compraXproducto_idproducto foreign key (idproducto) references productos(idproducto)
 );
+select * from compra
+
+
 
 INSERT INTO Marcas (Nombre) VALUES
 ('Marca A'),
