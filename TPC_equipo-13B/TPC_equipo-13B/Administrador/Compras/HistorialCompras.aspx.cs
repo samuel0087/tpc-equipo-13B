@@ -26,7 +26,7 @@ namespace TPC_equipo_13B
 
        
 
-        protected void gvCompras_RowCommand(object sender, GridViewCommandEventArgs e)
+        /*protected void gvCompras_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "VerDetalle")
             {   NegocioProductoXcompra negocioProductoXcompra= new NegocioProductoXcompra();
@@ -37,8 +37,8 @@ namespace TPC_equipo_13B
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$('#detalleModal').modal('show');", true);
             }
         }
-        
-        /*protected void gvCompras_RowCommand(object sender, GridViewCommandEventArgs e)
+        */
+        protected void gvCompras_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "VerDetalle")
             {
@@ -55,7 +55,7 @@ namespace TPC_equipo_13B
                 // Mostrar el modal con los detalles de la compra
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "showModal();", true);
             }
-        }*/
+        }
         protected void btnVolver_Click(object sender, EventArgs e)
         {
             Response.Redirect("MenuCompras.aspx");

@@ -20,27 +20,33 @@ namespace Negocio
                 string query = "INSERT INTO compraXproducto (IdCompra, IdProducto, Cantidad, PrecioXcantidad, PrecioXunidad) " +
                                "VALUES (@IdCompra, @IdProducto, @Cantidad, @PrecioXcantidad, @PrecioXunidad)";
 
-                datos.setearConsulta(query);
+                
 
                 foreach (var compraProducto in listaCompraProductos)
                 {
+                    // Limpiar los parámetros antes de cada iteración
+                    datos.limpiarParametros();
+                    datos.setearConsulta(query);
+                    // Establecer los nuevos valores de los parámetros
                     datos.setearParametro("@IdCompra", compraProducto.IdCompra);
                     datos.setearParametro("@IdProducto", compraProducto.IdProducto);
                     datos.setearParametro("@Cantidad", compraProducto.Cantidad);
                     datos.setearParametro("@PrecioXcantidad", compraProducto.precioXcantidad);
                     datos.setearParametro("@PrecioXunidad", compraProducto.PrecioXunidad);
 
+                    // Ejecutar la acción
                     datos.ejecutarAccion();
+                    datos.cerrarConexion();
                 }
             }
             catch (Exception ex)
             {
-                // Captura el error si ocurre
+                // Capturar errores específicos del proceso y re-lanzarlos
                 throw new Exception("Error al insertar las compras con productos: " + ex.Message);
             }
             finally
             {
-                // Asegurarse de cerrar la conexión solo después de insertar todos los productos
+                // Asegurarse de cerrar la conexión sin importar lo que suceda
                 datos.cerrarConexion();
             }
         }

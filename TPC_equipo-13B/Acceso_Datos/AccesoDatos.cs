@@ -73,12 +73,24 @@ namespace Acceso_Datos
 
         public void cerrarConexion()
         {
-            if (lector != null)
+            try
             {
-                lector.Close();
+                if (lector != null && !lector.IsClosed)
+                {
+                    lector.Close();
+                }
+                if (conexion != null && conexion.State != ConnectionState.Closed)
+                {
+                    conexion.Close();
+                }
             }
-            conexion.Close();
+            catch (Exception ex)
+            {
+                // Manejar excepciones, si es necesario
+                throw new Exception("Error al cerrar la conexión: " + ex.Message);
+            }
         }
+
         public object ejecutarAccionEscalar()
         {
             comando.Connection = conexion;
@@ -95,6 +107,10 @@ namespace Acceso_Datos
             {
                 conexion.Close();
             }
+        }
+        public void limpiarParametros()
+        {
+            comando.Parameters.Clear();
         }
     }
 }

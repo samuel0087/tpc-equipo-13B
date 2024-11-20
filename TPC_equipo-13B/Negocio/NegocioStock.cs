@@ -34,28 +34,30 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void ActualizarStock(Stock stock)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            { 
-                    string consultaActualizar = "UPDATE stock SET cantidad = cantidad + @Cantidad WHERE idproducto = @IdProducto";
-                    datos.setearConsulta(consultaActualizar);
-                    datos.setearParametro("@IdProducto", stock.IdProducto);
-                    datos.setearParametro("@Cantidad", stock.Cantidad);
-                
-               
-                datos.ejecutarAccion();
-            }
-            catch (Exception ex)
+      
+            public void ActualizarStock(int idProducto, int cantidadComprada)
             {
-                throw new Exception("Error al insertar o actualizar en la tabla stock: " + ex.Message);
+                AccesoDatos datos = new AccesoDatos();
+                try
+                {
+                    // Actualizar el stock sumando la cantidad comprada
+                    string query = "UPDATE Stock SET Cantidad = Cantidad + @Cantidad WHERE IdProducto = @IdProducto";
+                    datos.setearConsulta(query);
+                    datos.setearParametro("@Cantidad", cantidadComprada);
+                    datos.setearParametro("@IdProducto", idProducto);
+
+                    datos.ejecutarAccion();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al actualizar el stock: " + ex.Message);
+                }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
             }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
+        
         //el siguiente metodo abria que modificarlo para que funcione correctamente 
         /*public void InsertarOActualizarStock(Stock stock)
         {

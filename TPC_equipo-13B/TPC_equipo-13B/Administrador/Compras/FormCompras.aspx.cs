@@ -221,7 +221,7 @@ namespace TPC_equipo_13B.Compras
                 string proveedor = ddlProveedor.SelectedItem.Text;
                 string usuario = Session["NombreUsuario"] as string ?? "Usuario no autenticado";
                 DateTime fechaCompra = DateTime.Now;
-
+                
                 // Crear una lista de productos
                 var productos = new List<object>();
                 foreach (RepeaterItem item in rptProductos.Items)
@@ -292,6 +292,11 @@ namespace TPC_equipo_13B.Compras
                         compraXproducto.precioXcantidad = compraXproducto.PrecioXunidad * compraXproducto.Cantidad;
 
                         listaCompraXProducto.Add(compraXproducto);
+
+                        NegocioStock negocioStock = new NegocioStock();
+                        negocioStock.ActualizarStock(compraXproducto.IdProducto, compraXproducto.Cantidad);
+
+
                     }
                 }
 
