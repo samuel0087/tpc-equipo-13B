@@ -70,6 +70,7 @@ namespace TPC_equipo_13B.Ventas
         protected void btnConfirmarVenta_Click(object sender, EventArgs e)
         {
             Venta venta = (Venta)Session["Venta"];
+            venta.MetodoDePago = new MetodoDePago();
             venta.MetodoDePago.IdMetodoDePago = int.Parse(ddlMetodos.SelectedValue);
 
             NegocioVenta negocioVenta = new NegocioVenta();
