@@ -129,14 +129,19 @@ namespace TPC_equipo_13B
 
                 Producto.Tipo = new Tipo();
                 NegocioProducto negocioProducto = new NegocioProducto();
+                NegocioStock negocioStock = new NegocioStock();
 
                 Producto.Codigo = int.Parse(txtCodigo.Text);
                 Producto.Nombre = txtNombreProducto.Text;
                 Producto.Tipo.IdTipo = int.Parse(ddlTipo.SelectedValue);
                 Producto.Marca.IdMarca = int.Parse(ddlMarca.SelectedValue);
                 Producto.Ganancia = Decimal.Parse(txtGanancia.Text);
+                Producto.Cantidad = 0;
 
                 negocioProducto.AgregarProducto(Producto);
+
+                Producto = negocioProducto.getOneByCodigo(Producto.Codigo);
+                negocioStock.InsertarStock(Producto);
 
                 Response.Redirect("VerProductos.aspx");
 

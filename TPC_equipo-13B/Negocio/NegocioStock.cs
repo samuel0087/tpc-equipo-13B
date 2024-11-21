@@ -14,7 +14,7 @@ namespace Negocio
     public class NegocioStock
     {
         
-        public void InsertarStock(Stock stock )
+        public void InsertarStock(Producto producto )
         {   
             AccesoDatos datos = new AccesoDatos();
             try
@@ -22,8 +22,8 @@ namespace Negocio
                 string query = "INSERT INTO stock (idproducto, cantidad) VALUES (@IdProducto, @Cantidad)";
                 datos.setearConsulta(query);
                
-                datos.setearParametro("@IdProducto",stock.IdProducto);
-                datos.setearParametro("@Cantidad",stock.Cantidad);
+                datos.setearParametro("@IdProducto",producto.IdProducto);
+                datos.setearParametro("@Cantidad",producto.Cantidad);
 
                 datos.ejecutarAccion();
             }

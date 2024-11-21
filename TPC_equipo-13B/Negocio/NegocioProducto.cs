@@ -111,6 +111,52 @@ namespace Negocio
             }
         }
 
+        public Producto getOneByCodigo(int Codigo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            Producto aux = new Producto();
+
+            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
+                                Left join Marcas M On M.IdMarca = P.IdMarca
+                                Left Join Tipos T On T.IdTipo = P.IdTipo
+                                Where P.Codigo = @Codigo";
+            try
+            {
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@Codigo", Codigo);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+
+                    aux.IdProducto = datos.Lector["IdProducto"] is DBNull ? 0 : (int)datos.Lector["IdProducto"];
+                    aux.Codigo = datos.Lector["Codigo"] is DBNull ? 0 : (int)datos.Lector["Codigo"];
+                    aux.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"];
+                    aux.Ganancia = datos.Lector["Ganancia"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["Ganancia"]);
+
+                    aux.Marca = new Marca();
+                    aux.Marca.IdMarca = datos.Lector["IdMarca"] is DBNull ? 0 : (int)datos.Lector["IdMarca"];
+                    aux.Marca.Nombre = datos.Lector["MarcaNombre"] is DBNull ? "" : (string)datos.Lector["MarcaNombre"];
+
+                    aux.Tipo = new Tipo();
+                    aux.Tipo.IdTipo = datos.Lector["IdTipo"] is DBNull ? 0 : (int)datos.Lector["IdTipo"];
+                    aux.Tipo.Nombre = datos.Lector["TipoNombre"] is DBNull ? "" : (string)datos.Lector["TipoNombre"];
+                }
+
+                return aux;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener usuarios: " + ex.Message);
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
         // Agregar producto
         public void AgregarProducto(Producto producto)
         {
