@@ -107,13 +107,18 @@
 
                     <div class="row">
                         <div class="col">
-                            <asp:GridView runat="server" ID="dgvProductos" DataKeyNames="IdProducto"  CssClass="table" AutoGenerateColumns="false">
+                            <asp:GridView runat="server" ID="dgvProductos" DataKeyNames="IdProducto"  CssClass="table" AutoGenerateColumns="false" OnRowDataBound="dgvProductos_RowDataBound">
                                 <Columns>
                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                                     <asp:BoundField DataField="Marca.Nombre" HeaderText="Marca" />
                                     <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                                    <asp:BoundField DataField="PecioFinal" HeaderText="Precio Unitario" />
-                                    <asp:CommandField ShowSelectButton="true" SelectText="Ver" ControlStyle-CssClass="btn btn-primary" HeaderText="Detalles" />
+                                    <asp:BoundField DataField="PecioFinal" HeaderText="Precio Unitario"  DataFormatString="{0:F2}"/>
+                                    <asp:TemplateField  HeaderText="Precio Final" >
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblPrecioFinal" runat="server" text=""/>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    
                                 </Columns>
                             </asp:GridView>
                         </div>

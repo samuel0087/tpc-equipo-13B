@@ -23,12 +23,21 @@ namespace TPC_equipo_13B.Ventas
             if (Session["Cliente"] != null)
             {
                 Cliente = (Cliente)Session["Cliente"];
+                lblCliente.Text = Cliente.Nombre + "" + Cliente.Apellido;
+                lblDni.Text = Cliente.DNI.ToString();
+                lblEmail.Text = Cliente.Email;
+            }
+            else
+            {
+                Session.Remove("Cliente");
+                Cliente=null;
             }
 
-            txtCantidad.Text = "1";
+            
 
             if (!IsPostBack)
             {
+                txtCantidad.Text = "1";
                 CargarProductos();
                 CargarMarcas();
                 List<Producto> ListaVenta = new List<Producto>();
@@ -68,7 +77,7 @@ namespace TPC_equipo_13B.Ventas
                 ddlMarcas.DataTextField = "Nombre";
                 ddlMarcas.DataValueField = "IdMarca";
                 ddlMarcas.DataBind();
-                ddlProductos.Items.Insert(0, new ListItem("Seleccione un producto", ""));
+                ddlMarcas.Items.Insert(0, new ListItem("Seleccione una Marca", ""));
             }
             catch (Exception)
             {
@@ -230,6 +239,14 @@ namespace TPC_equipo_13B.Ventas
 
             try
             {
+                if(ddlProductos.SelectedItem.Value == null || ddlProductos.SelectedItem.Value == "")
+                {
+                    lblErrorCodigo.Text = "El Seleccione un producto";
+                    txtCodigo.Text = "";
+                    CargarProductos();
+                    CargarMarcas();
+                    return;
+                }
                 int id = int.Parse(ddlProductos.SelectedItem.Value);
                 Producto aux = negocio.buscarProductoPorId(id);
                 aux.Cantidad = int.Parse(txtCantidad.Text);
@@ -340,7 +357,53 @@ namespace TPC_equipo_13B.Ventas
 
         protected void btnConfirmarVenta_Click(object sender, EventArgs e)
         {
+            try
+            {
+                List<Producto> listaVenta = new List<Producto>();
 
+                if (Session["ListaVenta"] != null)
+                {
+                    listaVenta = (List<Producto>)Session["ListaVenta"];
+                }
+
+
+                if (Session["Cliente"]  == null)
+                {
+                    Session.Add("ErrorCliente", "Ingrese un cliente por favor");
+                    return;
+                }
+                
+                if ( listaVenta.Count <= 0){
+                    lblErrorCodigo.Text = "Por favor Ingrese Productos para realizar la compra";
+                    return;
+                }
+               
+
+
+            }
+            catch
+            {
+
+            }
+
+        }
+
+        protected void dgvProductos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Label lblPrecioFinal = (Label)e.Row.FindControl("lblPrecioFinal");
+
+                //Valor Unitario
+                decimal precioUnitario = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "PecioFinal"));
+                //cantidad
+                int cantidad = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Cantidad"));
+
+
+                lblPrecioFinal.Text = (precioUnitario * cantidad).ToString("F2");
+
+            }
+                
         }
     }
 }

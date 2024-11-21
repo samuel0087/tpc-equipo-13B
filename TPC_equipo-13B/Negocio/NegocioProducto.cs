@@ -25,7 +25,7 @@ namespace Negocio
 
             List<Producto> lista = new List<Producto>();
 
-            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
+            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia, P.PrecioFinal, P.PrecioCosto, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
                                 Left join Marcas M On M.IdMarca = P.IdMarca
                                 Left Join Tipos T On T.IdTipo = P.IdTipo";
             try
@@ -40,6 +40,8 @@ namespace Negocio
                     aux.Codigo = datos.Lector["Codigo"] is DBNull ? 0 : (int)datos.Lector["Codigo"] ;
                     aux.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"] ;
                     aux.Ganancia = datos.Lector["Ganancia"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["Ganancia"]) ;
+                    aux.PrecioCosto = datos.Lector["PrecioCosto"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["PrecioCosto"]) ;
+                    aux.PecioFinal = datos.Lector["PrecioFinal"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["PrecioFinal"]) ;
 
                     aux.Marca = new Marca();
                     aux.Marca.IdMarca = datos.Lector["IdMarca"] is DBNull ? 0 : (int)datos.Lector["IdMarca"];
@@ -71,7 +73,7 @@ namespace Negocio
 
             Producto aux = new Producto();
 
-            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
+            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia,, P.PrecioFinal, P.PrecioCosto, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
                                 Left join Marcas M On M.IdMarca = P.IdMarca
                                 Left Join Tipos T On T.IdTipo = P.IdTipo
                                 Where P.IdProducto = @Id";
@@ -88,6 +90,8 @@ namespace Negocio
                     aux.Codigo = datos.Lector["Codigo"] is DBNull ? 0 : (int)datos.Lector["Codigo"];
                     aux.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"];
                     aux.Ganancia = datos.Lector["Ganancia"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["Ganancia"]);
+                    aux.PrecioCosto = datos.Lector["PrecioCosto"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["PrecioCosto"]);
+                    aux.PecioFinal = datos.Lector["PrecioFinal"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["PrecioFinal"]);
 
                     aux.Marca = new Marca();
                     aux.Marca.IdMarca = datos.Lector["IdMarca"] is DBNull ? 0 : (int)datos.Lector["IdMarca"];
@@ -180,7 +184,7 @@ namespace Negocio
         public Producto buscarProductoPorId(int id)
         {
             Producto producto = null;
-            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
+            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia,P.PrecioCosto, P.PrecioFinal, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
                                 Left join Marcas M On M.IdMarca = P.IdMarca
                                 Left Join Tipos T On T.IdTipo = P.IdTipo
                                 Where P.IdProducto = @IdProducto";
@@ -199,6 +203,8 @@ namespace Negocio
                     producto.Codigo = accesoDatos.Lector["Codigo"] is DBNull ? 0 : (int)accesoDatos.Lector["Codigo"];
                     producto.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
                     producto.Ganancia = accesoDatos.Lector["Ganancia"] is DBNull ? 0 : Convert.ToDecimal(accesoDatos.Lector["Ganancia"]);
+                    producto.PrecioCosto = accesoDatos.Lector["PrecioCosto"] is DBNull ? 0 : Convert.ToDecimal(accesoDatos.Lector["PrecioCosto"]);
+                    producto.PecioFinal = accesoDatos.Lector["PrecioFinal"] is DBNull ? 0 : Convert.ToDecimal(accesoDatos.Lector["PrecioFinal"]);
 
                     producto.Marca = new Marca();
                     producto.Marca.IdMarca = accesoDatos.Lector["IdMarca"] is DBNull ? 0 : (int)accesoDatos.Lector["IdMarca"];
