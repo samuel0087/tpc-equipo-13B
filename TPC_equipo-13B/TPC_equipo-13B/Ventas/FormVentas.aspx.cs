@@ -155,7 +155,7 @@ namespace TPC_equipo_13B.Ventas
 
         protected void btnNuevoCliente_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect(ResolveUrl("~/Administrador/Clientes/FormCliente.aspx?create=true"));
         }
 
         public void validarCampo(int dni)
