@@ -77,6 +77,9 @@
     <Content Include="Default.aspx" />
     <Content Include="Administrador\Compras\compraexito.aspx" />
     <Content Include="Administrador\Compras\HistorialCompras.aspx" />
+    <Content Include="Administrador\stock\menustock.aspx" />
+    <Content Include="Administrador\stock\verstock.aspx" />
+    <Content Include="Administrador\stock\ModificarStock.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Administrador\proveedores\Proveedormodificadoconexito.aspx" />
     <Content Include="Administrador\proveedores\modificarproveedores.aspx" />
@@ -181,6 +184,27 @@
     </Compile>
     <Compile Include="Administrador\Compras\HistorialCompras.aspx.designer.cs">
       <DependentUpon>HistorialCompras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\stock\menustock.aspx.cs">
+      <DependentUpon>menustock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\stock\menustock.aspx.designer.cs">
+      <DependentUpon>menustock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\stock\verstock.aspx.cs">
+      <DependentUpon>verstock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\stock\verstock.aspx.designer.cs">
+      <DependentUpon>verstock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\stock\ModificarStock.aspx.cs">
+      <DependentUpon>ModificarStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\stock\ModificarStock.aspx.designer.cs">
+      <DependentUpon>ModificarStock.aspx</DependentUpon>
     </Compile>
     <Compile Include="Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
