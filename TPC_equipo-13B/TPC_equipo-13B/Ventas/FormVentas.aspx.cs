@@ -48,6 +48,8 @@ namespace TPC_equipo_13B.Ventas
                 ddlProductos.DataValueField = "IdProducto";
                 ddlProductos.DataTextField = "Nombre";
                 ddlProductos.DataBind();
+                // Agregar opción por defecto
+                ddlProductos.Items.Insert(0, new ListItem("Seleccione un producto", ""));
             }
             catch (Exception ex)
             {
@@ -66,6 +68,7 @@ namespace TPC_equipo_13B.Ventas
                 ddlMarcas.DataTextField = "Nombre";
                 ddlMarcas.DataValueField = "IdMarca";
                 ddlMarcas.DataBind();
+                ddlProductos.Items.Insert(0, new ListItem("Seleccione un producto", ""));
             }
             catch (Exception)
             {

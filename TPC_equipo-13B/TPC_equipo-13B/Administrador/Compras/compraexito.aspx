@@ -38,7 +38,7 @@
     <tr runat="server" visible='<%# Convert.ToInt32(Eval("Cantidad")) > 0 %>'>
         <td><%# Eval("NombreProducto") %></td>
         <td><%# Eval("Cantidad") %></td>
-        <td><%# Eval("PrecioTotal", "{0:C}") %></td>
+        <td><%# Eval("PrecioFinal") %></td>
     </tr>
 </ItemTemplate>
                 </asp:Repeater>

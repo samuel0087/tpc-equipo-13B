@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label>Ganancia</label>
+                    <label>Ganancia en %</label>
                         <asp:TextBox ID="txtGanancia" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
 
@@ -56,7 +56,7 @@
 
                  <%if (confirmarModificacion){%>
                 <div class="mb-3">
-                    <span class="form-label button-container">¿Esta seguro que desea eliminar?</span>
+                    <span class="form-label button-container">¿Esta seguro que desea Modificar?</span>
                     <div class="button-container">
                         <asp:Button Text="Modificar" ID="btnConfirmarModificacion" CssClass="btn btn-outline-primary" runat="server" OnClick="btnConfirmarModificacion_Click" />
                         <asp:Button Text="Cancelar" ID="btnCancelarModificacion" CssClass="btn btn btn-outline-secondary" runat="server" OnClick="btnCancelar_Click" />

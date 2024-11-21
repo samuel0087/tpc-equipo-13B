@@ -112,7 +112,7 @@
                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                                     <asp:BoundField DataField="Marca.Nombre" HeaderText="Marca" />
                                     <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                                    <asp:BoundField DataField="Precio" HeaderText="Precio Unitario" />
+                                    <asp:BoundField DataField="PecioFinal" HeaderText="Precio Unitario" />
                                     <asp:CommandField ShowSelectButton="true" SelectText="Ver" ControlStyle-CssClass="btn btn-primary" HeaderText="Detalles" />
                                 </Columns>
                             </asp:GridView>

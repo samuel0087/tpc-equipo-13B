@@ -20,6 +20,8 @@ namespace TPC_equipo_13B.Compras
                 CargarProveedor();
                 CargarProductos();
             }
+
+
         }
             private void CargarProveedor()
             {
@@ -109,6 +111,10 @@ namespace TPC_equipo_13B.Compras
 
             // Obtener el TextBox de cantidad
             TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
+            txtCantidad.Text = "1";
+
+            // Obtener el TextBox de Precio Unitario
+            TextBox txtPrecioUnitario = (TextBox)item.FindControl("txtPrecioUnitario");
 
             if (lblPrecio != null && txtCantidad != null)
             {
@@ -118,8 +124,10 @@ namespace TPC_equipo_13B.Compras
                 {
                     try
                     {
-                        // Obtener el precio del producto desde la base de datos
-                        decimal precioProducto = negocioProducto.ObtenerPrecioProducto(productoId);
+                        // Obtener el precio del producto
+
+                        txtPrecioUnitario.Text = negocioProducto.ObtenerPrecioProducto(productoId).ToString();
+                        decimal precioProducto = decimal.Parse(txtPrecioUnitario.Text);
 
                         // Verificar que la cantidad es válida
                         int cantidad = 1;  // Valor por defecto
@@ -131,7 +139,9 @@ namespace TPC_equipo_13B.Compras
                         }
                         else
                         {
-                            lblPrecio.Text = "Cantidad inválida";
+                            txtCantidad.Text = "1";
+                            decimal precioTotal = Decimal.Parse(txtCantidad.Text) * cantidad;
+                            lblPrecio.Text = precioTotal.ToString("C2"); // Formato moneda con 2 decimales
                         }
                     }
                     catch (Exception ex)
@@ -155,6 +165,7 @@ namespace TPC_equipo_13B.Compras
 
             DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
             Label lblPrecio = (Label)item.FindControl("lblPrecio");
+            TextBox txtPrecioUnitario = (TextBox)item.FindControl("txtPrecioUnitario");
 
             if (ddlProducto != null && lblPrecio != null)
             {
@@ -163,7 +174,7 @@ namespace TPC_equipo_13B.Compras
                 {
                     try
                     {
-                        decimal precioProducto = negocioProducto.ObtenerPrecioProducto(productoId);
+                        decimal precioProducto = Decimal.Parse(txtPrecioUnitario.Text);
 
                         int cantidad;
                         if (int.TryParse(txtCantidad.Text, out cantidad) && cantidad > 0)
@@ -228,15 +239,19 @@ namespace TPC_equipo_13B.Compras
                 {
                     DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
                     TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
+                    TextBox txtPrecioUnitario = (TextBox)item.FindControl("txtPrecioUnitario");
                     Label lblPrecio = (Label)item.FindControl("lblPrecio");
 
-                    if (ddlProducto != null && txtCantidad != null && lblPrecio != null)
+                    if (ddlProducto != null && txtCantidad.Text != "" && lblPrecio.Text != "")
                     {
+                        string textoprecioXunidad = txtPrecioUnitario.Text.Replace("$", "").Trim();
+                        string textoprecioXcantidad = lblPrecio.Text.Replace("$", "").Trim();
                         productos.Add(new
                         {
                             NombreProducto = ddlProducto.SelectedItem.Text,
                             Cantidad = txtCantidad.Text,
-                            PrecioTotal = lblPrecio.Text
+                            PrecioUnitario = Decimal.Parse(textoprecioXunidad),
+                            PrecioFinal = Decimal.Parse(textoprecioXcantidad)
                         });
                     }
                 }
@@ -271,30 +286,40 @@ namespace TPC_equipo_13B.Compras
                 {
                     DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
                     TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
+                    TextBox txtPrecioUnitario = (TextBox)item.FindControl("txtPrecioUnitario");
                     Label lblPrecio = (Label)item.FindControl("lblPrecio");
 
                     if (!string.IsNullOrEmpty(ddlProducto.SelectedValue) && !string.IsNullOrEmpty(txtCantidad.Text))
                     {
+                        string textoprecioXunidad = txtPrecioUnitario.Text.Replace("$", "").Trim();
+                        string textoprecioXcantidad = lblPrecio.Text.Replace("$", "").Trim();
+
                         // Crear una nueva instancia de CompraXproducto para cada producto
                         CompraXproducto compraXproducto = new CompraXproducto
                         {
                             IdCompra = negocioCompra.ObtenerUltimaCompraId(),
                             IdProducto = Convert.ToInt32(ddlProducto.SelectedValue),
-                            Cantidad = Convert.ToInt32(txtCantidad.Text)
+                            Cantidad = Convert.ToInt32(txtCantidad.Text),
+                            PrecioXunidad = Decimal.Parse(textoprecioXunidad),
+                            precioXcantidad = Decimal.Parse(textoprecioXcantidad)
                         };
 
-                        string textoprecioXunidad = lblPrecio.Text.Replace("$", "").Trim();
-                        if (decimal.TryParse(textoprecioXunidad, out decimal precioXunidad))
-                        {
-                            compraXproducto.PrecioXunidad = precioXunidad;
-                        }
+                        //string textoprecioXunidad = lblPrecio.Text.Replace("$", "").Trim();
+                        //if (decimal.TryParse(textoprecioXunidad, out decimal precioXunidad))
+                        //{
+                        //    compraXproducto.PrecioXunidad = precioXunidad;
+                        //}
 
-                        compraXproducto.precioXcantidad = compraXproducto.PrecioXunidad * compraXproducto.Cantidad;
+                        //compraXproducto.precioXcantidad = compraXproducto.PrecioXunidad * compraXproducto.Cantidad;
 
                         listaCompraXProducto.Add(compraXproducto);
 
                         NegocioStock negocioStock = new NegocioStock();
                         negocioStock.ActualizarStock(compraXproducto.IdProducto, compraXproducto.Cantidad);
+
+                        //Actualizar el precio del producto
+                        NegocioProducto negocioProducto = new NegocioProducto();
+                        negocioProducto.actualizarPrecio(compraXproducto.IdProducto, compraXproducto.PrecioXunidad);
 
 
                     }
@@ -391,6 +416,59 @@ namespace TPC_equipo_13B.Compras
         {
            
             Response.Redirect("MenuCompras.aspx"); 
+        }
+
+        protected void txtPrecioUnitario_TextChanged(object sender, EventArgs e)
+        {
+
+            NegocioProducto negocioProducto = new NegocioProducto();
+            TextBox txtPrecioUnitario = (TextBox)sender;
+
+            // Obtener el contenedor (RepeaterItem) del TextBox
+            RepeaterItem item = (RepeaterItem)txtPrecioUnitario.NamingContainer;
+
+            DropDownList ddlProducto = (DropDownList)item.FindControl("ddlProducto");
+            Label lblPrecio = (Label)item.FindControl("lblPrecio");
+
+            // Obtener el TextBox de Cantidad
+            TextBox txtCantidad = (TextBox)item.FindControl("txtCantidad");
+
+            if (ddlProducto != null && lblPrecio != null)
+            {
+                int productoId;
+                if (int.TryParse(ddlProducto.SelectedValue, out productoId) && productoId > 0)
+                {
+                    try
+                    {
+
+
+                        decimal precioUnitario;
+                        if (decimal.TryParse(txtPrecioUnitario.Text, out precioUnitario) && precioUnitario > 0)
+                        {
+                            decimal precioTotal = precioUnitario * int.Parse(txtCantidad.Text);
+                            lblPrecio.Text = precioTotal.ToString("C");
+                        }
+                        else
+                        {
+                            txtPrecioUnitario.Text = "1";
+                            decimal precioTotal = Decimal.Parse(txtPrecioUnitario.Text) * int.Parse(txtCantidad.Text);
+                            lblPrecio.Text = precioTotal.ToString("C");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        lblPrecio.Text = "Error al obtener el precio";
+                        Console.WriteLine("Error: " + ex.Message);
+                    }
+                }
+                else
+                {
+                    lblPrecio.Text = "Selecciona un producto válido";
+                }
+            }
+
+            // Actualizar el total general
+            ActualizarTotal();
         }
     }
 }

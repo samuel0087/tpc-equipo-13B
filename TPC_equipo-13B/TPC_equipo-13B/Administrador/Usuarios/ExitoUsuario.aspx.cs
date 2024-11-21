@@ -15,7 +15,7 @@ namespace TPC_equipo_13B
         }
         protected void btnVolver_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Proveedores.aspx");
+            Response.Redirect("Usuario.aspx");
         }
     }
 }

@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
-        <div class="col-6 main">
+        <div class="col-8 main">
             <h2>Nueva Compra</h2>
             <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
@@ -24,7 +24,8 @@
                                     <tr>
                                         <th>Producto</th>
                                         <th>Cantidad</th>
-                                        <th>Precio</th> 
+                                        <th>Precio Costo</th>
+                                        <th>Precio Final</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,12 +42,16 @@
                                                  OnTextChanged="txtCantidad_TextChanged" AutoPostBack="true"></asp:TextBox>
                                 </td>
                                 <td>
+                                    <asp:TextBox ID="txtPrecioUnitario" CssClass="form-control" Text="" runat="server" AutoPostBack="true" OnTextChanged="txtPrecioUnitario_TextChanged" ></asp:TextBox>
+                                </td>
+                                <td>
                                     <asp:Label ID="lblPrecio" runat="server" CssClass="form-control"></asp:Label> <!-- Control para mostrar el precio -->
                                 </td>
                             </tr>
                         </ItemTemplate>
                         <FooterTemplate>
                             </tbody>
+                                
                             </table>
                             
                         </FooterTemplate>
@@ -56,20 +61,20 @@
                     <asp:TextBox ID="txtTotal" runat="server" CssClass="form-control" ReadOnly="true" Text="0"></asp:TextBox>
                     <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="false"></asp:Label>
                   <div class="d-flex justify-content-between mt-3">
-    <!-- Botón Confirmar Compra -->
-    <asp:Button ID="btnConfirmarCompra" 
-                runat="server" 
-                CssClass="btn btn-success me-2" 
-                Text="Confirmar Compra" 
-                OnClick="btnConfirmarCompra_Click" />
-                
-    <!-- Botón Cancelar Compra -->
-    <asp:Button ID="btnCancelarCompra" 
-                runat="server" 
-                CssClass="btn btn-danger" 
-                Text="Cancelar Compra" 
-                OnClick="btnCancelarCompra_Click" />
-</div>
+                      <!-- Botón Confirmar Compra -->
+                      <asp:Button ID="btnConfirmarCompra"
+                          runat="server"
+                          CssClass="btn btn-success me-2"
+                          Text="Confirmar Compra"
+                          OnClick="btnConfirmarCompra_Click" />
+
+                      <!-- Botón Cancelar Compra -->
+                      <asp:Button ID="btnCancelarCompra"
+                          runat="server"
+                          CssClass="btn btn-danger"
+                          Text="Cancelar Compra"
+                          OnClick="btnCancelarCompra_Click" />
+                  </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

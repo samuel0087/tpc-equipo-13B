@@ -32,7 +32,7 @@ namespace TPC_equipo_13B
         }
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AgregarProductos.aspx");
+            Response.Redirect("FormProductos.aspx");
         }
         protected void GridViewProductos_RowCommand(object sender, GridViewCommandEventArgs e)
         {

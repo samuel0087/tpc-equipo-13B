@@ -32,12 +32,11 @@ Nombre varchar(50)not null,
 IdMarca int not null,
 IdTipo int not null,
 Ganancia float not null,
-Precio decimal not null
+PrecioCosto money not null,
+PrecioFinal money not null,
 constraint fk_producto_Marca foreign key(idmarca) references Marcas(idmarca),
 constraint fk_producto_Tipos foreign key(idtipo) references tipos(idtipo)
 );
-ALTER TABLE Productos
-ALTER COLUMN Precio money;
 
 go
 create table Clientes(
@@ -51,7 +50,6 @@ Direccion varchar(100)null,
 Provincia varchar(50)null,
 Pais varchar(50)null,
 Telefono varchar(50) not null
-
 );
 
 go

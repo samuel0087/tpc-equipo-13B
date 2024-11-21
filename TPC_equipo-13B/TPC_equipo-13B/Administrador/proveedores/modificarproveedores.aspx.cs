@@ -15,18 +15,22 @@ namespace TPC_equipo_13B
         {
             if (Session["ProveedoraModificar"] != null)
             {
-                Proveedor proveedor = (Proveedor)Session["ProveedoraModificar"];
+                if (!IsPostBack)
+                {
+                    Proveedor proveedor = (Proveedor)Session["ProveedoraModificar"];
 
 
-                /*txtIdUsuario.Text = usuario.IdUsuario.ToString();*/
-                txtNombre.Text = proveedor.Nombre;
-                TextApellido.Text = proveedor.Apellido;
-                TextEmail.Text = proveedor.Email;
-                TextTelefono.Text= proveedor.Telefono;
-                TextCelular.Text = proveedor.Celular;
-                TextDireccion.Text= proveedor.Direccion;
-                TextProvincia.Text= proveedor.Provincia;
-                TextPais.Text= proveedor.Pais;
+                    /*txtIdUsuario.Text = usuario.IdUsuario.ToString();*/
+                    txtNombre.Text = proveedor.Nombre;
+                    TextApellido.Text = proveedor.Apellido;
+                    TextEmail.Text = proveedor.Email;
+                    TextTelefono.Text = proveedor.Telefono;
+                    TextCelular.Text = proveedor.Celular;
+                    TextDireccion.Text = proveedor.Direccion;
+                    TextProvincia.Text = proveedor.Provincia;
+                    TextPais.Text = proveedor.Pais;
+                }
+
 
 
             }

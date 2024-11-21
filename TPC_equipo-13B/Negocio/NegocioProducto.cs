@@ -117,7 +117,7 @@ namespace Negocio
 
             Producto aux = new Producto();
 
-            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
+            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia,P.PrecioCosto, P.PrecioFinal, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
                                 Left join Marcas M On M.IdMarca = P.IdMarca
                                 Left Join Tipos T On T.IdTipo = P.IdTipo
                                 Where P.Codigo = @Codigo";
@@ -134,6 +134,8 @@ namespace Negocio
                     aux.Codigo = datos.Lector["Codigo"] is DBNull ? 0 : (int)datos.Lector["Codigo"];
                     aux.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"];
                     aux.Ganancia = datos.Lector["Ganancia"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["Ganancia"]);
+                    aux.PrecioCosto = datos.Lector["PrecioCosto"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["PrecioCosto"]);
+                    aux.PecioFinal = datos.Lector["PrecioFinal"] is DBNull ? 0 : Convert.ToDecimal(datos.Lector["PrecioFinal"]);
 
                     aux.Marca = new Marca();
                     aux.Marca.IdMarca = datos.Lector["IdMarca"] is DBNull ? 0 : (int)datos.Lector["IdMarca"];
@@ -160,8 +162,8 @@ namespace Negocio
         // Agregar producto
         public void AgregarProducto(Producto producto)
         {
-            string consulta = "INSERT INTO Productos (Codigo, Nombre, IdMarca, IdTipo, Ganancia) " +
-                                             "VALUES (@Codigo, @Nombre, @IdMarca, @IdTipo, @Ganancia)";
+            string consulta = "INSERT INTO Productos (Codigo, Nombre, IdMarca, IdTipo, Ganancia, PrecioCosto, PrecioFinal) " +
+                                             "VALUES (@Codigo, @Nombre, @IdMarca, @IdTipo, @Ganancia, @PrecioCosto, @PrecioFinal)";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@Codigo", producto.Codigo);
@@ -169,6 +171,8 @@ namespace Negocio
             accesoDatos.setearParametro("@IdMarca", producto.Marca.IdMarca);
             accesoDatos.setearParametro("@IdTipo", producto.Tipo.IdTipo);
             accesoDatos.setearParametro("@Ganancia", producto.Ganancia);
+            accesoDatos.setearParametro("@PrecioCosto", producto.PrecioCosto);
+            accesoDatos.setearParametro("@PrecioFinal", producto.PecioFinal);
 
             accesoDatos.ejecutarAccion();
         }
@@ -339,7 +343,7 @@ namespace Negocio
 
             try
             {
-                accesoDatos.setearConsulta("SELECT Precio FROM Productos WHERE IdProducto = @IdProducto");
+                accesoDatos.setearConsulta("SELECT PrecioCosto FROM Productos WHERE IdProducto = @IdProducto");
                 accesoDatos.setearParametro("@IdProducto", idProducto);
                 accesoDatos.ejecutarLectura();
 
@@ -360,7 +364,51 @@ namespace Negocio
             return precio;
         }
 
+        public int generarCodigo()
+        {
+            int codigo = 0;
+            try
+            {
+                string query = "select count(*) AS cantidadProductos from productos";
+                accesoDatos.setearConsulta(query);
+                accesoDatos.ejecutarLectura();
 
-      
+                if (accesoDatos.Lector.Read())
+                {
+                    codigo = accesoDatos.Lector["cantidadProductos"] is DBNull ? 0 : (int)accesoDatos.Lector["cantidadProductos"];
+                }
+
+                return codigo+1001;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void actualizarPrecio(int id, decimal precioCosto)
+        {
+            Producto aux = this.getOne(id);
+            aux.PrecioCosto = precioCosto;
+            aux.PecioFinal = precioCosto * (1 + aux.Ganancia / 100);
+
+            string consulta = "UPDATE Productos SET PrecioCosto = @precioCosto, PrecioFinal = @precioFinal " +
+                              "WHERE IdProducto = @IdProducto";
+
+            accesoDatos.setearConsulta(consulta);
+            accesoDatos.setearParametro("@IdProducto", id);
+            accesoDatos.setearParametro("@precioCosto", precioCosto);
+            accesoDatos.setearParametro("@precioFinal", aux.PecioFinal);
+
+
+            accesoDatos.ejecutarAccion();
+        }
+
+
     }
 }

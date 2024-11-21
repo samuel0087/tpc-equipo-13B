@@ -19,6 +19,7 @@ namespace TPC_equipo_13B
         {
             NegocioMarca marcaNegocio = new NegocioMarca();
             NegocioTipo tipoNegocio = new NegocioTipo();
+            NegocioProducto productoNegocio = new NegocioProducto();
 
             try
             {
@@ -39,6 +40,9 @@ namespace TPC_equipo_13B
                     ddlTipo.DataValueField = "IdTipo";
                     ddlTipo.DataTextField = "Nombre";
                     ddlTipo.DataBind();
+
+                    txtCodigo.Text = productoNegocio.generarCodigo().ToString();
+                    txtCodigo.Enabled = false;
                 }
 
                 
@@ -137,6 +141,8 @@ namespace TPC_equipo_13B
                 Producto.Marca.IdMarca = int.Parse(ddlMarca.SelectedValue);
                 Producto.Ganancia = Decimal.Parse(txtGanancia.Text);
                 Producto.Cantidad = 0;
+                Producto.PrecioCosto = 0;
+                Producto.PecioFinal = 0;
 
                 negocioProducto.AgregarProducto(Producto);
 
