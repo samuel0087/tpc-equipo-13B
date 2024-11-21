@@ -14,7 +14,7 @@
                 <a href="<%=ResolveUrl("~/Administrador/Proveedores/Proveedores.aspx") %>">Proveedores</a>
                 <a href="<%=ResolveUrl("~/Administrador/Usuarios/Usuario.aspx") %>">Usuarios</a>
                 <a href="<%=ResolveUrl("~/Administrador/stock/menustock.aspx") %>">stock</a>
-                <a href="<%=ResolveUrl("~/Administrador/Clientes/Clietes.aspx") %>">Clientes</a>
+                <a href="<%=ResolveUrl("~/Administrador/Clientes/MenuClientes.aspx") %>">Clientes</a>
             </div>
         </div>
     </div>

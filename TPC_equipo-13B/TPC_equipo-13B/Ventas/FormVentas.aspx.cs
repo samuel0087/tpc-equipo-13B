@@ -25,6 +25,8 @@ namespace TPC_equipo_13B.Ventas
                 Cliente = (Cliente)Session["Cliente"];
             }
 
+            txtCantidad.Text = "1";
+
             if (!IsPostBack)
             {
                 CargarProductos();
@@ -155,7 +157,7 @@ namespace TPC_equipo_13B.Ventas
 
         protected void btnNuevoCliente_Click(object sender, EventArgs e)
         {
-            Response.Redirect(ResolveUrl("~/Administrador/Clientes/FormCliente.aspx?create=true"));
+            Response.Redirect(ResolveUrl("~/Administrador/Clientes/FormClientes.aspx?create=true"), false);
         }
 
         public void validarCampo(int dni)
@@ -248,6 +250,9 @@ namespace TPC_equipo_13B.Ventas
                 }
 
                 Session["ListaVenta"] = ListaVenta;
+                CargarProductos();
+                CargarMarcas();
+
 
             }
             catch (Exception)
@@ -281,13 +286,25 @@ namespace TPC_equipo_13B.Ventas
 
             try
             {
-                var resultado = ((List<Producto>)Session["ListadoProductos"]).FindAll(x => x.Codigo == aux);
+                var resultado = ((List<Producto>)Session["ListadoProductos"]).Find(x => x.Codigo == aux);
+                if(resultado != null)
+                {
+                    ddlProductos.DataSource = (List<Producto>)Session["ListadoProductos"];
+                    ddlProductos.DataBind();
 
-                ddlProductos.DataSource= (List<Producto>)Session["ListadoProductos"];
-                ddlProductos.DataBind();
+                    ddlProductos.SelectedValue = resultado.IdProducto.ToString();
+                    ddlMarcas.SelectedValue = resultado.Marca.IdMarca.ToString();
+                    lblErrorCodigo.Text = "";
+                }
+                else
+                {
+                    lblErrorCodigo.Text = "El codigo de producto no existe, intente nuevamente";
+                    txtCodigo.Text = "";
+                    CargarProductos();
+                    CargarMarcas();
+                }
 
-                ddlProductos.SelectedValue = resultado[0].IdProducto.ToString();
-                ddlMarcas.SelectedValue = resultado[0].Marca.IdMarca.ToString();
+                
             }
             catch (Exception)
             {

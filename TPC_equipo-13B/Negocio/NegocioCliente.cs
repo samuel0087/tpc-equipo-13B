@@ -21,21 +21,34 @@ namespace Negocio
         // Agregar cliente
         public void AgregarCliente(Cliente cliente)
         {
-            string consulta = "INSERT INTO Clientes (Nombre, Apellido, DNI, Telefono, Celular, Email, Direccion, Provincia, Pais) " +
+            try
+            {
+                string consulta = "INSERT INTO Clientes (Nombre, Apellido, DNI, Telefono, Celular, Email, Direccion, Provincia, Pais) " +
                               "VALUES (@Nombre, @Apellido, @DNI, @Telefono, @Celular, @Email, @Direccion, @Provincia, @Pais)";
 
-            accesoDatos.setearConsulta(consulta);
-            accesoDatos.setearParametro("@Nombre", cliente.Nombre);
-            accesoDatos.setearParametro("@Apellido", cliente.Apellido);
-            accesoDatos.setearParametro("@DNI", cliente.DNI);
-            accesoDatos.setearParametro("@Telefono", cliente.Telefono);
-            accesoDatos.setearParametro("@Celular", cliente.Celular);
-            accesoDatos.setearParametro("@Email", cliente.Email);
-            accesoDatos.setearParametro("@Direccion", cliente.Direccion);
-            accesoDatos.setearParametro("@Provincia", cliente.Provincia);
-            accesoDatos.setearParametro("@Pais", cliente.Pais);
+                accesoDatos.setearConsulta(consulta);
+                accesoDatos.setearParametro("@Nombre", cliente.Nombre);
+                accesoDatos.setearParametro("@Apellido", cliente.Apellido);
+                accesoDatos.setearParametro("@DNI", cliente.DNI);
+                accesoDatos.setearParametro("@Telefono", cliente.Telefono);
+                accesoDatos.setearParametro("@Celular", cliente.Celular);
+                accesoDatos.setearParametro("@Email", cliente.Email);
+                accesoDatos.setearParametro("@Direccion", cliente.Direccion);
+                accesoDatos.setearParametro("@Provincia", cliente.Provincia);
+                accesoDatos.setearParametro("@Pais", cliente.Pais);
 
-            accesoDatos.ejecutarAccion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception e)
+            {
+                throw e;
+
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+
         }
 
         // Modificar existente
@@ -43,7 +56,7 @@ namespace Negocio
         {
             string consulta = "UPDATE Clientes SET Nombre = @Nombre, Apellido = @Apellido, DNI = @DNI, Telefono = @Telefono, " +
                               "Celular = @Celular, Email = @Email, Direccion = @Direccion, Provincia = @Provincia, Pais = @Pais " +
-                              "WHERE ID = @ID";
+                              "WHERE IdCliente = @ID";
 
             accesoDatos.setearConsulta(consulta);
             accesoDatos.setearParametro("@ID", cliente.ID);
@@ -61,12 +74,12 @@ namespace Negocio
         }
 
         // Eliminar cliente
-        public void EliminarCliente(int idCliente)
+        public void EliminarCliente(Cliente aux)
         {
-            string consulta = "DELETE FROM Clientes WHERE ID = @ID";
+            string consulta = "DELETE FROM Clientes WHERE IdCliente = @ID";
 
             accesoDatos.setearConsulta(consulta);
-            accesoDatos.setearParametro("@ID", idCliente);
+            accesoDatos.setearParametro("@ID", aux.ID);
 
             accesoDatos.ejecutarAccion();
         }
@@ -144,7 +157,7 @@ namespace Negocio
             AccesoDatos accesoDatos = new AccesoDatos();
             DataTable tablaClientes = new DataTable();
 
-            string consulta = "SELECT IdCliente, Nombre FROM Clientes"; 
+            string consulta = "SELECT IdCliente, Nombre FROM Clientes";
             try
             {
                 accesoDatos.setearConsulta(consulta);
@@ -159,7 +172,8 @@ namespace Negocio
             return tablaClientes;
         }
 
-        public Cliente getOneByDNI(int dni) {
+        public Cliente getOneByDNI(int dni)
+        {
             Cliente aux = new Cliente();
             try
             {
@@ -188,10 +202,86 @@ namespace Negocio
 
                 throw;
             }
-            finally 
+            finally
             {
                 accesoDatos.cerrarConexion();
             }
+        }
+
+        public Cliente getOne(int id)
+        {
+            Cliente aux = new Cliente();
+            try
+            {
+                accesoDatos.setearConsulta(@"Select IdCliente, Nombre, Apellido, DNI, Celular, Telefono, Email, Direccion, Provincia, Pais From Clientes Where IdCliente = @id ");
+                accesoDatos.setearParametro("@id", id);
+                accesoDatos.ejecutarLectura();
+
+                if (accesoDatos.Lector.Read())
+                {
+                    aux.ID = accesoDatos.Lector["IdCliente"] is DBNull ? 0 : (int)accesoDatos.Lector["IdCliente"];
+                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+                    aux.Apellido = accesoDatos.Lector["Apellido"] is DBNull ? "" : (string)accesoDatos.Lector["Apellido"];
+                    aux.DNI = accesoDatos.Lector["DNI"] is DBNull ? 0 : (int)accesoDatos.Lector["DNI"];
+                    aux.Celular = accesoDatos.Lector["Celular"] is DBNull ? "" : (string)accesoDatos.Lector["Celular"];
+                    aux.Telefono = accesoDatos.Lector["Telefono"] is DBNull ? "" : (string)accesoDatos.Lector["Telefono"];
+                    aux.Email = accesoDatos.Lector["Email"] is DBNull ? "" : (string)accesoDatos.Lector["Email"];
+                    aux.Direccion = accesoDatos.Lector["Direccion"] is DBNull ? "" : (string)accesoDatos.Lector["Direccion"];
+                    aux.Provincia = accesoDatos.Lector["Provincia"] is DBNull ? "" : (string)accesoDatos.Lector["Provincia"];
+                    aux.Pais = accesoDatos.Lector["Pais"] is DBNull ? "" : (string)accesoDatos.Lector["Pais"];
+                }
+
+                return aux;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public List<Cliente> listar()
+        {
+            List<Cliente> lista = new List<Cliente>();
+            try
+            {
+                accesoDatos.setearConsulta(@"Select IdCliente, Nombre, Apellido, DNI, Celular, Telefono, Email, Direccion, Provincia, Pais From Clientes");
+                accesoDatos.ejecutarLectura();
+
+                while (accesoDatos.Lector.Read())
+                {
+                    Cliente aux = new Cliente();
+                    aux.ID = accesoDatos.Lector["IdCliente"] is DBNull ? 0 : (int)accesoDatos.Lector["IdCliente"];
+                    aux.Nombre = accesoDatos.Lector["Nombre"] is DBNull ? "" : (string)accesoDatos.Lector["Nombre"];
+                    aux.Apellido = accesoDatos.Lector["Apellido"] is DBNull ? "" : (string)accesoDatos.Lector["Apellido"];
+                    aux.DNI = accesoDatos.Lector["DNI"] is DBNull ? 0 : (int)accesoDatos.Lector["DNI"];
+                    aux.Celular = accesoDatos.Lector["Celular"] is DBNull ? "" : (string)accesoDatos.Lector["Celular"];
+                    aux.Telefono = accesoDatos.Lector["Telefono"] is DBNull ? "" : (string)accesoDatos.Lector["Telefono"];
+                    aux.Email = accesoDatos.Lector["Email"] is DBNull ? "" : (string)accesoDatos.Lector["Email"];
+                    aux.Direccion = accesoDatos.Lector["Direccion"] is DBNull ? "" : (string)accesoDatos.Lector["Direccion"];
+                    aux.Provincia = accesoDatos.Lector["Provincia"] is DBNull ? "" : (string)accesoDatos.Lector["Provincia"];
+                    aux.Pais = accesoDatos.Lector["Pais"] is DBNull ? "" : (string)accesoDatos.Lector["Pais"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+
+
         }
     }
 }

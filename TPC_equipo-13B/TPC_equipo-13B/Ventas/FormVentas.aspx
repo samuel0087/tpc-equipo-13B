@@ -73,6 +73,7 @@
 
                         <div class="col-9">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control" TextMode="Number"  Placeholder="Codigo"></asp:TextBox>
+                            <asp:Label Text="" ID="lblErrorCodigo" CssClass="error" runat="server" />
                         </div>
 
                         <div class="col">

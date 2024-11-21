@@ -70,6 +70,9 @@
     <Content Include="Administrador\Categorias\FormCategorias.aspx" />
     <Content Include="Administrador\Categorias\MenuCategorias.aspx" />
     <Content Include="Administrador\Categorias\VerCategorias.aspx" />
+    <Content Include="Administrador\Clientes\FormClientes.aspx" />
+    <Content Include="Administrador\Clientes\MenuClientes.aspx" />
+    <Content Include="Administrador\Clientes\VerClientes.aspx" />
     <Content Include="Administrador\Compras\FormCompras.aspx" />
     <Content Include="Administrador\Compras\ListadoCompras.aspx" />
     <Content Include="Administrador\Compras\MenuCompras.aspx" />
@@ -135,6 +138,27 @@
     </Compile>
     <Compile Include="Administrador\Categorias\VerCategorias.aspx.designer.cs">
       <DependentUpon>VerCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Clientes\FormClientes.aspx.cs">
+      <DependentUpon>FormClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Clientes\FormClientes.aspx.designer.cs">
+      <DependentUpon>FormClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Clientes\MenuClientes.aspx.cs">
+      <DependentUpon>MenuClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Clientes\MenuClientes.aspx.designer.cs">
+      <DependentUpon>MenuClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Clientes\VerClientes.aspx.cs">
+      <DependentUpon>VerClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Clientes\VerClientes.aspx.designer.cs">
+      <DependentUpon>VerClientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="ComercioApp.Master.cs">
       <DependentUpon>ComercioApp.Master</DependentUpon>
