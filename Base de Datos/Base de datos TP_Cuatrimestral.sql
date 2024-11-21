@@ -93,7 +93,7 @@ create table stock(
 iddestock int primary key identity(1,1),
 idproducto int not null,
 cantidad bigint not null
-constraint fk_stock_idproducto foreign key (idproducto) references productos(idproducto)
+constraint fk_stock_idproducto foreign key (IdProductos) references productos(IdProductos)
 );
 select*from stock
 
@@ -117,6 +117,34 @@ constraint fk_compraXproducto_idproducto foreign key (idproducto) references pro
 );
 select * from compraXproducto
 SELECT TOP 1 idcompra FROM compra ORDER BY idcompra DESC
+
+GO
+create table Ventas(
+IdDeVenta int primary key identity(1,1),
+IdCliente int not null,
+Fecha date not null ,
+IdVendedor int not null,
+IdMetodoDePago int not null,
+CostoTotal money not null,
+NumeroFactura int not null,
+constraint fk_Ventas_Clientes foreign key (IdCliente) references Clientes(IdCliente),
+constraint fk_Ventas_Usuarios foreign key (IdVendedor) references Usuarios(IdUsuario),
+constraint fk_Ventas_MetodoDePago foreign key(IdMetodoDePago) references MetodoDePago(IdMetodoDePago)
+);
+
+go
+
+create table VentasXProductos(
+IdVentaXProducto int primary key identity(1,1),
+IdVenta int not null,
+IdProducto int not null,
+Cantidad bigint not null,
+PrecioXCantidad money not null,
+PrecioXUnidad money not null,
+constraint fk_VentaXProducto_IdVenta foreign key (IdVenta) references Ventas(IdDeVenta),
+constraint fk_VentaXProducto_IdProducto foreign key (idproducto) references productos(idProducto)
+);
+
 
 
 INSERT INTO Marcas (Nombre) VALUES
@@ -238,18 +266,6 @@ FROM Productos
 WHERE IdProducto = 5;
 -- go
 
--- create table Ventas(
--- IdDeVenta int primary key identity(1,1),
--- IdCliente int not null,
--- Fecha date not null ,
--- IdVendedor int not null,
--- IdMetodoDePago int not null,
--- FacturaGenerada bit not null,
--- CostoTotal money not null,
--- constraint fk_Ventas_Cliente foreign key (IdCliente) references Clientes(IdCliente),
--- constraint fk_Ventas_Usuario foreign key (IdVendedor) references Usuarios(IdUsuario),
--- constraint fk_Ventas_MetodoDePago foreign key(IdMetodoDePago) references MetodoDePago(IdMetodoDePago)
--- );
 
 -- go 
 

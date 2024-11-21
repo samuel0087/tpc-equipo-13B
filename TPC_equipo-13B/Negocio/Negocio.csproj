@@ -45,6 +45,7 @@
     <Compile Include="NegocioCliente.cs" />
     <Compile Include="NegocioCompra.cs" />
     <Compile Include="NegocioMarca.cs" />
+    <Compile Include="NegocioMetodoPago.cs" />
     <Compile Include="NegocioProducto.cs" />
     <Compile Include="NegocioProductoXcompra.cs" />
     <Compile Include="NegocioProveedores.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="NegocioStock.cs" />
     <Compile Include="NegocioTipos.cs" />
     <Compile Include="NegocioUsuario.cs" />
+    <Compile Include="NegocioVenta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

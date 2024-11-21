@@ -125,8 +125,11 @@
                     </div>
 
 
+                    <div class="button-container">
+                        <asp:Button ID="btnConfirmarVenta" runat="server" CssClass="btn btn-success" Text="Confirmar Venta" OnClick="btnConfirmarVenta_Click" />
+                        <asp:Button ID="btnCancelarVenta" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancelarVenta_Click" />
 
-                    <asp:Button ID="btnConfirmarVenta" runat="server" CssClass="btn btn-success" Text="Confirmar Venta" OnClick="btnConfirmarVenta_Click" />
+                    </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

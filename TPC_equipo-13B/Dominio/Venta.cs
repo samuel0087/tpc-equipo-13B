@@ -9,15 +9,13 @@ namespace Dominio
     public class Venta
     {
         public int IdDeVenta { get; set; }
-        public int IdCliente { get; set; }
         public DateTime Fecha { get; set; }
-        public int IdVendedor { get; set; }
-        public int IdMetodoDePago { get; set; }
-        public bool FacturaGenerada { get; set; }
+        public int NumeroFactura { get; set; }
         public decimal CostoTotal { get; set; }
         public Cliente Cliente { get; set; }
         public Usuario Vendedor { get; set; }
         public MetodoDePago MetodoDePago { get; set; }
+        public List<Producto> Productos { get; set; }
 
     }
 }

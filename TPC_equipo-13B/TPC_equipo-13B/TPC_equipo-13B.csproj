@@ -115,6 +115,7 @@
     <Content Include="Ventas\FormVentas.aspx" />
     <Content Include="Ventas\ListadoVentas.aspx" />
     <Content Include="Ventas\MenuVentas.aspx" />
+    <Content Include="Ventas\ResumenVenta.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -450,6 +451,13 @@
     </Compile>
     <Compile Include="Ventas\MenuVentas.aspx.designer.cs">
       <DependentUpon>MenuVentas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas\ResumenVenta.aspx.cs">
+      <DependentUpon>ResumenVenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ventas\ResumenVenta.aspx.designer.cs">
+      <DependentUpon>ResumenVenta.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

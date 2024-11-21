@@ -73,7 +73,7 @@ namespace Negocio
 
             Producto aux = new Producto();
 
-            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia,, P.PrecioFinal, P.PrecioCosto, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
+            string consulta = @"Select P.IdProducto, P.Codigo, P.Nombre, P.Ganancia,P.PrecioFinal, P.PrecioCosto, M.IdMarca, M.Nombre As MarcaNombre , T.IdTipo, T.Nombre As TipoNombre from Productos P
                                 Left join Marcas M On M.IdMarca = P.IdMarca
                                 Left Join Tipos T On T.IdTipo = P.IdTipo
                                 Where P.IdProducto = @Id";

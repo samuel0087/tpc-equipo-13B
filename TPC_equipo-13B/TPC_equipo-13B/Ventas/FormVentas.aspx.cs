@@ -41,6 +41,10 @@ namespace TPC_equipo_13B.Ventas
                 CargarProductos();
                 CargarMarcas();
                 List<Producto> ListaVenta = new List<Producto>();
+                if (Session["Venta"] != null && Request.QueryString["edit"] != null)
+                {
+                    ListaVenta = ((Venta)Session["Venta"]).Productos;
+                }
                 Session.Add("ListaVenta", ListaVenta);
                 CargarLista();
             }
@@ -377,8 +381,26 @@ namespace TPC_equipo_13B.Ventas
                     lblErrorCodigo.Text = "Por favor Ingrese Productos para realizar la compra";
                     return;
                 }
-               
 
+                Venta venta = new Venta();
+                venta.Productos = new List<Producto>();
+                venta.Productos = listaVenta;
+                venta.Cliente = (Cliente)Session["Cliente"];
+                venta.Vendedor = (Usuario)Session["Usuario"];
+                venta.Fecha = DateTime.Now;
+
+                decimal costoTotal = 0;
+
+                foreach (Producto p in venta.Productos)
+                {
+                    costoTotal += p.Cantidad * p.PecioFinal;
+                }
+
+                venta.CostoTotal = costoTotal;
+
+                Session.Add("Venta", venta);
+
+                Response.Redirect("ResumenVenta.aspx", false);
 
             }
             catch
@@ -404,6 +426,13 @@ namespace TPC_equipo_13B.Ventas
 
             }
                 
+        }
+
+        protected void btnCancelarVenta_Click(object sender, EventArgs e)
+        {
+            Session.Remove("Venta");
+            Session.Remove("Cliente");
+            Response.Redirect("MenuVentas.aspx");
         }
     }
 }
